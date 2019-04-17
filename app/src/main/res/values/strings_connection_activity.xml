@@ -1,0 +1,5 @@
+<resources>
+    <string name="ip">ip:</string>
+    <string name="button_connect_text">connect</string>
+    <string name="edit_text_ip_hint">Server IP</string>
+</resources>
