@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="registration_activity_edit_text_name_hint">First name</string>
+</resources>
