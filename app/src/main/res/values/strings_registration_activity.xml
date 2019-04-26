@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="registration_activity_edit_text_name_hint">First name</string>
+    <string name="registration_activity_edit_text_first_name_hint">First name</string>
+    <string name="registration_activity_edit_text_surname_hint">Surname</string>
+    <string name="registration_activity_edit_text_email_hint">E-mail</string>
+    <string name="registration_activity_edit_text_login_hint">Enter a login</string>
+    <string name="registration_activity_edit_text_password_hint">Enter a password</string>
+    <string name="registration_activity_edit_text_password_confirm_hint">Confirm password</string>
+    <string name="registration_activity_button_register_text">Register</string>
+    <string name="registration_activity_text_view_login_text">Already have an account? Log in</string>
 </resources>

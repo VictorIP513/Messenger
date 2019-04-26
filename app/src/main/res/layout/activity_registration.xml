@@ -20,14 +20,104 @@
             android:layout_marginBottom="8dp">
 
             <EditText
-                android:id="@+id/editTextName"
+                android:id="@+id/editTextFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/registration_activity_edit_text_name_hint"
+                android:hint="@string/registration_activity_edit_text_first_name_hint"
                 android:inputType="textPersonName"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
+            <EditText
+                android:id="@+id/editTextSurname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_activity_edit_text_surname_hint"
+                android:inputType="textPersonName"
+                tools:ignore="Autofill" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_activity_edit_text_email_hint"
+                android:inputType="textEmailAddress"
+                tools:ignore="Autofill" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_activity_edit_text_login_hint"
+                android:inputType="textPersonName"
+                tools:ignore="Autofill" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_activity_edit_text_password_hint"
+                android:inputType="textPassword"
+                tools:ignore="Autofill" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextPasswordConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_activity_edit_text_password_confirm_hint"
+                android:inputType="textPassword"
+                tools:ignore="Autofill" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="@string/registration_activity_button_register_text" />
+
+        <TextView
+            android:id="@+id/textViewLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="@string/registration_activity_text_view_login_text"
+            android:textSize="16sp" />
+    </LinearLayout>
 </ScrollView>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_activity_edit_text_login_hint">Введите логин или почту</string>
+    <string name="login_activity_edit_text_password_hint">Введите пароль</string>
+    <string name="login_activity_button_login_text">Войти</string>
+    <string name="login_activity_text_view_register_text">Ещё нет аккаунта? Создайте аккаунт</string>
+</resources>
