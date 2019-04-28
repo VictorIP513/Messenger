@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/registration_activity_edit_text_first_name_hint"
                 android:inputType="textPersonName"
+                android:maxLength="50"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
@@ -40,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/registration_activity_edit_text_surname_hint"
                 android:inputType="textPersonName"
+                android:maxLength="50"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
@@ -55,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/registration_activity_edit_text_email_hint"
                 android:inputType="textEmailAddress"
+                android:maxLength="100"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
@@ -70,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/registration_activity_edit_text_login_hint"
                 android:inputType="textPersonName"
+                android:maxLength="30"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
@@ -85,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/registration_activity_edit_text_password_hint"
                 android:inputType="textPassword"
+                android:maxLength="100"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
@@ -100,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/registration_activity_edit_text_password_confirm_hint"
                 android:inputType="textPassword"
+                android:maxLength="100"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
@@ -108,6 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:onClick="buttonRegistrationClick"
             android:padding="12dp"
             android:text="@string/registration_activity_button_register_text" />
 
@@ -117,6 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
+            android:onClick="textViewLoginClick"
             android:text="@string/registration_activity_text_view_login_text"
             android:textSize="16sp" />
     </LinearLayout>

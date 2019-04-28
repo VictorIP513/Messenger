@@ -8,4 +8,11 @@
     <string name="registration_activity_edit_text_password_confirm_hint">Confirm password</string>
     <string name="registration_activity_button_register_text">Register</string>
     <string name="registration_activity_text_view_login_text">Already have an account? Log in</string>
+
+    <string name="registration_activity_error_passwords_do_not_match">The passwords do not match</string>
+    <string name="registration_activity_error_incorrect_login_length">Login can be from 3 to 30 characters long</string>
+    <string name="registration_activity_error_incorrect_first_name_length">First name can be from 1 to 50 characters long</string>
+    <string name="registration_activity_error_incorrect_surname_length">Surname can be from 1 to 50 characters long</string>
+    <string name="registration_activity_error_incorrect_password_length">Password can be from 6 to 100 characters long</string>
+    <string name="registration_activity_error_incorrect_email">E-mail is invalid</string>
 </resources>

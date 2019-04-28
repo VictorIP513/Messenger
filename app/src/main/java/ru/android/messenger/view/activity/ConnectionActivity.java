@@ -1,8 +1,10 @@
-package ru.android.messenger;
+package ru.android.messenger.view.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+
+import ru.android.messenger.R;
 
 public class ConnectionActivity extends Activity {
 
