@@ -62,6 +62,7 @@ public class RegistrationActivity extends Activity implements RegistrationView {
 
     public void textViewLoginClick(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
