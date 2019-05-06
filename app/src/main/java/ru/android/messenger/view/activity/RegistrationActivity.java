@@ -41,9 +41,11 @@ public class RegistrationActivity extends Activity implements RegistrationView {
                 editTextPasswordConfirm.setError(errorText);
                 break;
             case INCORRECT_EMAIL:
+            case EMAIL_IS_EXISTS:
                 editTextEmail.setError(errorText);
                 break;
             case INCORRECT_LOGIN_LENGTH:
+            case LOGIN_IS_EXISTS:
                 editTextLogin.setError(errorText);
                 break;
             case INCORRECT_PASSWORD_LENGTH:

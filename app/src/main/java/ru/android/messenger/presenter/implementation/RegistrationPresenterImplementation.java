@@ -2,6 +2,10 @@ package ru.android.messenger.presenter.implementation;
 
 import android.util.Patterns;
 
+import ru.android.messenger.model.Model;
+import ru.android.messenger.model.Repository;
+import ru.android.messenger.model.User;
+import ru.android.messenger.model.callbacks.RegistrationCallback;
 import ru.android.messenger.presenter.RegistrationPresenter;
 import ru.android.messenger.view.RegistrationError;
 import ru.android.messenger.view.RegistrationView;
@@ -18,9 +22,11 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
     private static final int MAX_SURNAME_LENGTH = 50;
 
     private RegistrationView registrationView;
+    private Repository repository;
 
     public RegistrationPresenterImplementation(RegistrationView registrationView) {
         this.registrationView = registrationView;
+        repository = Model.getRepository();
     }
 
     @Override
@@ -31,6 +37,10 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
         }
         validateIncorrectTextLength(firstName, surname, login, password);
         validateEmail(email);
+
+        User user = new User(login, password, email, firstName, surname);
+        repository.registerUser(user).enqueue(new RegistrationCallback(registrationView));
+
     }
 
     private void validateIncorrectTextLength(String firstName, String surname, String login, String password) {

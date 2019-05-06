@@ -15,4 +15,7 @@
     <string name="registration_activity_error_incorrect_surname_length">Surname can be from 1 to 50 characters long</string>
     <string name="registration_activity_error_incorrect_password_length">Password can be from 6 to 100 characters long</string>
     <string name="registration_activity_error_incorrect_email">E-mail is invalid</string>
+
+    <string name="registration_activity_error_email_is_exists">Sorry, this e-mail is already registered</string>
+    <string name="registration_activity_error_login_is_exists">Sorry, this login is already registered</string>
 </resources>

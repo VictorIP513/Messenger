@@ -15,4 +15,7 @@
     <string name="registration_activity_error_incorrect_surname_length">Фамилия может быть длиной от 1 до 50 символов</string>
     <string name="registration_activity_error_incorrect_password_length">Пароль может быть длиной от 6 до 100 символов</string>
     <string name="registration_activity_error_incorrect_email">Некорректный e-mail</string>
+
+    <string name="registration_activity_error_email_is_exists">К сожалению, e-mail занят</string>
+    <string name="registration_activity_error_login_is_exists">К сожалению, логин занят</string>
 </resources>
