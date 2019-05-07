@@ -39,8 +39,8 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
         validateEmail(email);
 
         User user = new User(login, password, email, firstName, surname);
+        registrationView.showWaitAlertDialog();
         repository.registerUser(user).enqueue(new RegistrationCallback(registrationView));
-
     }
 
     private void validateIncorrectTextLength(String firstName, String surname, String login, String password) {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alert_dialog_wait_title">Пожалуйста, подождите…</string>
+    <string name="alert_dialog_connection_failed_title">Подключение прервано</string>
+    <string name="alert_dialog_connection_failed_content">Сервер недоступен или отсутствует интернет-соединение</string>
+</resources>

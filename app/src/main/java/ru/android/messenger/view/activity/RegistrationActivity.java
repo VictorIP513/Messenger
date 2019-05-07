@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import ru.android.messenger.R;
 import ru.android.messenger.presenter.RegistrationPresenter;
 import ru.android.messenger.presenter.implementation.RegistrationPresenterImplementation;
 import ru.android.messenger.view.RegistrationError;
 import ru.android.messenger.view.RegistrationView;
+import ru.android.messenger.view.utils.ViewUtils;
 
 public class RegistrationActivity extends Activity implements RegistrationView {
 
@@ -22,6 +24,8 @@ public class RegistrationActivity extends Activity implements RegistrationView {
     private EditText editTextLogin;
     private EditText editTextPassword;
     private EditText editTextPasswordConfirm;
+
+    private SweetAlertDialog waitAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,23 @@ public class RegistrationActivity extends Activity implements RegistrationView {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void showWaitAlertDialog() {
+        waitAlertDialog = ViewUtils.createWaitAlertDialog(this);
+        waitAlertDialog.show();
+    }
+
+    @Override
+    public void cancelWaitAlertDialog() {
+        waitAlertDialog.cancel();
+    }
+
+    @Override
+    public void showConnectionErrorAlertDialog() {
+        SweetAlertDialog alertDialog = ViewUtils.createConnectionErrorAlertDialog(this);
+        alertDialog.show();
     }
 
     public void textViewLoginClick(View view) {

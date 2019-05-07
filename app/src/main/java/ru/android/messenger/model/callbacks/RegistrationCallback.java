@@ -23,6 +23,7 @@ public class RegistrationCallback implements Callback<RegistrationResponse> {
     @Override
     public void onResponse(@NonNull Call<RegistrationResponse> call,
                            @NonNull Response<RegistrationResponse> response) {
+        registrationView.cancelWaitAlertDialog();
         if (response.isSuccessful()) {
 
         } else {
@@ -39,6 +40,7 @@ public class RegistrationCallback implements Callback<RegistrationResponse> {
 
     @Override
     public void onFailure(@NonNull Call call, @NonNull Throwable t) {
-
+        registrationView.cancelWaitAlertDialog();
+        registrationView.showConnectionErrorAlertDialog();
     }
 }
