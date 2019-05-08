@@ -25,7 +25,7 @@ public class RegistrationCallback implements Callback<RegistrationResponse> {
                            @NonNull Response<RegistrationResponse> response) {
         registrationView.cancelWaitAlertDialog();
         if (response.isSuccessful()) {
-
+            registrationView.showSuccessRegistrationAlert();
         } else {
             RegistrationResponse registrationResponse = ApiUtils.getJsonFromResponseBody(
                     Objects.requireNonNull(response.errorBody()), RegistrationResponse.class);

@@ -35,32 +35,43 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
         if (!password.equals(passwordConfirm)) {
             registrationView.setRegistrationError(RegistrationError.PASSWORDS_DO_NOT_MATCH);
         }
-        validateIncorrectTextLength(firstName, surname, login, password);
-        validateEmail(email);
+        boolean isValidTextLength = validateIncorrectTextLength(firstName, surname, login, password);
+        boolean isValidEmail = validateEmail(email);
 
-        User user = new User(login, password, email, firstName, surname);
-        registrationView.showWaitAlertDialog();
-        repository.registerUser(user).enqueue(new RegistrationCallback(registrationView));
+        if (isValidTextLength && isValidEmail) {
+            User user = new User(login, password, email, firstName, surname);
+            registrationView.showWaitAlertDialog();
+            repository.registerUser(user).enqueue(new RegistrationCallback(registrationView));
+        }
     }
 
-    private void validateIncorrectTextLength(String firstName, String surname, String login, String password) {
+    private boolean validateIncorrectTextLength(String firstName, String surname,
+                                                String login, String password) {
+        boolean isCorrectTextLength = true;
         if (firstName.length() < MIN_FIRST_NAME_LENGTH || firstName.length() > MAX_FIRST_NAME_LENGTH) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_FIRST_NAME_LENGTH);
+            isCorrectTextLength = false;
         }
         if (surname.length() < MIN_SURNAME_LENGTH || surname.length() > MAX_SURNAME_LENGTH) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_SURNAME_LENGTH);
+            isCorrectTextLength = false;
         }
         if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_PASSWORD_LENGTH);
+            isCorrectTextLength = false;
         }
         if (login.length() < MIN_LOGIN_LENGTH || login.length() > MAX_LOGIN_LENGTH) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_LOGIN_LENGTH);
+            isCorrectTextLength = false;
         }
+        return isCorrectTextLength;
     }
 
-    private void validateEmail(String email) {
+    private boolean validateEmail(String email) {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_EMAIL);
+            return false;
         }
+        return true;
     }
 }

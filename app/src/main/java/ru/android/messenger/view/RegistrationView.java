@@ -9,4 +9,8 @@ public interface RegistrationView {
     void cancelWaitAlertDialog();
 
     void showConnectionErrorAlertDialog();
+
+    void showSuccessRegistrationAlert();
+
+    void backToLoginActivity();
 }

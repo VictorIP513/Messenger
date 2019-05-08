@@ -3,4 +3,7 @@
     <string name="alert_dialog_wait_title">Please wait…</string>
     <string name="alert_dialog_connection_failed_title">Connection failed</string>
     <string name="alert_dialog_connection_failed_content">Server is unavailable or no internet connection</string>
+    <string name="alert_dialog_registration_successful_title">Registration successful</string>
+    <string name="alert_dialog_registration_successful_content">Please check your inbox for a confirmation email.
+        Click the link in the email to confirm your email address</string>
 </resources>

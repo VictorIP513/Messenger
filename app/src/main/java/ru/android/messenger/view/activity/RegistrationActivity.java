@@ -83,10 +83,29 @@ public class RegistrationActivity extends Activity implements RegistrationView {
         alertDialog.show();
     }
 
-    public void textViewLoginClick(View view) {
+    @Override
+    public void showSuccessRegistrationAlert() {
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText(getString(R.string.alert_dialog_registration_successful_title))
+                .setContentText(getString(R.string.alert_dialog_registration_successful_content))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        backToLoginActivity();
+                    }
+                }).show();
+    }
+
+    @Override
+    public void backToLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    public void textViewLoginClick(View view) {
+        backToLoginActivity();
     }
 
     public void buttonRegistrationClick(View view) {
