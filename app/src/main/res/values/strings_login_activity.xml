@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login_activity_edit_text_login_hint">Enter your login or email</string>
+    <string name="login_activity_edit_text_login_hint">Enter your login</string>
     <string name="login_activity_edit_text_password_hint">Enter your password</string>
     <string name="login_activity_button_login_text">Log in</string>
     <string name="login_activity_text_view_register_text">No account yet? Create an account</string>
+
+    <string name="login_activity_error_incorrect_login_length">Login can be from 3 to 30 characters long</string>
+    <string name="login_activity_error_incorrect_password_length">Password can be from 6 to 100 characters long</string>
 </resources>

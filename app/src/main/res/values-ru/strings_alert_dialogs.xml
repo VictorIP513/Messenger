@@ -6,4 +6,9 @@
     <string name="alert_dialog_registration_successful_title">Регистрация прошла успешно</string>
     <string name="alert_dialog_registration_successful_content">Пожалуйста, проверьте вашу почту на наличие письма с подтверждением e-mail адреса.
         Нажмите на ссылку в письме чтобы подтвердить свой e-mail адрес</string>
+    <string name="alert_dialog_login_error_invalid_login_or_password_title">Не удалось авторизоваться</string>
+    <string name="alert_dialog_login_error_invalid_login_or_password_content">Неверный логин или пароль</string>
+    <string name="alert_dialog_login_error_account_not_confirmed_title">Не удалось авторизоваться</string>
+    <string name="alert_dialog_login_error_account_not_confirmed_content">Аккаунт не подтвержден. Пожалуйста, проверьте вашу почту на наличие письма с подтверждением e-mail адреса.
+        Нажмите на ссылку в письме чтобы подтвердить свой e-mail адрес</string>
 </resources>

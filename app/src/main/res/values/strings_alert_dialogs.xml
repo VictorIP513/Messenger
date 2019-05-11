@@ -6,4 +6,9 @@
     <string name="alert_dialog_registration_successful_title">Registration successful</string>
     <string name="alert_dialog_registration_successful_content">Please check your inbox for a confirmation email.
         Click the link in the email to confirm your email address</string>
+    <string name="alert_dialog_login_error_invalid_login_or_password_title">Login failed</string>
+    <string name="alert_dialog_login_error_invalid_login_or_password_content">Invalid login or password</string>
+    <string name="alert_dialog_login_error_account_not_confirmed_title">Login failed</string>
+    <string name="alert_dialog_login_error_account_not_confirmed_content">Account not confirm. Please check your inbox for a confirmation email.
+        Click the link in the email to confirm your email address</string>
 </resources>

@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_activity_edit_text_login_hint"
                 android:inputType="textEmailAddress"
+                android:maxLength="30"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
@@ -40,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_activity_edit_text_password_hint"
                 android:inputType="textPassword"
+                android:maxLength="100"
                 tools:ignore="Autofill" />
         </android.support.design.widget.TextInputLayout>
 
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:onClick="buttonLoginClick"
             android:padding="12dp"
             android:text="@string/login_activity_button_login_text" />
 

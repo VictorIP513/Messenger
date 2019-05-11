@@ -1,14 +1,10 @@
 package ru.android.messenger.view;
 
-public interface RegistrationView {
+import ru.android.messenger.view.errors.RegistrationError;
+
+public interface RegistrationView extends ViewWithAlerts {
 
     void setRegistrationError(RegistrationError registrationError);
-
-    void showWaitAlertDialog();
-
-    void cancelWaitAlertDialog();
-
-    void showConnectionErrorAlertDialog();
 
     void showSuccessRegistrationAlert();
 

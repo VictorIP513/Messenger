@@ -1,25 +1,16 @@
 package ru.android.messenger.presenter.implementation;
 
-import android.util.Patterns;
-
+import ru.android.messenger.model.DataValidator;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.User;
 import ru.android.messenger.model.callbacks.RegistrationCallback;
 import ru.android.messenger.presenter.RegistrationPresenter;
-import ru.android.messenger.view.RegistrationError;
 import ru.android.messenger.view.RegistrationView;
+import ru.android.messenger.view.errors.RegistrationError;
 
 public class RegistrationPresenterImplementation implements RegistrationPresenter {
 
-    private static final int MIN_LOGIN_LENGTH = 3;
-    private static final int MAX_LOGIN_LENGTH = 30;
-    private static final int MIN_PASSWORD_LENGTH = 6;
-    private static final int MAX_PASSWORD_LENGTH = 100;
-    private static final int MIN_FIRST_NAME_LENGTH = 1;
-    private static final int MAX_FIRST_NAME_LENGTH = 50;
-    private static final int MIN_SURNAME_LENGTH = 1;
-    private static final int MAX_SURNAME_LENGTH = 50;
 
     private RegistrationView registrationView;
     private Repository repository;
@@ -35,43 +26,38 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
         if (!password.equals(passwordConfirm)) {
             registrationView.setRegistrationError(RegistrationError.PASSWORDS_DO_NOT_MATCH);
         }
-        boolean isValidTextLength = validateIncorrectTextLength(firstName, surname, login, password);
-        boolean isValidEmail = validateEmail(email);
 
-        if (isValidTextLength && isValidEmail) {
+        boolean isValidInputData = validateInputData(login, password, email, firstName, surname);
+        if (isValidInputData) {
             User user = new User(login, password, email, firstName, surname);
             registrationView.showWaitAlertDialog();
             repository.registerUser(user).enqueue(new RegistrationCallback(registrationView));
         }
     }
 
-    private boolean validateIncorrectTextLength(String firstName, String surname,
-                                                String login, String password) {
-        boolean isCorrectTextLength = true;
-        if (firstName.length() < MIN_FIRST_NAME_LENGTH || firstName.length() > MAX_FIRST_NAME_LENGTH) {
-            registrationView.setRegistrationError(RegistrationError.INCORRECT_FIRST_NAME_LENGTH);
-            isCorrectTextLength = false;
-        }
-        if (surname.length() < MIN_SURNAME_LENGTH || surname.length() > MAX_SURNAME_LENGTH) {
-            registrationView.setRegistrationError(RegistrationError.INCORRECT_SURNAME_LENGTH);
-            isCorrectTextLength = false;
-        }
-        if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH) {
-            registrationView.setRegistrationError(RegistrationError.INCORRECT_PASSWORD_LENGTH);
-            isCorrectTextLength = false;
-        }
-        if (login.length() < MIN_LOGIN_LENGTH || login.length() > MAX_LOGIN_LENGTH) {
+    private boolean validateInputData(String login, String password, String email,
+                                      String firstName, String surname) {
+        boolean isValidData = true;
+        if (!DataValidator.isCorrectLoginLength(login)) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_LOGIN_LENGTH);
-            isCorrectTextLength = false;
+            isValidData = false;
         }
-        return isCorrectTextLength;
-    }
-
-    private boolean validateEmail(String email) {
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!DataValidator.isCorrectPasswordLength(password)) {
+            registrationView.setRegistrationError(RegistrationError.INCORRECT_PASSWORD_LENGTH);
+            isValidData = false;
+        }
+        if (!DataValidator.isCorrectEmail(email)) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_EMAIL);
-            return false;
+            isValidData = false;
         }
-        return true;
+        if (!DataValidator.isCorrectFirstNameLength(firstName)) {
+            registrationView.setRegistrationError(RegistrationError.INCORRECT_FIRST_NAME_LENGTH);
+            isValidData = false;
+        }
+        if (!DataValidator.isCorrectSurnameLength(surname)) {
+            registrationView.setRegistrationError(RegistrationError.INCORRECT_SURNAME_LENGTH);
+            isValidData = false;
+        }
+        return isValidData;
     }
 }
