@@ -81,6 +81,7 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
     public void textViewLoginClick(View view) {

@@ -63,6 +63,7 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
     public void textViewRegisterClick(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
     public void buttonLoginClick(View view) {
