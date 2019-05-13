@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_activity_alert_set_profile_image_upload_photo">Загрузить фото</string>
+    <string name="settings_activity_alert_set_profile_image_take_photo">Сфотографировать</string>
+    <string name="settings_activity_alert_set_profile_image_title">Изменение изображения профиля</string>
+    <string name="settings_activity_error_file_not_found">Произошла ошибка при открытии файла. Файл не найден</string>
+    <string name="settings_activity_error_camera_not_found">Невозможно получить доступ к камере</string>
+</resources>

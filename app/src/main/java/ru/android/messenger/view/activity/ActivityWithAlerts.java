@@ -5,7 +5,7 @@ import android.graphics.Color;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import ru.android.messenger.R;
-import ru.android.messenger.view.ViewWithAlerts;
+import ru.android.messenger.view.interfaces.ViewWithAlerts;
 
 public abstract class ActivityWithAlerts extends Activity implements ViewWithAlerts {
 

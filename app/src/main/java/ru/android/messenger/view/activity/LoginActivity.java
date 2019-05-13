@@ -1,6 +1,8 @@
 package ru.android.messenger.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,10 +11,12 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import ru.android.messenger.R;
 import ru.android.messenger.presenter.LoginPresenter;
 import ru.android.messenger.presenter.implementation.LoginPresenterImplementation;
-import ru.android.messenger.view.LoginView;
 import ru.android.messenger.view.errors.LoginError;
+import ru.android.messenger.view.interfaces.LoginView;
 
 public class LoginActivity extends ActivityWithAlerts implements LoginView {
+
+    private static final String GLOBAL_SHARED_PREFERENCES_FILE = "application_preferences";
 
     private LoginPresenter loginPresenter;
 
@@ -58,6 +62,11 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
                 getString(R.string.alert_dialog_login_error_account_not_confirmed_title),
                 getString(R.string.alert_dialog_login_error_account_not_confirmed_content));
         alertDialog.show();
+    }
+
+    @Override
+    public SharedPreferences getSharedPreferences() {
+        return getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
     }
 
     public void textViewRegisterClick(View view) {

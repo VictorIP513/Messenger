@@ -10,7 +10,7 @@ import retrofit2.Response;
 import ru.android.messenger.model.api.ApiUtils;
 import ru.android.messenger.model.api.RegistrationResponse;
 import ru.android.messenger.view.errors.RegistrationError;
-import ru.android.messenger.view.RegistrationView;
+import ru.android.messenger.view.interfaces.RegistrationView;
 
 public class RegistrationCallback implements Callback<RegistrationResponse> {
 

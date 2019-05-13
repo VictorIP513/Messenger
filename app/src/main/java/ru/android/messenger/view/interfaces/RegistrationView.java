@@ -1,4 +1,4 @@
-package ru.android.messenger.view;
+package ru.android.messenger.view.interfaces;
 
 import ru.android.messenger.view.errors.RegistrationError;
 

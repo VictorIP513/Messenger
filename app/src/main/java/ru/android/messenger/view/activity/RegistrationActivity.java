@@ -9,7 +9,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import ru.android.messenger.R;
 import ru.android.messenger.presenter.RegistrationPresenter;
 import ru.android.messenger.presenter.implementation.RegistrationPresenterImplementation;
-import ru.android.messenger.view.RegistrationView;
+import ru.android.messenger.view.interfaces.RegistrationView;
 import ru.android.messenger.view.errors.RegistrationError;
 
 public class RegistrationActivity extends ActivityWithAlerts implements RegistrationView {

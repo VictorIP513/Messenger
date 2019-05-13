@@ -1,4 +1,4 @@
-package ru.android.messenger.view;
+package ru.android.messenger.view.interfaces;
 
 public interface ViewWithAlerts {
 

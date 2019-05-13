@@ -6,11 +6,10 @@ import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.User;
 import ru.android.messenger.model.callbacks.RegistrationCallback;
 import ru.android.messenger.presenter.RegistrationPresenter;
-import ru.android.messenger.view.RegistrationView;
+import ru.android.messenger.view.interfaces.RegistrationView;
 import ru.android.messenger.view.errors.RegistrationError;
 
 public class RegistrationPresenterImplementation implements RegistrationPresenter {
-
 
     private RegistrationView registrationView;
     private Repository repository;

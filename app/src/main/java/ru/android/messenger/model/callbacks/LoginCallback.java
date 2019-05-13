@@ -10,7 +10,7 @@ import retrofit2.Response;
 import ru.android.messenger.model.api.ApiUtils;
 import ru.android.messenger.model.api.LoginResponse;
 import ru.android.messenger.presenter.LoginPresenter;
-import ru.android.messenger.view.LoginView;
+import ru.android.messenger.view.interfaces.LoginView;
 
 public class LoginCallback implements Callback<LoginResponse> {
 
