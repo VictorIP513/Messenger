@@ -13,6 +13,7 @@ public class PreferenceManager {
     public static void setAuthenticationTokenToSharedPreferences(
             SharedPreferences.Editor editor, String authenticationToken) {
         editor.putString(AUTHENTICATION_TOKEN_KEY, authenticationToken);
+        editor.commit();
     }
 
     public static String getAuthenticationTokenFromSharedPreferences(SharedPreferences preferences) {

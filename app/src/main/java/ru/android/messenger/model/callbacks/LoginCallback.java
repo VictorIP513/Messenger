@@ -29,6 +29,7 @@ public class LoginCallback implements Callback<LoginResponse> {
         if (response.isSuccessful()) {
             LoginResponse loginResponse = Objects.requireNonNull(response.body());
             loginPresenter.saveAuthenticationToken(loginResponse.getAuthenticationToken());
+            loginView.changeToMainActivity();
         } else {
             LoginResponse loginResponse = ApiUtils.getJsonFromResponseBody(
                     Objects.requireNonNull(response.errorBody()), LoginResponse.class);

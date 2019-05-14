@@ -17,10 +17,10 @@
         tools:targetApi="m">
         <activity android:name=".view.activity.FriendListActivity" />
         <activity android:name=".view.activity.UsersSearchActivity" />
-        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.SettingsActivity" />
         <activity android:name=".view.activity.RegistrationActivity" />
         <activity android:name=".view.activity.ConnectionActivity" />
-        <activity android:name=".view.activity.SettingsActivity">
+        <activity android:name=".view.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,6 +6,7 @@ import ru.android.messenger.model.DataValidator;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
+import ru.android.messenger.model.callbacks.CheckAuthenticationTokenCallback;
 import ru.android.messenger.model.callbacks.LoginCallback;
 import ru.android.messenger.presenter.LoginPresenter;
 import ru.android.messenger.view.errors.LoginError;
@@ -36,6 +37,18 @@ public class LoginPresenterImplementation implements LoginPresenter {
         SharedPreferences sharedPreferences = loginView.getSharedPreferences();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         PreferenceManager.setAuthenticationTokenToSharedPreferences(editor, authenticationToken);
+    }
+
+    @Override
+    public void autoLogin() {
+        SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        String authenticationToken =
+                PreferenceManager.getAuthenticationTokenFromSharedPreferences(sharedPreferences);
+        if (authenticationToken != null) {
+            loginView.showWaitAlertDialog();
+            repository.checkAuthenticationToken(authenticationToken)
+                    .enqueue(new CheckAuthenticationTokenCallback(loginView));
+        }
     }
 
     private boolean validateInputData(String login, String password) {

@@ -31,6 +31,7 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
         loginPresenter = new LoginPresenterImplementation(this);
 
         findViews();
+        autoLogin();
     }
 
     @Override
@@ -65,6 +66,14 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
     }
 
     @Override
+    public void changeToMainActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        finish();
+    }
+
+    @Override
     public SharedPreferences getSharedPreferences() {
         return getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
     }
@@ -85,5 +94,9 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
     private void findViews() {
         editTextLogin = findViewById(R.id.editTextLogin);
         editTextPassword = findViewById(R.id.editTextPassword);
+    }
+
+    private void autoLogin() {
+        loginPresenter.autoLogin();
     }
 }

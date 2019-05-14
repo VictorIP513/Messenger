@@ -12,5 +12,7 @@ public interface LoginView extends ViewWithAlerts {
 
     void setAccountNotConfirmedError();
 
+    void changeToMainActivity();
+
     SharedPreferences getSharedPreferences();
 }
