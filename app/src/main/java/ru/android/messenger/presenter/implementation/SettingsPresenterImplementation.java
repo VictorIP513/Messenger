@@ -43,9 +43,9 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
                             settingsView.getSharedPreferences());
             settingsView.showWaitAlertDialog();
 
-            repository.uploadPhoto(Model.createFileToSend(photoFile, PHOTO_PART_NAME),
-                    authenticationToken)
-                    .enqueue(new UploadPhotoCallback(settingsView, this));
+            repository.uploadPhoto(Model.createFileToSend(
+                    photoFile, PHOTO_PART_NAME), authenticationToken)
+                    .enqueue(new UploadPhotoCallback(settingsView, bitmap));
         } catch (IOException e) {
             Logger.error("Error when writing bitmap to file", e);
             settingsView.setErrorWritingBitmapToFile();
