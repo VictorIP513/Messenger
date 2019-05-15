@@ -2,65 +2,157 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/main_cyan_color"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="76dp"
-            android:layout_height="76dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:onClick="imageViewProfileClick"
-                android:src="@drawable/profile_thumbnail"
-                android:id="@+id/image_view_profile"
-                android:layout_width="76dp"
-                android:layout_height="76dp"
-                android:contentDescription="TODO"
-                android:scaleType="centerCrop" />
-
-            <ImageView
-                android:onClick="imageViewProfileClick"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/camera"
-                android:contentDescription="TODO" />
-        </RelativeLayout>
-
+        android:background="@color/button_text_color"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="76dp"
+                android:layout_height="76dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_view_profile"
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:contentDescription="@string/content_description_user_profile_photo"
+                    android:onClick="imageViewProfileClick"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_thumbnail" />
+
+                <ImageView
+                    android:layout_width="31dp"
+                    android:layout_height="31dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:contentDescription="@string/content_description_upload_photo"
+                    android:onClick="imageViewProfileClick"
+                    android:src="@drawable/camera" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\@login"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textViewEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="email"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e6e6e6" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_text_color"
+            android:paddingLeft="21dp"
+            android:paddingTop="12dp"
+            android:paddingRight="21dp"
+            android:paddingBottom="15dp">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="20sp"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/settings_activity_enable_notifications_text"
+                android:textColor="#1b1d1d"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView2"
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_notifications"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\@login"
-                android:textSize="16sp" />
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:checked="true"
+                android:gravity="center_vertical" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e6e6e6" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_blocked_members_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_text_color"
+            android:orientation="horizontal"
+            android:paddingLeft="21dp"
+            android:paddingTop="12dp"
+            android:paddingRight="21dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/settings_activity_blocked_members_list_text"
+                android:textColor="#1b1d1d"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:background="@drawable/shape"
+                android:contentDescription="@string/content_description_open_blocked_members_list"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e6e6e6" />
+
     </LinearLayout>
 </ScrollView>
