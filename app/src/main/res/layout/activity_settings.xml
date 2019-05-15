@@ -16,11 +16,11 @@
 
         <RelativeLayout
             android:layout_width="76dp"
-            android:layout_height="76dp"
-            android:background="@drawable/profile_thumbnail">
+            android:layout_height="76dp">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:onClick="imageViewProfileClick"
+                android:src="@drawable/profile_thumbnail"
                 android:id="@+id/image_view_profile"
                 android:layout_width="76dp"
                 android:layout_height="76dp"
@@ -33,7 +33,7 @@
                 android:layout_height="31dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/camera"
+                android:src="@drawable/camera"
                 android:contentDescription="TODO" />
         </RelativeLayout>
 

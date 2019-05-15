@@ -26,6 +26,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation group: 'com.github.f0ris.sweetalert', name: 'library', version: '1.5.6'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
