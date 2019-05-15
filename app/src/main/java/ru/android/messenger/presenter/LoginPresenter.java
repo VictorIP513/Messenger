@@ -4,7 +4,5 @@ public interface LoginPresenter {
 
     void buttonLoginClicked(String login, String password);
 
-    void saveAuthenticationToken(String authenticationToken);
-
     void autoLogin();
 }

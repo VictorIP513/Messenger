@@ -1,13 +1,21 @@
 package ru.android.messenger.presenter.implementation;
 
-import ru.android.messenger.model.utils.DataValidator;
+import android.support.annotation.NonNull;
+
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Response;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.Repository;
+import ru.android.messenger.model.api.ApiUtils;
+import ru.android.messenger.model.api.RegistrationResponse;
+import ru.android.messenger.model.callbacks.DefaultCallback;
 import ru.android.messenger.model.dto.User;
-import ru.android.messenger.model.callbacks.RegistrationCallback;
+import ru.android.messenger.model.utils.DataValidator;
 import ru.android.messenger.presenter.RegistrationPresenter;
-import ru.android.messenger.view.interfaces.RegistrationView;
 import ru.android.messenger.view.errors.RegistrationError;
+import ru.android.messenger.view.interfaces.RegistrationView;
 
 public class RegistrationPresenterImplementation implements RegistrationPresenter {
 
@@ -35,7 +43,30 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
             user.setFirstName(firstName);
             user.setSurname(surname);
             registrationView.showWaitAlertDialog();
-            repository.registerUser(user).enqueue(new RegistrationCallback(registrationView));
+            repository.registerUser(user).enqueue(
+                    new DefaultCallback<RegistrationResponse, RegistrationView>(registrationView) {
+                        @Override
+                        public void onResponse(@NonNull Call<RegistrationResponse> call,
+                                               @NonNull Response<RegistrationResponse> response) {
+                            super.onResponse(call, response);
+                            processRegistrationResponse(response);
+                        }
+                    });
+        }
+    }
+
+    private void processRegistrationResponse(Response<RegistrationResponse> response) {
+        if (response.isSuccessful()) {
+            registrationView.showSuccessRegistrationAlert();
+        } else {
+            RegistrationResponse registrationResponse = ApiUtils.getJsonFromResponseBody(
+                    Objects.requireNonNull(response.errorBody()), RegistrationResponse.class);
+            if (registrationResponse == RegistrationResponse.LOGIN_IS_EXISTS) {
+                registrationView.setRegistrationError(RegistrationError.LOGIN_IS_EXISTS);
+            }
+            if (registrationResponse == RegistrationResponse.EMAIL_IS_EXISTS) {
+                registrationView.setRegistrationError(RegistrationError.EMAIL_IS_EXISTS);
+            }
         }
     }
 
