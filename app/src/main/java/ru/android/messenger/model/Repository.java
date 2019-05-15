@@ -10,6 +10,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import ru.android.messenger.model.api.LoginResponse;
 import ru.android.messenger.model.api.RegistrationResponse;
+import ru.android.messenger.model.dto.User;
 
 public interface Repository {
 

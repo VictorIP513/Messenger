@@ -3,7 +3,7 @@ package ru.android.messenger.presenter.implementation;
 import ru.android.messenger.model.DataValidator;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.Repository;
-import ru.android.messenger.model.User;
+import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.callbacks.RegistrationCallback;
 import ru.android.messenger.presenter.RegistrationPresenter;
 import ru.android.messenger.view.interfaces.RegistrationView;
@@ -28,7 +28,12 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
 
         boolean isValidInputData = validateInputData(login, password, email, firstName, surname);
         if (isValidInputData) {
-            User user = new User(login, password, email, firstName, surname);
+            User user = new User();
+            user.setLogin(login);
+            user.setPassword(password);
+            user.setEmail(email);
+            user.setFirstName(firstName);
+            user.setSurname(surname);
             registrationView.showWaitAlertDialog();
             repository.registerUser(user).enqueue(new RegistrationCallback(registrationView));
         }
