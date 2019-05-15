@@ -1,13 +1,13 @@
 package ru.android.messenger.view.activity;
 
-import android.app.Activity;
 import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import ru.android.messenger.R;
 import ru.android.messenger.view.interfaces.ViewWithAlerts;
 
-public abstract class ActivityWithAlerts extends Activity implements ViewWithAlerts {
+public abstract class ActivityWithAlerts extends AppCompatActivity implements ViewWithAlerts {
 
     private static final int PROGRESS_BAR_COLOR = Color.parseColor("#A5DC86");
 

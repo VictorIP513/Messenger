@@ -5,4 +5,5 @@
     <string name="settings_activity_alert_set_profile_image_title">Изменение изображения профиля</string>
     <string name="settings_activity_error_file_not_found">Произошла ошибка при открытии файла. Файл не найден</string>
     <string name="settings_activity_error_camera_not_found">Невозможно получить доступ к камере</string>
+    <string name="settings_activity_error_writing_bitmap_to_file">Произошла ошибка при обработке фотографии пользователя</string>
 </resources>

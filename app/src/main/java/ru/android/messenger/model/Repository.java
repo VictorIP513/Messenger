@@ -1,5 +1,6 @@
 package ru.android.messenger.model;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,6 +19,11 @@ public interface Repository {
     @Multipart
     @POST("/api/login")
     Call<LoginResponse> login(@Part("login") String login, @Part("password") String password);
+
+    @Multipart
+    @POST("/api/uploadPhoto")
+    Call<Void> uploadPhoto(@Part MultipartBody.Part photo,
+                           @Part("authenticationToken") String authenticationToken);
 
     @GET("/api/checkAuthenticationToken/{authenticationToken}")
     Call<Boolean> checkAuthenticationToken(@Path("authenticationToken") String authenticationToken);

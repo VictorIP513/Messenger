@@ -5,4 +5,5 @@
     <string name="settings_activity_alert_set_profile_image_title">Set profile image</string>
     <string name="settings_activity_error_file_not_found">An error occurred while opening the file. File not found</string>
     <string name="settings_activity_error_camera_not_found">Can\'t connect to camera</string>
+    <string name="settings_activity_error_writing_bitmap_to_file">An error occurred while processing the user\'s photo</string>
 </resources>

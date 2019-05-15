@@ -1,32 +1,29 @@
 package ru.android.messenger.view.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.Objects;
 
 import ru.android.messenger.R;
 import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.presenter.implementation.SettingsPresenterImplementation;
-import ru.android.messenger.utils.Logger;
 import ru.android.messenger.view.interfaces.SettingsView;
 
-public class SettingsActivity extends AppCompatActivity implements SettingsView {
+public class SettingsActivity extends ActivityWithAlerts implements SettingsView {
 
+    private static final String GLOBAL_SHARED_PREFERENCES_FILE = "application_preferences";
     private static final int UPLOAD_PHOTO_REQUEST_CODE = 0;
     private static final int TAKE_PHOTO_REQUEST_CODE = 1;
     private static final String INTENT_IMAGE_TYPE = "image/*";
@@ -43,6 +40,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
         settingsPresenter = new SettingsPresenterImplementation(this);
 
         findViews();
+        fillUserInformation();
     }
 
     @Override
@@ -57,6 +55,34 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
         }
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public SharedPreferences getSharedPreferences() {
+        return getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+    }
+
+    @Override
+    public void setErrorWritingBitmapToFile() {
+        Toast errorToast = Toast.makeText(this,
+                getText(R.string.settings_activity_error_writing_bitmap_to_file), Toast.LENGTH_LONG);
+        errorToast.show();
+    }
+
+    @Override
+    public void setImageNotFoundError() {
+        Toast errorToast = Toast.makeText(this,
+                getText(R.string.settings_activity_error_file_not_found), Toast.LENGTH_LONG);
+        errorToast.show();
+    }
+
+    @Override
+    public void setProfileImage(Bitmap bitmap) {
+        imageViewProfile.setImageBitmap(bitmap);
+    }
 
     public void imageViewProfileClick(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -102,23 +128,19 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
     }
 
     private void getPhotoFromDevice(Intent data) {
-        try {
-            Uri imageUri = data.getData();
-            InputStream imageStream = getContentResolver().openInputStream(
-                    Objects.requireNonNull(imageUri));
-            Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-            imageViewProfile.setImageBitmap(selectedImage);
-        } catch (FileNotFoundException e) {
-            Logger.error("Image not found", e);
-            Toast errorToast = Toast.makeText(this,
-                    getText(R.string.settings_activity_error_file_not_found), Toast.LENGTH_LONG);
-            errorToast.show();
+        Bitmap imageBitmap = settingsPresenter.getBitmapFromUri(data.getData());
+        if (imageBitmap != null) {
+            settingsPresenter.uploadPhoto(imageBitmap);
         }
     }
 
     private void getPhotoFromCamera(Intent data) {
         Bundle extras = data.getExtras();
         Bitmap imageBitmap = (Bitmap) Objects.requireNonNull(extras).get("data");
-        imageViewProfile.setImageBitmap(imageBitmap);
+        settingsPresenter.uploadPhoto(imageBitmap);
+    }
+
+    private void fillUserInformation() {
+        settingsPresenter.fillUserInformation();
     }
 }
