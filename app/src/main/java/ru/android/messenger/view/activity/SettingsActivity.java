@@ -104,6 +104,29 @@ public class SettingsActivity extends ActivityWithAlerts implements SettingsView
         dialog.show();
     }
 
+    public void linearLayoutClearCacheClick(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.settings_activity_alert_clear_cache_title))
+                .setMessage(getString(R.string.settings_activity_alert_clear_cache_message))
+                .setPositiveButton(getString(R.string.settings_activity_alert_clear_cache_yes),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteCacheAndBackToLoginActivity();
+                            }
+                        })
+                .setNegativeButton(
+                        getString(R.string.settings_activity_alert_clear_cache_no), null)
+                .show();
+    }
+
+    private void deleteCacheAndBackToLoginActivity() {
+        settingsPresenter.deleteCache();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void findViews() {
         imageViewProfile = findViewById(R.id.image_view_profile);
     }

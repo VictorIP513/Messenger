@@ -1,6 +1,6 @@
 package ru.android.messenger.presenter.implementation;
 
-import ru.android.messenger.model.DataValidator;
+import ru.android.messenger.model.utils.DataValidator;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.dto.User;

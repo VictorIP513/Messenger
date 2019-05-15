@@ -9,5 +9,7 @@ public interface SettingsPresenter {
 
     void uploadPhoto(Bitmap bitmap);
 
+    void deleteCache();
+
     Bitmap getBitmapFromUri(Uri uri);
 }

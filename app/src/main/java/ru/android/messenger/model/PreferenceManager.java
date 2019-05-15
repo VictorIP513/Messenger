@@ -11,12 +11,18 @@ public class PreferenceManager {
     }
 
     public static void setAuthenticationTokenToSharedPreferences(
-            SharedPreferences.Editor editor, String authenticationToken) {
+            SharedPreferences sharedPreferences, String authenticationToken) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(AUTHENTICATION_TOKEN_KEY, authenticationToken);
         editor.commit();
     }
 
     public static String getAuthenticationTokenFromSharedPreferences(SharedPreferences preferences) {
         return preferences.getString(AUTHENTICATION_TOKEN_KEY, null);
+    }
+
+    public static void clearAllPreferences(SharedPreferences sharedPreferences) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear().apply();
     }
 }

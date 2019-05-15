@@ -2,7 +2,7 @@ package ru.android.messenger.presenter.implementation;
 
 import android.content.SharedPreferences;
 
-import ru.android.messenger.model.DataValidator;
+import ru.android.messenger.model.utils.DataValidator;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
@@ -35,8 +35,8 @@ public class LoginPresenterImplementation implements LoginPresenter {
     @Override
     public void saveAuthenticationToken(String authenticationToken) {
         SharedPreferences sharedPreferences = loginView.getSharedPreferences();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        PreferenceManager.setAuthenticationTokenToSharedPreferences(editor, authenticationToken);
+        PreferenceManager.setAuthenticationTokenToSharedPreferences(
+                sharedPreferences, authenticationToken);
     }
 
     @Override

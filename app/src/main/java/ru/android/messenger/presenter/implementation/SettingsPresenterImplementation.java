@@ -1,6 +1,7 @@
 package ru.android.messenger.presenter.implementation;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
@@ -13,6 +14,7 @@ import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.UploadPhotoCallback;
+import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.utils.Logger;
 import ru.android.messenger.view.interfaces.SettingsView;
@@ -50,6 +52,14 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
             Logger.error("Error when writing bitmap to file", e);
             settingsView.setErrorWritingBitmapToFile();
         }
+    }
+
+    @Override
+    public void deleteCache() {
+        Context context = settingsView.getContext();
+        FileUtils.deleteCache(context);
+        SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
+        PreferenceManager.clearAllPreferences(sharedPreferences);
     }
 
     @Override

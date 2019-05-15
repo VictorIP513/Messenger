@@ -9,4 +9,10 @@
 
     <string name="settings_activity_enable_notifications_text">Enable notifications</string>
     <string name="settings_activity_blocked_members_list_text">Blocked members list</string>
+    <string name="settings_activity_clear_cache_and_sign_out_text">Clear cache and sign out</string>
+
+    <string name="settings_activity_alert_clear_cache_yes">Yes</string>
+    <string name="settings_activity_alert_clear_cache_no">No</string>
+    <string name="settings_activity_alert_clear_cache_title">Messenger</string>
+    <string name="settings_activity_alert_clear_cache_message">You really want to clear the cache and log out?</string>
 </resources>

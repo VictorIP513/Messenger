@@ -154,5 +154,34 @@
             android:layout_height="1dp"
             android:background="#e6e6e6" />
 
+        <LinearLayout
+            android:id="@+id/linear_layout_clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_text_color"
+            android:onClick="linearLayoutClearCacheClick"
+            android:orientation="horizontal"
+            android:paddingLeft="21dp"
+            android:paddingTop="12dp"
+            android:paddingRight="21dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/settings_activity_clear_cache_and_sign_out_text"
+                android:textColor="#1b1d1d"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e6e6e6" />
     </LinearLayout>
 </ScrollView>

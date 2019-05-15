@@ -1,4 +1,4 @@
-package ru.android.messenger.model;
+package ru.android.messenger.model.utils;
 
 import android.util.Patterns;
 
