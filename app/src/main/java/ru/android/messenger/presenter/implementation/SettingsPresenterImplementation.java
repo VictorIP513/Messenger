@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -17,6 +18,7 @@ import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.DefaultCallback;
+import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.utils.Logger;
@@ -36,7 +38,7 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
 
     @Override
     public void fillUserInformation() {
-
+        fillUserData();
     }
 
     @Override
@@ -84,5 +86,25 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
             settingsView.setImageNotFoundError();
         }
         return null;
+    }
+
+    private void fillUserData() {
+        SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
+        String authenticationToken =
+                PreferenceManager.getAuthenticationTokenFromSharedPreferences(sharedPreferences);
+        settingsView.showWaitAlertDialog();
+        repository.getUser(authenticationToken)
+                .enqueue(new DefaultCallback<User, SettingsView>(settingsView) {
+                    @Override
+                    public void onResponse(@NonNull Call<User> call,
+                                           @NonNull Response<User> response) {
+                        super.onResponse(call, response);
+                        if (response.isSuccessful()) {
+                            User user = Objects.requireNonNull(response.body());
+                            settingsView.setUserData(user.getFirstName(), user.getSurname(),
+                                    user.getLogin(), user.getEmail());
+                        }
+                    }
+                });
     }
 }

@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Objects;
@@ -31,6 +32,9 @@ public class SettingsActivity extends ActivityWithAlerts implements SettingsView
     private SettingsPresenter settingsPresenter;
 
     private ImageView imageViewProfile;
+    private TextView textViewName;
+    private TextView textViewLogin;
+    private TextView textViewEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,14 @@ public class SettingsActivity extends ActivityWithAlerts implements SettingsView
         imageViewProfile.setImageBitmap(bitmap);
     }
 
+    @Override
+    public void setUserData(String firstName, String surname, String login, String email) {
+        String name = firstName + " " + surname;
+        textViewName.setText(name);
+        textViewLogin.setText(login);
+        textViewEmail.setText(email);
+    }
+
     public void imageViewProfileClick(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.settings_activity_alert_set_profile_image_title))
@@ -129,6 +141,9 @@ public class SettingsActivity extends ActivityWithAlerts implements SettingsView
 
     private void findViews() {
         imageViewProfile = findViewById(R.id.image_view_profile);
+        textViewName = findViewById(R.id.text_view_name);
+        textViewLogin = findViewById(R.id.text_view_login);
+        textViewEmail = findViewById(R.id.text_view_email);
     }
 
     private void uploadPhoto() {

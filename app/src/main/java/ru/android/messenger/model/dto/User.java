@@ -8,7 +8,6 @@ public class User {
     private String email;
     private String firstName;
     private String surname;
-    private String profileImageUrl;
 
     public String getLogin() {
         return login;
@@ -48,13 +47,5 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
-
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
     }
 }
