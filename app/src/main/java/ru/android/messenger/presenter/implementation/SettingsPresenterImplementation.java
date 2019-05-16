@@ -3,6 +3,7 @@ package ru.android.messenger.presenter.implementation;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
@@ -11,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import ru.android.messenger.model.ImageHelper;
@@ -39,6 +41,7 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
     @Override
     public void fillUserInformation() {
         fillUserData();
+        fillPhoto();
     }
 
     @Override
@@ -90,19 +93,35 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
 
     private void fillUserData() {
         SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
-        String authenticationToken =
-                PreferenceManager.getAuthenticationTokenFromSharedPreferences(sharedPreferences);
+        String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
         settingsView.showWaitAlertDialog();
-        repository.getUser(authenticationToken)
-                .enqueue(new DefaultCallback<User, SettingsView>(settingsView) {
+        repository.getUser(login).enqueue(new DefaultCallback<User, SettingsView>(settingsView) {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                super.onResponse(call, response);
+                if (response.isSuccessful()) {
+                    User user = Objects.requireNonNull(response.body());
+                    settingsView.setUserData(user.getFirstName(), user.getSurname(),
+                            user.getLogin(), user.getEmail());
+                }
+            }
+        });
+    }
+
+    private void fillPhoto() {
+        SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
+        String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
+        repository.getUserPhoto(login)
+                .enqueue(new DefaultCallback<ResponseBody, SettingsView>(settingsView) {
                     @Override
-                    public void onResponse(@NonNull Call<User> call,
-                                           @NonNull Response<User> response) {
+                    public void onResponse(@NonNull Call<ResponseBody> call,
+                                           @NonNull Response<ResponseBody> response) {
                         super.onResponse(call, response);
                         if (response.isSuccessful()) {
-                            User user = Objects.requireNonNull(response.body());
-                            settingsView.setUserData(user.getFirstName(), user.getSurname(),
-                                    user.getLogin(), user.getEmail());
+                            File file = Objects.requireNonNull(FileUtils.getFileFromResponseBody(
+                                    response.body(), settingsView.getContext()));
+                            Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
+                            settingsView.setProfileImage(bitmap);
                         }
                     }
                 });

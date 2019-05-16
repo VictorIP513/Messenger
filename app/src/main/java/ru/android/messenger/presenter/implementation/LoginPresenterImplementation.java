@@ -29,7 +29,7 @@ public class LoginPresenterImplementation implements LoginPresenter {
     }
 
     @Override
-    public void buttonLoginClicked(String login, String password) {
+    public void buttonLoginClicked(final String login, String password) {
         boolean isValidInputData = validateInputData(login, password);
         if (isValidInputData) {
             loginView.showWaitAlertDialog();
@@ -39,7 +39,7 @@ public class LoginPresenterImplementation implements LoginPresenter {
                         public void onResponse(@NonNull Call<LoginResponse> call,
                                                @NonNull Response<LoginResponse> response) {
                             super.onResponse(call, response);
-                            processLoginResponse(response);
+                            processLoginResponse(response, login);
                         }
                     });
         }
@@ -73,10 +73,11 @@ public class LoginPresenterImplementation implements LoginPresenter {
         }
     }
 
-    private void processLoginResponse(Response<LoginResponse> response) {
+    private void processLoginResponse(Response<LoginResponse> response, String login) {
         if (response.isSuccessful()) {
             LoginResponse loginResponse = Objects.requireNonNull(response.body());
             saveAuthenticationToken(loginResponse.getAuthenticationToken());
+            saveLogin(login);
             loginView.changeToMainActivity();
         } else {
             LoginResponse loginResponse = ApiUtils.getJsonFromResponseBody(
@@ -94,6 +95,11 @@ public class LoginPresenterImplementation implements LoginPresenter {
         SharedPreferences sharedPreferences = loginView.getSharedPreferences();
         PreferenceManager.setAuthenticationTokenToSharedPreferences(
                 sharedPreferences, authenticationToken);
+    }
+
+    private void saveLogin(String login) {
+        SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        PreferenceManager.setLoginToSharedPreferences(sharedPreferences, login);
     }
 
     private boolean validateInputData(String login, String password) {
