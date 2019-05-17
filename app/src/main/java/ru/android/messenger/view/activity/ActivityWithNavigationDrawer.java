@@ -10,6 +10,7 @@ import android.view.View;
 
 import ru.android.messenger.R;
 
+@SuppressWarnings("squid:MaximumInheritanceDepth")
 public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts {
 
     private NavigationView navigationView;

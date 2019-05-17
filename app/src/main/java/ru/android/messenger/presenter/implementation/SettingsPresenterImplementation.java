@@ -10,9 +10,7 @@ import android.support.annotation.NonNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import ru.android.messenger.model.ImageHelper;
@@ -40,14 +38,20 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
 
     @Override
     public void fillUserInformation() {
-        fillUserData();
-        fillPhoto();
+        String pathToPhoto = FileUtils.getPathToPhoto(settingsView.getContext());
+        Bitmap bitmap = BitmapFactory.decodeFile(pathToPhoto);
+        settingsView.setProfileImage(bitmap);
+
+        SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
+        User user = PreferenceManager.getUserToSharedPreferences(sharedPreferences);
+        settingsView.setUserData(user.getFirstName(), user.getSurname(),
+                user.getLogin(), user.getEmail());
     }
 
     @Override
     public void uploadPhoto(final Bitmap bitmap) {
         try {
-            File photoFile = ImageHelper.writeBitmapToFile(bitmap, settingsView.getContext());
+            final File photoFile = ImageHelper.writeBitmapToFile(bitmap, settingsView.getContext());
             String authenticationToken =
                     PreferenceManager.getAuthenticationTokenFromSharedPreferences(
                             settingsView.getSharedPreferences());
@@ -61,6 +65,8 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
                                                @NonNull Response<Void> response) {
                             super.onResponse(call, response);
                             if (response.isSuccessful()) {
+                                FileUtils.saveUserPhotoToInternalStorage(photoFile,
+                                        settingsView.getContext());
                                 settingsView.setProfileImage(bitmap);
                             }
                         }
@@ -89,41 +95,5 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
             settingsView.setImageNotFoundError();
         }
         return null;
-    }
-
-    private void fillUserData() {
-        SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
-        String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
-        settingsView.showWaitAlertDialog();
-        repository.getUser(login).enqueue(new DefaultCallback<User, SettingsView>(settingsView) {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                super.onResponse(call, response);
-                if (response.isSuccessful()) {
-                    User user = Objects.requireNonNull(response.body());
-                    settingsView.setUserData(user.getFirstName(), user.getSurname(),
-                            user.getLogin(), user.getEmail());
-                }
-            }
-        });
-    }
-
-    private void fillPhoto() {
-        SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
-        String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
-        repository.getUserPhoto(login)
-                .enqueue(new DefaultCallback<ResponseBody, SettingsView>(settingsView) {
-                    @Override
-                    public void onResponse(@NonNull Call<ResponseBody> call,
-                                           @NonNull Response<ResponseBody> response) {
-                        super.onResponse(call, response);
-                        if (response.isSuccessful()) {
-                            File file = Objects.requireNonNull(FileUtils.getFileFromResponseBody(
-                                    response.body(), settingsView.getContext()));
-                            Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
-                            settingsView.setProfileImage(bitmap);
-                        }
-                    }
-                });
     }
 }

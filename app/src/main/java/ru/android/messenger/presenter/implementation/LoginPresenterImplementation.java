@@ -3,8 +3,10 @@ package ru.android.messenger.presenter.implementation;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
+import java.io.File;
 import java.util.Objects;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import ru.android.messenger.model.Model;
@@ -13,7 +15,9 @@ import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.api.ApiUtils;
 import ru.android.messenger.model.api.LoginResponse;
 import ru.android.messenger.model.callbacks.DefaultCallback;
+import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.DataValidator;
+import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.presenter.LoginPresenter;
 import ru.android.messenger.view.errors.LoginError;
 import ru.android.messenger.view.interfaces.LoginView;
@@ -68,6 +72,7 @@ public class LoginPresenterImplementation implements LoginPresenter {
         if (response.isSuccessful()) {
             boolean isCorrectAuthenticationToken = Objects.requireNonNull(response.body());
             if (isCorrectAuthenticationToken) {
+                loadUserDataFromServer();
                 loginView.changeToMainActivity();
             }
         }
@@ -78,6 +83,7 @@ public class LoginPresenterImplementation implements LoginPresenter {
             LoginResponse loginResponse = Objects.requireNonNull(response.body());
             saveAuthenticationToken(loginResponse.getAuthenticationToken());
             saveLogin(login);
+            loadUserDataFromServer();
             loginView.changeToMainActivity();
         } else {
             LoginResponse loginResponse = ApiUtils.getJsonFromResponseBody(
@@ -113,5 +119,44 @@ public class LoginPresenterImplementation implements LoginPresenter {
             isValidData = false;
         }
         return isValidData;
+    }
+
+    private void loadUserDataFromServer() {
+        loadUserData();
+        loadUserPhoto();
+    }
+
+    private void loadUserData() {
+        final SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
+        loginView.showWaitAlertDialog();
+        repository.getUser(login).enqueue(new DefaultCallback<User, LoginView>(loginView) {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                super.onResponse(call, response);
+                if (response.isSuccessful()) {
+                    User user = Objects.requireNonNull(response.body());
+                    PreferenceManager.setUserToSharedPreferences(sharedPreferences, user);
+                }
+            }
+        });
+    }
+
+    private void loadUserPhoto() {
+        SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        final String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
+        repository.getUserPhoto(login)
+                .enqueue(new DefaultCallback<ResponseBody, LoginView>(loginView) {
+                    @Override
+                    public void onResponse(@NonNull Call<ResponseBody> call,
+                                           @NonNull Response<ResponseBody> response) {
+                        super.onResponse(call, response);
+                        if (response.isSuccessful()) {
+                            File photo = Objects.requireNonNull(FileUtils.getFileFromResponseBody(
+                                    response.body(), loginView.getContext()));
+                            FileUtils.saveUserPhotoToInternalStorage(photo, loginView.getContext());
+                        }
+                    }
+                });
     }
 }

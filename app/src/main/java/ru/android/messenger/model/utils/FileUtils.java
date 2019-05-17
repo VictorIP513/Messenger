@@ -1,9 +1,12 @@
 package ru.android.messenger.model.utils;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +17,9 @@ import okhttp3.ResponseBody;
 import ru.android.messenger.utils.Logger;
 
 public class FileUtils {
+
+    private static final String IMAGES_DIR_NAME = "images";
+    private static final String PROFILE_IMAGE_NAME = "profile.jpg";
 
     private FileUtils() {
 
@@ -65,5 +71,41 @@ public class FileUtils {
             return null;
         }
         return file;
+    }
+
+    public static void saveUserPhotoToInternalStorage(File photo, Context context) {
+        ContextWrapper contextWrapper = new ContextWrapper(context);
+        String destinationFileName =
+                contextWrapper.getDir(IMAGES_DIR_NAME, Context.MODE_PRIVATE) + PROFILE_IMAGE_NAME;
+        copyFile(photo, destinationFileName);
+        deleteFile(photo);
+    }
+
+    public static String getPathToPhoto(Context context) {
+        ContextWrapper contextWrapper = new ContextWrapper(context);
+       return contextWrapper.getDir(IMAGES_DIR_NAME, Context.MODE_PRIVATE) + PROFILE_IMAGE_NAME;
+    }
+
+    private static void copyFile(File file, String destination) {
+        File newFile = new File(destination);
+        try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+             OutputStream out = new BufferedOutputStream(new FileOutputStream(newFile))) {
+            byte[] buffer = new byte[1024];
+            int lengthRead;
+            while ((lengthRead = inputStream.read(buffer)) > 0) {
+                out.write(buffer, 0, lengthRead);
+                out.flush();
+            }
+        } catch (IOException e) {
+            Logger.error("Error with copy file", e);
+        }
+    }
+
+    @SuppressWarnings("squid:S4042")
+    private static void deleteFile(File file) {
+        if (file.delete()) {
+            String warningMessage = String.format("File %s not deleted", file.getPath());
+            Logger.warning(warningMessage);
+        }
     }
 }

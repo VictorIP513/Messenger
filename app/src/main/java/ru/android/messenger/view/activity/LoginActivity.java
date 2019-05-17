@@ -78,6 +78,11 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
         return getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
     }
 
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
+    }
+
     public void textViewRegisterClick(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
