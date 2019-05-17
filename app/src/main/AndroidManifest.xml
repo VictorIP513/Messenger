@@ -16,6 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name=".view.activity.DialogsActivity" />
         <activity android:name=".view.activity.FriendListActivity" />
         <activity android:name=".view.activity.UsersSearchActivity" />
         <activity android:name=".view.activity.SettingsActivity" />
@@ -29,5 +30,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

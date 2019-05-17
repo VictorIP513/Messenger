@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_drawer_dialogs"
+            android:icon="@drawable/message"
+            android:title="@string/menu_drawer_dialogs" />
+        <item
+            android:id="@+id/navigation_drawer_friends"
+            android:icon="@drawable/group"
+            android:title="@string/menu_drawer_friends" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/navigation_drawer_settings"
+                android:icon="@drawable/settings"
+                android:title="@string/menu_drawer_settings" />
+            <item
+                android:id="@+id/navigation_drawer_logout"
+                android:icon="@drawable/exit_to_app"
+                android:title="@string/menu_drawer_logout" />
+        </menu>
+    </item>
+</menu>
