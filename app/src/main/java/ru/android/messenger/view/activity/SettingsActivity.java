@@ -3,7 +3,6 @@ package ru.android.messenger.view.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -22,9 +21,9 @@ import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.presenter.implementation.SettingsPresenterImplementation;
 import ru.android.messenger.view.interfaces.SettingsView;
 
+@SuppressWarnings("squid:MaximumInheritanceDepth")
 public class SettingsActivity extends ActivityWithAlerts implements SettingsView {
 
-    private static final String GLOBAL_SHARED_PREFERENCES_FILE = "application_preferences";
     private static final int UPLOAD_PHOTO_REQUEST_CODE = 0;
     private static final int TAKE_PHOTO_REQUEST_CODE = 1;
     private static final String INTENT_IMAGE_TYPE = "image/*";
@@ -62,11 +61,6 @@ public class SettingsActivity extends ActivityWithAlerts implements SettingsView
     @Override
     public Context getContext() {
         return this;
-    }
-
-    @Override
-    public SharedPreferences getSharedPreferences() {
-        return getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
     }
 
     @Override

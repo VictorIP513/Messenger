@@ -12,6 +12,7 @@ import ru.android.messenger.presenter.implementation.RegistrationPresenterImplem
 import ru.android.messenger.view.interfaces.RegistrationView;
 import ru.android.messenger.view.errors.RegistrationError;
 
+@SuppressWarnings("squid:MaximumInheritanceDepth")
 public class RegistrationActivity extends ActivityWithAlerts implements RegistrationView {
 
     private RegistrationPresenter registrationPresenter;

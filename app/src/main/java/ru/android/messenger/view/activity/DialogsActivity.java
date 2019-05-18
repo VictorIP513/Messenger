@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import ru.android.messenger.R;
 
+@SuppressWarnings("squid:MaximumInheritanceDepth")
 public class DialogsActivity extends ActivityWithNavigationDrawer {
 
     @Override

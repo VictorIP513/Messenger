@@ -13,13 +13,13 @@ import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import ru.android.messenger.model.ImageHelper;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.DefaultCallback;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
+import ru.android.messenger.model.utils.ImageHelper;
 import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.utils.Logger;
 import ru.android.messenger.view.interfaces.SettingsView;
@@ -38,11 +38,13 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
 
     @Override
     public void fillUserInformation() {
-        String pathToPhoto = FileUtils.getPathToPhoto(settingsView.getContext());
+        Context context = settingsView.getContext();
+        String pathToPhoto = FileUtils.getPathToPhoto(context);
         Bitmap bitmap = BitmapFactory.decodeFile(pathToPhoto);
         settingsView.setProfileImage(bitmap);
 
-        SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
         User user = PreferenceManager.getUserToSharedPreferences(sharedPreferences);
         settingsView.setUserData(user.getFirstName(), user.getSurname(),
                 user.getLogin(), user.getEmail());
@@ -51,10 +53,12 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
     @Override
     public void uploadPhoto(final Bitmap bitmap) {
         try {
-            final File photoFile = ImageHelper.writeBitmapToFile(bitmap, settingsView.getContext());
+            Context context = settingsView.getContext();
+            final File photoFile = ImageHelper.writeBitmapToFile(bitmap, context);
+            SharedPreferences sharedPreferences =
+                    PreferenceManager.getSharedPreferencesFromApplicationContext(context);
             String authenticationToken =
-                    PreferenceManager.getAuthenticationTokenFromSharedPreferences(
-                            settingsView.getSharedPreferences());
+                    PreferenceManager.getAuthenticationTokenFromSharedPreferences(sharedPreferences);
             settingsView.showWaitAlertDialog();
 
             repository.uploadPhoto(Model.createFileToSend(
@@ -81,7 +85,8 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
     public void deleteCache() {
         Context context = settingsView.getContext();
         FileUtils.deleteCache(context);
-        SharedPreferences sharedPreferences = settingsView.getSharedPreferences();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
         PreferenceManager.clearAllPreferences(sharedPreferences);
     }
 

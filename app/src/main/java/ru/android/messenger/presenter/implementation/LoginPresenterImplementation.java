@@ -51,7 +51,8 @@ public class LoginPresenterImplementation implements LoginPresenter {
 
     @Override
     public void autoLogin() {
-        SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
         String authenticationToken =
                 PreferenceManager.getAuthenticationTokenFromSharedPreferences(sharedPreferences);
         if (authenticationToken != null) {
@@ -98,13 +99,15 @@ public class LoginPresenterImplementation implements LoginPresenter {
     }
 
     private void saveAuthenticationToken(String authenticationToken) {
-        SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
         PreferenceManager.setAuthenticationTokenToSharedPreferences(
                 sharedPreferences, authenticationToken);
     }
 
     private void saveLogin(String login) {
-        SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
         PreferenceManager.setLoginToSharedPreferences(sharedPreferences, login);
     }
 
@@ -127,7 +130,8 @@ public class LoginPresenterImplementation implements LoginPresenter {
     }
 
     private void loadUserData() {
-        final SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        final SharedPreferences sharedPreferences =
+                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
         String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
         loginView.showWaitAlertDialog();
         repository.getUser(login).enqueue(new DefaultCallback<User, LoginView>(loginView) {
@@ -143,7 +147,8 @@ public class LoginPresenterImplementation implements LoginPresenter {
     }
 
     private void loadUserPhoto() {
-        SharedPreferences sharedPreferences = loginView.getSharedPreferences();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
         final String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
         repository.getUserPhoto(login)
                 .enqueue(new DefaultCallback<ResponseBody, LoginView>(loginView) {

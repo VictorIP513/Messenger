@@ -2,7 +2,6 @@ package ru.android.messenger.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,9 +13,8 @@ import ru.android.messenger.presenter.implementation.LoginPresenterImplementatio
 import ru.android.messenger.view.errors.LoginError;
 import ru.android.messenger.view.interfaces.LoginView;
 
+@SuppressWarnings("squid:MaximumInheritanceDepth")
 public class LoginActivity extends ActivityWithAlerts implements LoginView {
-
-    private static final String GLOBAL_SHARED_PREFERENCES_FILE = "application_preferences";
 
     private LoginPresenter loginPresenter;
 
@@ -71,11 +69,6 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
         startActivity(intent);
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         finish();
-    }
-
-    @Override
-    public SharedPreferences getSharedPreferences() {
-        return getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
     }
 
     @Override

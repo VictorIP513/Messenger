@@ -1,5 +1,6 @@
 package ru.android.messenger.model;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import ru.android.messenger.model.dto.User;
@@ -12,8 +13,14 @@ public class PreferenceManager {
     private static final String USER_FIRST_NAME_KEY = "userFirstName";
     private static final String USER_SURNAME_KEY = "userSurname";
 
+    private static final String GLOBAL_SHARED_PREFERENCES_FILE = "application_preferences";
+
     private PreferenceManager() {
 
+    }
+
+    public static SharedPreferences getSharedPreferencesFromApplicationContext(Context context) {
+        return context.getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
     }
 
     public static void setAuthenticationTokenToSharedPreferences(
