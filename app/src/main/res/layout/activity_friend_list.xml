@@ -32,6 +32,15 @@
             android:scrollbars="vertical">
 
         </android.support.v7.widget.RecyclerView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/action_button_add_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:onClick="actionButtonAddFriendClick"
+            app:srcCompat="@drawable/floating_button_add" />
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

@@ -1,5 +1,7 @@
 package ru.android.messenger.model;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -37,4 +39,7 @@ public interface Repository {
     @Streaming
     @GET("/api/getUserPhoto/{login}")
     Call<ResponseBody> getUserPhoto(@Path("login") String login);
+
+    @GET("/api/getAllUsers")
+    Call<List<User>> getAllUsers();
 }

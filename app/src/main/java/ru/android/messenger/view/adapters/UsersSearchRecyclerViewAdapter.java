@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.android.messenger.R;
-import ru.android.messenger.model.UserFromView;
+import ru.android.messenger.model.dto.UserFromView;
 
 public class UsersSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<UsersSearchRecyclerViewAdapter.UsersSearchViewHolder> {

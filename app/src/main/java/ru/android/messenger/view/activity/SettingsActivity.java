@@ -39,7 +39,6 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.init(R.layout.activity_settings);
-        //setContentView(R.layout.activity_settings);
 
         settingsPresenter = new SettingsPresenterImplementation(this);
 

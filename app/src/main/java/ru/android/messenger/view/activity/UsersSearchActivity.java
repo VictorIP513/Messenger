@@ -1,9 +1,7 @@
 package ru.android.messenger.view.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -12,17 +10,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.android.messenger.R;
-import ru.android.messenger.model.UserFromView;
+import ru.android.messenger.model.dto.UserFromView;
+import ru.android.messenger.presenter.UsersSearchPresenter;
+import ru.android.messenger.presenter.implementation.UsersSearchPresenterImplementation;
 import ru.android.messenger.view.adapters.UsersSearchRecyclerViewAdapter;
 import ru.android.messenger.view.interfaces.UsersSearchView;
 
-public class UsersSearchActivity extends AppCompatActivity implements UsersSearchView {
+@SuppressWarnings("squid:MaximumInheritanceDepth")
+public class UsersSearchActivity extends ActivityWithAlerts implements UsersSearchView {
 
     private UsersSearchRecyclerViewAdapter adapter;
+    private UsersSearchPresenter usersSearchPresenter;
 
     private List<UserFromView> users;
 
@@ -31,8 +32,9 @@ public class UsersSearchActivity extends AppCompatActivity implements UsersSearc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_search);
 
-        fillUsers();
-        setupRecyclerView();
+        usersSearchPresenter = new UsersSearchPresenterImplementation(this);
+
+        usersSearchPresenter.fillUsersList();
     }
 
     @Override
@@ -58,15 +60,15 @@ public class UsersSearchActivity extends AppCompatActivity implements UsersSearc
         return true;
     }
 
-    private void fillUsers() {
-        users = new ArrayList<>();
-        users.add(new UserFromView(Bitmap.createBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)), "login1", "firstName1", "surname1"));
-        users.add(new UserFromView(Bitmap.createBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)), "login2", "firstName2", "surname2"));
-        users.add(new UserFromView(Bitmap.createBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)), "login3", "firstName3", "surname3"));
-        users.add(new UserFromView(Bitmap.createBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)), "login4", "firstName4", "surname4"));
-        users.add(new UserFromView(Bitmap.createBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)), "login5", "firstName5", "surname5"));
-        users.add(new UserFromView(Bitmap.createBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)), "login6", "firstName6", "surname6"));
-        users.add(new UserFromView(Bitmap.createBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)), "login7", "firstName7", "surname7"));
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
+    }
+
+    @Override
+    public void setUsersList(List<UserFromView> users) {
+        this.users = users;
+        setupRecyclerView();
     }
 
     private void setupRecyclerView() {
