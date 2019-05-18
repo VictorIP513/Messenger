@@ -25,10 +25,10 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
 
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-    private ImageView imageViewProfile;
-    private TextView textViewLogin;
-    private TextView textViewName;
-    private TextView textViewEmail;
+    private ImageView navigationDrawerImageViewProfile;
+    private TextView navigationDrawerTextViewLogin;
+    private TextView navigationDrawerTextViewName;
+    private TextView navigationDrawerTextViewEmail;
 
     private Class activityToStart;
 
@@ -39,17 +39,17 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
 
     @Override
     public void setProfileImageToNavigationDrawer(Bitmap bitmap) {
-        imageViewProfile = findViewById(R.id.image_view_profile);
-        imageViewProfile.setImageBitmap(bitmap);
+        navigationDrawerImageViewProfile = findViewById(R.id.navigation_drawer_image_view_profile);
+        navigationDrawerImageViewProfile.setImageBitmap(bitmap);
     }
 
     @Override
     public void setUserDataToNavigationDrawer(String firstName, String surname,
                                               String login, String email) {
         String name = firstName + " " + surname;
-        textViewLogin.setText(login);
-        textViewEmail.setText(email);
-        textViewName.setText(name);
+        navigationDrawerTextViewLogin.setText(login);
+        navigationDrawerTextViewEmail.setText(email);
+        navigationDrawerTextViewName.setText(name);
     }
 
     protected void init(int layoutResourceId) {
@@ -58,7 +58,7 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
         navigationDrawerPresenter =
                 new NavigationDrawerPresenterImplementation(this);
 
-        findViews();
+        findViewsInNavigationDrawer();
         setNavigationItemSelectedListener();
         addDrawerLayoutListener();
     }
@@ -69,8 +69,18 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         int id = menuItem.getItemId();
-                        if (id == R.id.navigation_drawer_settings) {
-                            activityToStart = SettingsActivity.class;
+                        switch (id) {
+                            case R.id.navigation_drawer_dialogs:
+                                activityToStart = DialogsActivity.class;
+                                break;
+                            case R.id.navigation_drawer_friends:
+                                activityToStart = FriendListActivity.class;
+                                break;
+                            case R.id.navigation_drawer_settings:
+                                activityToStart = SettingsActivity.class;
+                                break;
+                            default:
+                                break;
                         }
                         drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
@@ -80,12 +90,6 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
 
     private void addDrawerLayoutListener() {
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-
-            @Override
-            public void onDrawerOpened(@NonNull View view) {
-                findDrawerLayoutViews();
-                navigationDrawerPresenter.fillUserInformationToNavigationDrawer();
-            }
 
             @Override
             public void onDrawerClosed(@NonNull View view) {
@@ -100,6 +104,13 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
 
             @Override
             public void onDrawerSlide(@NonNull View view, float v) {
+                findDrawerLayoutViews();
+                navigationDrawerPresenter.fillUserInformationToNavigationDrawer();
+                //unused method
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View view) {
                 //unused method
             }
 
@@ -110,15 +121,15 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
         });
     }
 
-    private void findViews() {
+    private void findViewsInNavigationDrawer() {
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawer_layout);
     }
 
     private void findDrawerLayoutViews() {
-        imageViewProfile = findViewById(R.id.image_view_profile);
-        textViewLogin = findViewById(R.id.text_view_login);
-        textViewName = findViewById(R.id.text_view_name);
-        textViewEmail = findViewById(R.id.text_view_email);
+        navigationDrawerImageViewProfile = findViewById(R.id.navigation_drawer_image_view_profile);
+        navigationDrawerTextViewLogin = findViewById(R.id.navigation_drawer_text_view_login);
+        navigationDrawerTextViewName = findViewById(R.id.navigation_drawer_text_view_name);
+        navigationDrawerTextViewEmail = findViewById(R.id.navigation_drawer_text_view_email);
     }
 }

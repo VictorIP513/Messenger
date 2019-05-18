@@ -12,14 +12,15 @@
             android:id="@+id/navigation_drawer_friends"
             android:icon="@drawable/group"
             android:title="@string/menu_drawer_friends" />
+
+        <item
+            android:id="@+id/navigation_drawer_settings"
+            android:icon="@drawable/settings"
+            android:title="@string/menu_drawer_settings" />
     </group>
 
     <item android:title="">
         <menu>
-            <item
-                android:id="@+id/navigation_drawer_settings"
-                android:icon="@drawable/settings"
-                android:title="@string/menu_drawer_settings" />
             <item
                 android:id="@+id/navigation_drawer_logout"
                 android:icon="@drawable/exit_to_app"

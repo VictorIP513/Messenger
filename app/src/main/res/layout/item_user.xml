@@ -19,7 +19,7 @@
             android:padding="2dp" />
 
         <TextView
-            android:id="@+id/text_view_name"
+            android:id="@+id/navigation_drawer_text_view_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -30,10 +30,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_view_login"
+            android:id="@+id/navigation_drawer_text_view_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_name"
+            android:layout_below="@+id/navigation_drawer_text_view_name"
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@+id/image_view_user_photo"
             android:text="Line 2"

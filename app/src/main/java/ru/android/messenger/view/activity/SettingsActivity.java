@@ -22,7 +22,7 @@ import ru.android.messenger.presenter.implementation.SettingsPresenterImplementa
 import ru.android.messenger.view.interfaces.SettingsView;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
-public class SettingsActivity extends ActivityWithAlerts implements SettingsView {
+public class SettingsActivity extends ActivityWithNavigationDrawer implements SettingsView {
 
     private static final int UPLOAD_PHOTO_REQUEST_CODE = 0;
     private static final int TAKE_PHOTO_REQUEST_CODE = 1;
@@ -38,7 +38,8 @@ public class SettingsActivity extends ActivityWithAlerts implements SettingsView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        super.init(R.layout.activity_settings);
+        //setContentView(R.layout.activity_settings);
 
         settingsPresenter = new SettingsPresenterImplementation(this);
 
