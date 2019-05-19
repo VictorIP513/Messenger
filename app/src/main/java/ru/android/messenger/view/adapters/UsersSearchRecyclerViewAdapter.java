@@ -18,6 +18,8 @@ import ru.android.messenger.model.dto.UserFromView;
 public class UsersSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<UsersSearchRecyclerViewAdapter.UsersSearchViewHolder> {
 
+    private static final String LOGIN_PREFIX = "@";
+
     private Filter usersFilter;
     private List<UserFromView> users;
     private List<UserFromView> allUsers;
@@ -37,12 +39,14 @@ public class UsersSearchRecyclerViewAdapter
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UsersSearchViewHolder usersSearchViewHolder, int position) {
+    public void onBindViewHolder(@NonNull UsersSearchViewHolder usersSearchViewHolder,
+                                 int position) {
         UserFromView user = users.get(position);
-        String firstNameAndSurname = user.getFirstName() + user.getSurname();
+        String firstNameAndSurname = user.getFirstName() + " " + user.getSurname();
+        String login = LOGIN_PREFIX + user.getLogin();
 
         usersSearchViewHolder.imageViewUserPhoto.setImageBitmap(user.getUserPhoto());
-        usersSearchViewHolder.textViewLogin.setText(user.getLogin());
+        usersSearchViewHolder.textViewLogin.setText(login);
         usersSearchViewHolder.textViewName.setText(firstNameAndSurname);
     }
 
@@ -59,18 +63,11 @@ public class UsersSearchRecyclerViewAdapter
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<UserFromView> filteredList = new ArrayList<>();
-
-                if (constraint == null || constraint.length() == 0) {
-                    filteredList.addAll(allUsers);
-                } else {
-                    // TODO filter
-                }
+                List<UserFromView> filteredList = getFilteredList(constraint);
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filteredList;
                 return filterResults;
             }
-
 
             @SuppressWarnings("unchecked")
             @Override
@@ -80,6 +77,41 @@ public class UsersSearchRecyclerViewAdapter
                 notifyDataSetChanged();
             }
         };
+    }
+
+    private List<UserFromView> getFilteredList(CharSequence constraint) {
+        if (constraint == null || constraint.length() == 0) {
+            return new ArrayList<>(allUsers);
+        } else {
+            String filterPattern = constraint.toString().toLowerCase().trim();
+            if (String.valueOf(filterPattern.charAt(0)).equals(LOGIN_PREFIX)) {
+                filterPattern = filterPattern.substring(1);
+                return filterByLogin(filterPattern);
+            } else {
+                return filterByName(filterPattern);
+            }
+        }
+    }
+
+    private List<UserFromView> filterByLogin(String filterPattern) {
+        List<UserFromView> filteredList = new ArrayList<>();
+        for (UserFromView userFromView : allUsers) {
+            if (userFromView.getLogin().toLowerCase().contains(filterPattern)) {
+                filteredList.add(userFromView);
+            }
+        }
+        return filteredList;
+    }
+
+    private List<UserFromView> filterByName(String filterPattern) {
+        List<UserFromView> filteredList = new ArrayList<>();
+        for (UserFromView userFromView : allUsers) {
+            if (userFromView.getFirstName().toLowerCase().contains(filterPattern) ||
+                    userFromView.getSurname().toLowerCase().contains(filterPattern)) {
+                filteredList.add(userFromView);
+            }
+        }
+        return filteredList;
     }
 
     class UsersSearchViewHolder extends RecyclerView.ViewHolder {

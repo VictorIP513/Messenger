@@ -1,5 +1,7 @@
 package ru.android.messenger.presenter.implementation;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
@@ -15,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import ru.android.messenger.R;
 import ru.android.messenger.model.Model;
+import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.DefaultCallback;
 import ru.android.messenger.model.dto.User;
@@ -48,6 +51,7 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
                         super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             List<User> users = Objects.requireNonNull(response.body());
+                            deleteCurrentUserFromUserList(users);
                             userFromViewList.clear();
                             convertUsersToUsersFromView(users);
                         }
@@ -93,5 +97,18 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
             userFromView.setUserPhoto(bitmap);
         }
         return userFromView;
+    }
+
+    private void deleteCurrentUserFromUserList(List<User> users) {
+        Context context = usersSearchView.getContext();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
+        String currentUserLogin = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
+        for (User user : users) {
+            if (user.getLogin().equals(currentUserLogin)) {
+                users.remove(user);
+                break;
+            }
+        }
     }
 }
