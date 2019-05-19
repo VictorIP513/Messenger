@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +25,7 @@ import ru.android.messenger.model.callbacks.DefaultCallback;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.UserFromView;
 import ru.android.messenger.model.utils.FileUtils;
+import ru.android.messenger.model.utils.ImageHelper;
 import ru.android.messenger.presenter.UsersSearchPresenter;
 import ru.android.messenger.view.interfaces.UsersSearchView;
 
@@ -59,6 +62,11 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
                 });
     }
 
+    @Override
+    public byte[] getBitmapFromByteArray(Bitmap bitmap) {
+        return ImageHelper.getBitmapFromByteArray(bitmap);
+    }
+
     private void convertUsersToUsersFromView(final List<User> users) {
         for (final User user : users) {
             repository.getUserPhoto(user.getLogin())
@@ -75,11 +83,23 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
                             UserFromView userFromView = createUserFromView(user, photo);
                             userFromViewList.add(userFromView);
                             if (userFromViewList.size() == users.size()) {
+                                sortUsersFromFirstNameAndSurname();
                                 usersSearchView.setUsersList(userFromViewList);
                             }
                         }
                     });
         }
+    }
+
+    private void sortUsersFromFirstNameAndSurname() {
+        Collections.sort(userFromViewList, new Comparator<UserFromView>() {
+            @Override
+            public int compare(UserFromView firstUser, UserFromView secondUser) {
+                String firstName = firstUser.getFirstName() + " " + firstUser.getSurname();
+                String secondName = secondUser.getFirstName() + " " + secondUser.getSurname();
+                return firstName.compareToIgnoreCase(secondName);
+            }
+        });
     }
 
     private UserFromView createUserFromView(User user, @Nullable File photo) {

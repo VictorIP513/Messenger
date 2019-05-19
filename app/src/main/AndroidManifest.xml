@@ -16,6 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name=".view.activity.UserInfoActivity"></activity>
         <activity
             android:name=".view.activity.DialogsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -36,4 +37,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
