@@ -1,19 +1,35 @@
 package ru.android.messenger.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import ru.android.messenger.R;
+import ru.android.messenger.model.api.FriendStatus;
+import ru.android.messenger.presenter.UserInfoPresenter;
+import ru.android.messenger.presenter.implementation.UserInfoPresenterImplementation;
+import ru.android.messenger.view.interfaces.UserInfoView;
 
-public class UserInfoActivity extends AppCompatActivity {
+@SuppressWarnings("squid:MaximumInheritanceDepth")
+public class UserInfoActivity extends ActivityWithAlerts implements UserInfoView {
 
     private static final String LOGIN_PREFIX = "@";
+    private static final int BUTTON_FRIEND_ADD_COLOR = 0xFF03A9F4;
+    private static final int BUTTON_FRIEND_DELETE_COLOR = 0xFFFF2B2B;
+    private static final int BUTTON_FRIEND_CANCEL_COLOR = 0xB2C2BCBC;
+    private static final int BUTTON_FRIEND_ADD_TEXT_COLOR = 0xFFFFFFFF;
+    private static final int BUTTON_FRIEND_DELETE_TEXT_COLOR = 0xFFFFFFFF;
+    private static final int BUTTON_FRIEND_CANCEL_TEXT_COLOR = 0xFF000000;
+
+    private UserInfoPresenter userInfoPresenter;
+    private FriendStatus friendStatus;
+    private String userLogin;
 
     private ImageView imageViewProfile;
     private TextView textViewName;
@@ -26,8 +42,64 @@ public class UserInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 
+        userInfoPresenter = new UserInfoPresenterImplementation(this);
+
         findViews();
         setUserDataFromIntent();
+        userInfoPresenter.fillUserFriendStatus(userLogin);
+    }
+
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
+    }
+
+    @Override
+    public void setFriendStatus(FriendStatus friendStatus) {
+        this.friendStatus = friendStatus;
+        switch (friendStatus) {
+            case USER_IS_NOT_FRIEND:
+                textViewFriendStatus.setText(
+                        getText(R.string.user_info_friend_status_user_is_not_friend));
+                buttonFriendAdd.setText(getText(R.string.user_info_button_friend_add));
+                buttonFriendAdd.setBackgroundColor(BUTTON_FRIEND_ADD_COLOR);
+                buttonFriendAdd.setTextColor(BUTTON_FRIEND_ADD_TEXT_COLOR);
+                break;
+            case USER_IS_FRIEND:
+                textViewFriendStatus.setText(
+                        getText(R.string.user_info_friend_status_user_is_friend));
+                buttonFriendAdd.setText(getText(R.string.user_info_button_friend_delete));
+                buttonFriendAdd.setBackgroundColor(BUTTON_FRIEND_DELETE_COLOR);
+                buttonFriendAdd.setTextColor(BUTTON_FRIEND_DELETE_TEXT_COLOR);
+                break;
+            case FRIEND_REQUEST_HAS_BEEN_SENT:
+                textViewFriendStatus.setText(
+                        getText(R.string.user_info_friend_status_friend_request_has_been_sent));
+                buttonFriendAdd.setText(getText(R.string.user_info_button_friend_cancel));
+                buttonFriendAdd.setBackgroundColor(BUTTON_FRIEND_CANCEL_COLOR);
+                buttonFriendAdd.setTextColor(BUTTON_FRIEND_CANCEL_TEXT_COLOR);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void buttonFriendAddClick(View view) {
+        if (friendStatus == null) {
+            showConnectionErrorAlertDialog();
+        } else {
+            switch (friendStatus) {
+                case USER_IS_NOT_FRIEND:
+                    userInfoPresenter.addToFriend(userLogin);
+                    break;
+                case USER_IS_FRIEND:
+                    break;
+                case FRIEND_REQUEST_HAS_BEEN_SENT:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void findViews() {
@@ -46,7 +118,8 @@ public class UserInfoActivity extends AppCompatActivity {
         String name = firstName + " " + surname;
         textViewName.setText(name);
 
-        String login = LOGIN_PREFIX + intent.getStringExtra("user_login");
+        userLogin = intent.getStringExtra("user_login");
+        String login = LOGIN_PREFIX + userLogin;
         textViewLogin.setText(login);
 
         byte[] userPhoto = intent.getByteArrayExtra("user_photo");

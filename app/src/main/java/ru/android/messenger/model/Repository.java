@@ -8,10 +8,13 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.Streaming;
+import ru.android.messenger.model.api.FriendStatus;
 import ru.android.messenger.model.api.LoginResponse;
 import ru.android.messenger.model.api.RegistrationResponse;
 import ru.android.messenger.model.dto.User;
@@ -30,6 +33,10 @@ public interface Repository {
     Call<Void> uploadPhoto(@Part MultipartBody.Part photo,
                            @Part("authenticationToken") String authenticationToken);
 
+    @PATCH("/api/addToFriend/{login}")
+    Call<Void> addToFriend(@Path("login") String login,
+                                       @Query("authenticationToken") String authenticationToken);
+
     @GET("/api/checkAuthenticationToken/{authenticationToken}")
     Call<Boolean> checkAuthenticationToken(@Path("authenticationToken") String authenticationToken);
 
@@ -42,4 +49,8 @@ public interface Repository {
 
     @GET("/api/getAllUsers")
     Call<List<User>> getAllUsers();
+
+    @GET("/api/getFriendStatus/{login}")
+    Call<FriendStatus> getFriendStatus(@Path("login") String login,
+                                       @Query("authenticationToken") String authenticationToken);
 }

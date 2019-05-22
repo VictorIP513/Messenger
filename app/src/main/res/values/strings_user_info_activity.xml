@@ -2,4 +2,11 @@
 <resources>
     <string name="user_info_activity_block_text">Block this user</string>
     <string name="user_info_activity_block_hint_text">When a user is blocked, he will not be able to communicate with you</string>
+
+    <string name="user_info_friend_status_user_is_not_friend">User is not on your friend list</string>
+    <string name="user_info_friend_status_user_is_friend">User is your friend</string>
+    <string name="user_info_friend_status_friend_request_has_been_sent">Friend request has been sent</string>
+    <string name="user_info_button_friend_add">Add</string>
+    <string name="user_info_button_friend_delete">Delete</string>
+    <string name="user_info_button_friend_cancel">Cancel</string>
 </resources>

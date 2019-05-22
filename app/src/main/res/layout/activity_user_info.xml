@@ -84,13 +84,15 @@
 
             <Button
                 android:id="@+id/button_friend_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="72dp"
+                android:layout_height="23dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0"
                 android:background="@color/main_blue_stroke_color"
                 android:checked="true"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:onClick="buttonFriendAddClick"
+                android:textAlignment="center" />
         </LinearLayout>
 
         <View
