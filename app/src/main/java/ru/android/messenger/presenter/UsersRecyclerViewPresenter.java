@@ -2,9 +2,9 @@ package ru.android.messenger.presenter;
 
 import android.graphics.Bitmap;
 
-public interface UsersSearchPresenter {
+public interface UsersRecyclerViewPresenter {
 
     void fillUsersList();
 
-    byte[] getBitmapFromByteArray(Bitmap bitmap);
+    byte[] getByteArrayFromBitmap(Bitmap bitmap);
 }

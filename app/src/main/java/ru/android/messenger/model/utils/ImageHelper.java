@@ -42,7 +42,7 @@ public class ImageHelper {
         return BitmapFactory.decodeStream(imageStream);
     }
 
-    public static byte[] getBitmapFromByteArray(Bitmap bitmap) {
+    public static byte[] getByteArrayFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(COMPRESS_FORMAT, QUALITY, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();

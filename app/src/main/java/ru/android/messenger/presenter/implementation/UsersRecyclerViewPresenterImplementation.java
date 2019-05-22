@@ -24,18 +24,18 @@ import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.UserFromView;
 import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.model.utils.ImageHelper;
-import ru.android.messenger.presenter.UsersSearchPresenter;
-import ru.android.messenger.view.interfaces.UsersSearchView;
+import ru.android.messenger.presenter.UsersRecyclerViewPresenter;
+import ru.android.messenger.view.interfaces.ViewWithUsersRecyclerView;
 
-public class UsersSearchPresenterImplementation implements UsersSearchPresenter {
+public class UsersRecyclerViewPresenterImplementation implements UsersRecyclerViewPresenter {
 
-    private UsersSearchView usersSearchView;
+    private ViewWithUsersRecyclerView view;
     private Repository repository;
 
     private List<UserFromView> userFromViewList;
 
-    public UsersSearchPresenterImplementation(UsersSearchView usersSearchView) {
-        this.usersSearchView = usersSearchView;
+    public UsersRecyclerViewPresenterImplementation(ViewWithUsersRecyclerView view) {
+        this.view = view;
         repository = Model.getRepository();
 
         userFromViewList = new ArrayList<>();
@@ -43,9 +43,9 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
 
     @Override
     public void fillUsersList() {
-        usersSearchView.showWaitAlertDialog();
+        view.showWaitAlertDialog();
         repository.getAllUsers()
-                .enqueue(new DefaultCallback<List<User>, UsersSearchView>(usersSearchView) {
+                .enqueue(new DefaultCallback<List<User>, ViewWithUsersRecyclerView>(view) {
                     @Override
                     public void onResponse(@NonNull Call<List<User>> call,
                                            @NonNull Response<List<User>> response) {
@@ -61,14 +61,14 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
     }
 
     @Override
-    public byte[] getBitmapFromByteArray(Bitmap bitmap) {
-        return ImageHelper.getBitmapFromByteArray(bitmap);
+    public byte[] getByteArrayFromBitmap(Bitmap bitmap) {
+        return ImageHelper.getByteArrayFromBitmap(bitmap);
     }
 
     private void convertUsersToUsersFromView(final List<User> users) {
         for (final User user : users) {
             repository.getUserPhoto(user.getLogin())
-                    .enqueue(new DefaultCallback<ResponseBody, UsersSearchView>(usersSearchView) {
+                    .enqueue(new DefaultCallback<ResponseBody, ViewWithUsersRecyclerView>(view) {
                         @Override
                         public void onResponse(@NonNull Call<ResponseBody> call,
                                                @NonNull Response<ResponseBody> response) {
@@ -76,13 +76,13 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
                             File photo = null;
                             if (response.isSuccessful()) {
                                 photo = Objects.requireNonNull(FileUtils.getFileFromResponseBody(
-                                        response.body(), usersSearchView.getContext()));
+                                        response.body(), view.getContext()));
                             }
                             UserFromView userFromView = createUserFromView(user, photo);
                             userFromViewList.add(userFromView);
                             if (userFromViewList.size() == users.size()) {
                                 sortUsersFromFirstNameAndSurname();
-                                usersSearchView.setUsersList(userFromViewList);
+                                view.setUsersList(userFromViewList);
                             }
                         }
                     });
@@ -111,14 +111,14 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
             userFromView.setUserPhoto(bitmap);
         } else {
             Bitmap bitmap = BitmapFactory.decodeResource(
-                    usersSearchView.getContext().getResources(), R.drawable.profile_thumbnail);
+                    view.getContext().getResources(), R.drawable.profile_thumbnail);
             userFromView.setUserPhoto(bitmap);
         }
         return userFromView;
     }
 
     private void deleteCurrentUserFromUserList(List<User> users) {
-        String currentUserLogin = PreferenceManager.getLogin(usersSearchView.getContext());
+        String currentUserLogin = PreferenceManager.getLogin(view.getContext());
         for (User user : users) {
             if (user.getLogin().equals(currentUserLogin)) {
                 users.remove(user);
