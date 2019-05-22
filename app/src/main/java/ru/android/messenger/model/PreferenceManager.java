@@ -19,33 +19,32 @@ public class PreferenceManager {
 
     }
 
-    public static SharedPreferences getSharedPreferencesFromApplicationContext(Context context) {
-        return context.getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
-    }
-
-    public static void setAuthenticationTokenToSharedPreferences(
-            SharedPreferences sharedPreferences, String authenticationToken) {
+    public static void setAuthenticationToken(Context context, String authenticationToken) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(AUTHENTICATION_TOKEN_KEY, authenticationToken);
         editor.apply();
     }
 
-    public static String getAuthenticationTokenFromSharedPreferences(SharedPreferences preferences) {
-        return preferences.getString(AUTHENTICATION_TOKEN_KEY, null);
+    public static String getAuthenticationToken(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        return sharedPreferences.getString(AUTHENTICATION_TOKEN_KEY, null);
     }
 
-    public static void setLoginToSharedPreferences(
-            SharedPreferences sharedPreferences, String login) {
+    public static void setLogin(Context context, String login) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(LOGIN_KEY, login);
         editor.apply();
     }
 
-    public static String getLoginFromSharedPreferences(SharedPreferences preferences) {
-        return preferences.getString(LOGIN_KEY, null);
+    public static String getLogin(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        return sharedPreferences.getString(LOGIN_KEY, null);
     }
 
-    public static void setUserToSharedPreferences(SharedPreferences sharedPreferences, User user) {
+    public static void setUser(Context context, User user) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(LOGIN_KEY, user.getLogin());
         editor.putString(EMAIL_KEY, user.getEmail());
@@ -54,17 +53,23 @@ public class PreferenceManager {
         editor.apply();
     }
 
-    public static User getUserToSharedPreferences(SharedPreferences preferences) {
+    public static User getUser(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
         User user = new User();
-        user.setLogin(preferences.getString(LOGIN_KEY, null));
-        user.setEmail(preferences.getString(EMAIL_KEY, null));
-        user.setFirstName(preferences.getString(USER_FIRST_NAME_KEY, null));
-        user.setSurname(preferences.getString(USER_SURNAME_KEY, null));
+        user.setLogin(sharedPreferences.getString(LOGIN_KEY, null));
+        user.setEmail(sharedPreferences.getString(EMAIL_KEY, null));
+        user.setFirstName(sharedPreferences.getString(USER_FIRST_NAME_KEY, null));
+        user.setSurname(sharedPreferences.getString(USER_SURNAME_KEY, null));
         return user;
     }
 
-    public static void clearAllPreferences(SharedPreferences sharedPreferences) {
+    public static void clearAllPreferences(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear().apply();
+    }
+
+    private static SharedPreferences getSharedPreferences(Context context) {
+        return context.getSharedPreferences(GLOBAL_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
     }
 }

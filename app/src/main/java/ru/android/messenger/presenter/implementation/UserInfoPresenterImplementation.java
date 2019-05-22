@@ -1,7 +1,5 @@
 package ru.android.messenger.presenter.implementation;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import retrofit2.Call;
@@ -27,11 +25,8 @@ public class UserInfoPresenterImplementation implements UserInfoPresenter {
     @Override
     public void fillUserFriendStatus(String login) {
         userInfoView.showWaitAlertDialog();
-        Context context = userInfoView.getContext();
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
-        String authenticationToken = PreferenceManager.getAuthenticationTokenFromSharedPreferences(
-                sharedPreferences);
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(userInfoView.getContext());
         repository.getFriendStatus(login, authenticationToken)
                 .enqueue(new DefaultCallback<FriendStatus, UserInfoView>(userInfoView) {
                     @Override
@@ -48,11 +43,8 @@ public class UserInfoPresenterImplementation implements UserInfoPresenter {
     @Override
     public void addToFriend(String login) {
         userInfoView.showWaitAlertDialog();
-        Context context = userInfoView.getContext();
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
-        String authenticationToken = PreferenceManager.getAuthenticationTokenFromSharedPreferences(
-                sharedPreferences);
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(userInfoView.getContext());
         repository.addToFriend(login, authenticationToken)
                 .enqueue(new DefaultCallback<Void, UserInfoView>(userInfoView) {
                     @Override

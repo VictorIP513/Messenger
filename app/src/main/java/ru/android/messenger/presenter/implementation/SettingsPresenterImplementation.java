@@ -1,7 +1,6 @@
 package ru.android.messenger.presenter.implementation;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -43,9 +42,7 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
         Bitmap bitmap = BitmapFactory.decodeFile(pathToPhoto);
         settingsView.setProfileImage(bitmap);
 
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
-        User user = PreferenceManager.getUserToSharedPreferences(sharedPreferences);
+        User user = PreferenceManager.getUser(context);
         settingsView.setUserData(user.getFirstName(), user.getSurname(),
                 user.getLogin(), user.getEmail());
     }
@@ -53,12 +50,10 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
     @Override
     public void uploadPhoto(final Bitmap bitmap) {
         try {
-            Context context = settingsView.getContext();
+            final Context context = settingsView.getContext();
             final File photoFile = ImageHelper.writeBitmapToFile(bitmap, context);
-            SharedPreferences sharedPreferences =
-                    PreferenceManager.getSharedPreferencesFromApplicationContext(context);
             String authenticationToken =
-                    PreferenceManager.getAuthenticationTokenFromSharedPreferences(sharedPreferences);
+                    PreferenceManager.getAuthenticationToken(settingsView.getContext());
             settingsView.showWaitAlertDialog();
 
             repository.uploadPhoto(Model.createFileToSend(
@@ -69,8 +64,7 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
                                                @NonNull Response<Void> response) {
                             super.onResponse(call, response);
                             if (response.isSuccessful()) {
-                                FileUtils.saveUserPhotoToInternalStorage(photoFile,
-                                        settingsView.getContext());
+                                FileUtils.saveUserPhotoToInternalStorage(photoFile, context);
                                 settingsView.setProfileImage(bitmap);
                             }
                         }
@@ -85,9 +79,7 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
     public void deleteCache() {
         Context context = settingsView.getContext();
         FileUtils.deleteCache(context);
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
-        PreferenceManager.clearAllPreferences(sharedPreferences);
+        PreferenceManager.clearAllPreferences(context);
     }
 
     @Override

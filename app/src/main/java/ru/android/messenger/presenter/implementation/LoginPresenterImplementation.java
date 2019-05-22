@@ -1,6 +1,5 @@
 package ru.android.messenger.presenter.implementation;
 
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import java.io.File;
@@ -51,10 +50,8 @@ public class LoginPresenterImplementation implements LoginPresenter {
 
     @Override
     public void autoLogin() {
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
         String authenticationToken =
-                PreferenceManager.getAuthenticationTokenFromSharedPreferences(sharedPreferences);
+                PreferenceManager.getAuthenticationToken(loginView.getContext());
         if (authenticationToken != null) {
             loginView.showWaitAlertDialog();
             repository.checkAuthenticationToken(authenticationToken)
@@ -82,8 +79,9 @@ public class LoginPresenterImplementation implements LoginPresenter {
     private void processLoginResponse(Response<LoginResponse> response, String login) {
         if (response.isSuccessful()) {
             LoginResponse loginResponse = Objects.requireNonNull(response.body());
-            saveAuthenticationToken(loginResponse.getAuthenticationToken());
-            saveLogin(login);
+            String authenticationToken = loginResponse.getAuthenticationToken();
+            PreferenceManager.setAuthenticationToken(loginView.getContext(), authenticationToken);
+            PreferenceManager.setLogin(loginView.getContext(), login);
             loadUserDataFromServer();
             loginView.changeToMainActivity();
         } else {
@@ -96,19 +94,6 @@ public class LoginPresenterImplementation implements LoginPresenter {
                 loginView.setAccountNotConfirmedError();
             }
         }
-    }
-
-    private void saveAuthenticationToken(String authenticationToken) {
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
-        PreferenceManager.setAuthenticationTokenToSharedPreferences(
-                sharedPreferences, authenticationToken);
-    }
-
-    private void saveLogin(String login) {
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
-        PreferenceManager.setLoginToSharedPreferences(sharedPreferences, login);
     }
 
     private boolean validateInputData(String login, String password) {
@@ -130,9 +115,7 @@ public class LoginPresenterImplementation implements LoginPresenter {
     }
 
     private void loadUserData() {
-        final SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
-        String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
+        String login = PreferenceManager.getLogin(loginView.getContext());
         loginView.showWaitAlertDialog();
         repository.getUser(login).enqueue(new DefaultCallback<User, LoginView>(loginView) {
             @Override
@@ -140,16 +123,14 @@ public class LoginPresenterImplementation implements LoginPresenter {
                 super.onResponse(call, response);
                 if (response.isSuccessful()) {
                     User user = Objects.requireNonNull(response.body());
-                    PreferenceManager.setUserToSharedPreferences(sharedPreferences, user);
+                    PreferenceManager.setUser(loginView.getContext(), user);
                 }
             }
         });
     }
 
     private void loadUserPhoto() {
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(loginView.getContext());
-        final String login = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
+        String login = PreferenceManager.getLogin(loginView.getContext());
         repository.getUserPhoto(login)
                 .enqueue(new DefaultCallback<ResponseBody, LoginView>(loginView) {
                     @Override

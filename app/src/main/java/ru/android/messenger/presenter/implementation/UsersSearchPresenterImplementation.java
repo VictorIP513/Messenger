@@ -1,7 +1,5 @@
 package ru.android.messenger.presenter.implementation;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
@@ -120,10 +118,7 @@ public class UsersSearchPresenterImplementation implements UsersSearchPresenter 
     }
 
     private void deleteCurrentUserFromUserList(List<User> users) {
-        Context context = usersSearchView.getContext();
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
-        String currentUserLogin = PreferenceManager.getLoginFromSharedPreferences(sharedPreferences);
+        String currentUserLogin = PreferenceManager.getLogin(usersSearchView.getContext());
         for (User user : users) {
             if (user.getLogin().equals(currentUserLogin)) {
                 users.remove(user);

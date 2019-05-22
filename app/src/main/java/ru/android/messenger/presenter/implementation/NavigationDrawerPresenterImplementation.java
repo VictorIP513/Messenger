@@ -1,7 +1,6 @@
 package ru.android.messenger.presenter.implementation;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -26,9 +25,7 @@ public class NavigationDrawerPresenterImplementation implements NavigationDrawer
         Bitmap bitmap = BitmapFactory.decodeFile(pathToPhoto);
         navigationDrawerView.setProfileImageToNavigationDrawer(bitmap);
 
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getSharedPreferencesFromApplicationContext(context);
-        User user = PreferenceManager.getUserToSharedPreferences(sharedPreferences);
+        User user = PreferenceManager.getUser(context);
         navigationDrawerView.setUserDataToNavigationDrawer(user.getFirstName(), user.getSurname(),
                 user.getLogin(), user.getEmail());
     }
