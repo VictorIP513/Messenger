@@ -11,9 +11,10 @@ public class DefaultCallback<T, V extends ViewWithAlerts> implements Callback<T>
 
     private V view;
 
-    public DefaultCallback(V view) {
+    protected DefaultCallback(V view) {
         this.view = view;
     }
+
     @Override
     public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         view.cancelWaitAlertDialog();

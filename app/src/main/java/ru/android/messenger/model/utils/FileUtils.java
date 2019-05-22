@@ -83,7 +83,7 @@ public class FileUtils {
 
     public static String getPathToPhoto(Context context) {
         ContextWrapper contextWrapper = new ContextWrapper(context);
-       return contextWrapper.getDir(IMAGES_DIR_NAME, Context.MODE_PRIVATE) + PROFILE_IMAGE_NAME;
+        return contextWrapper.getDir(IMAGES_DIR_NAME, Context.MODE_PRIVATE) + PROFILE_IMAGE_NAME;
     }
 
     private static void copyFile(File file, String destination) {

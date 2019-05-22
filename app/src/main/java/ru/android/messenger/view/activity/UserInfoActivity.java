@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import ru.android.messenger.R;
-import ru.android.messenger.model.api.FriendStatus;
+import ru.android.messenger.model.dto.response.FriendStatus;
 import ru.android.messenger.presenter.UserInfoPresenter;
 import ru.android.messenger.presenter.implementation.UserInfoPresenterImplementation;
 import ru.android.messenger.view.interfaces.UserInfoView;

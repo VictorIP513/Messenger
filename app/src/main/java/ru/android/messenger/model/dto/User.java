@@ -1,6 +1,5 @@
 package ru.android.messenger.model.dto;
 
-@SuppressWarnings("unused")
 public class User {
 
     private String login;

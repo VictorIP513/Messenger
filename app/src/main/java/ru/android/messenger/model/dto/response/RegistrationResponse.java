@@ -1,4 +1,4 @@
-package ru.android.messenger.model.api;
+package ru.android.messenger.model.dto.response;
 
 public enum RegistrationResponse {
 

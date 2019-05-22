@@ -4,5 +4,4 @@ import ru.android.messenger.presenter.FriendListPresenter;
 
 public class FriendListPresenterImplementation implements FriendListPresenter {
 
-
 }

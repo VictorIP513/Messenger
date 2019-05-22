@@ -14,10 +14,10 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
-import ru.android.messenger.model.api.FriendStatus;
-import ru.android.messenger.model.api.LoginResponse;
-import ru.android.messenger.model.api.RegistrationResponse;
 import ru.android.messenger.model.dto.User;
+import ru.android.messenger.model.dto.response.FriendStatus;
+import ru.android.messenger.model.dto.response.LoginResponse;
+import ru.android.messenger.model.dto.response.RegistrationResponse;
 
 public interface Repository {
 
@@ -35,7 +35,7 @@ public interface Repository {
 
     @PATCH("/api/addToFriend/{login}")
     Call<Void> addToFriend(@Path("login") String login,
-                                       @Query("authenticationToken") String authenticationToken);
+                           @Query("authenticationToken") String authenticationToken);
 
     @GET("/api/checkAuthenticationToken/{authenticationToken}")
     Call<Boolean> checkAuthenticationToken(@Path("authenticationToken") String authenticationToken);

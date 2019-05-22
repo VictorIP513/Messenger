@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -34,7 +32,7 @@ public class RecyclerViewUtils {
             RecyclerView recyclerView, final Context context, final List<UserFromView> users) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         RecyclerView.Adapter adapter = new UsersSearchRecyclerViewAdapter(users);
-        
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(

@@ -7,8 +7,8 @@ import retrofit2.Response;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
-import ru.android.messenger.model.api.FriendStatus;
 import ru.android.messenger.model.callbacks.DefaultCallback;
+import ru.android.messenger.model.dto.response.FriendStatus;
 import ru.android.messenger.presenter.UserInfoPresenter;
 import ru.android.messenger.view.interfaces.UserInfoView;
 
