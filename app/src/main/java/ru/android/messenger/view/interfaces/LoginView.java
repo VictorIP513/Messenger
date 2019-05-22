@@ -1,7 +1,5 @@
 package ru.android.messenger.view.interfaces;
 
-import android.content.Context;
-
 import ru.android.messenger.view.errors.LoginError;
 
 public interface LoginView extends ViewWithAlerts {
@@ -13,6 +11,4 @@ public interface LoginView extends ViewWithAlerts {
     void setAccountNotConfirmedError();
 
     void changeToMainActivity();
-
-    Context getContext();
 }

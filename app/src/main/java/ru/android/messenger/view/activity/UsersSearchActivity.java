@@ -1,6 +1,5 @@
 package ru.android.messenger.view.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,11 +65,6 @@ public class UsersSearchActivity extends ActivityWithAlerts implements UsersSear
             }
         });
         return true;
-    }
-
-    @Override
-    public Context getContext() {
-        return getApplicationContext();
     }
 
     @Override

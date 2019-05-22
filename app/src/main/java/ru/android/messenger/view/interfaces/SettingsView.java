@@ -1,11 +1,8 @@
 package ru.android.messenger.view.interfaces;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 
 public interface SettingsView extends ViewWithAlerts {
-
-    Context getContext();
 
     void setErrorWritingBitmapToFile();
 

@@ -1,5 +1,6 @@
 package ru.android.messenger.view.activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 
@@ -12,6 +13,11 @@ public abstract class ActivityWithAlerts extends AppCompatActivity implements Vi
     private static final int PROGRESS_BAR_COLOR = Color.parseColor("#A5DC86");
 
     private SweetAlertDialog waitAlertDialog;
+
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
+    }
 
     @Override
     public void showWaitAlertDialog() {

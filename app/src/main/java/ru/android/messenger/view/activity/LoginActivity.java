@@ -1,6 +1,5 @@
 package ru.android.messenger.view.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -69,11 +68,6 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
         startActivity(intent);
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         finish();
-    }
-
-    @Override
-    public Context getContext() {
-        return getApplicationContext();
     }
 
     public void textViewRegisterClick(View view) {

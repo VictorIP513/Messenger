@@ -1,6 +1,5 @@
 package ru.android.messenger.view.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,11 +46,6 @@ public class UserInfoActivity extends ActivityWithAlerts implements UserInfoView
         findViews();
         setUserDataFromIntent();
         userInfoPresenter.fillUserFriendStatus(userLogin);
-    }
-
-    @Override
-    public Context getContext() {
-        return getApplicationContext();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package ru.android.messenger.view.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -56,11 +55,6 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
         if (requestCode == TAKE_PHOTO_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             getPhotoFromCamera(data);
         }
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
     }
 
     @Override
