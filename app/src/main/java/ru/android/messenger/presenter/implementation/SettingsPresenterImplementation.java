@@ -93,4 +93,9 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
         }
         return null;
     }
+
+    @Override
+    public String getServerAddress() {
+        return Model.getServerIp();
+    }
 }

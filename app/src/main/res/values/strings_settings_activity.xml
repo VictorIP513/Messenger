@@ -15,4 +15,6 @@
     <string name="settings_activity_alert_clear_cache_no">No</string>
     <string name="settings_activity_alert_clear_cache_title">Messenger</string>
     <string name="settings_activity_alert_clear_cache_message">You really want to clear the cache and log out?</string>
+
+    <string name="settings_activity_server_address_text">Server address:</string>
 </resources>

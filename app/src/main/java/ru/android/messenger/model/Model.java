@@ -13,7 +13,8 @@ import ru.android.messenger.model.converterfactory.StringConverterFactory;
 
 public class Model {
 
-    private static final String SERVER_IP = "http://37.192.145.83:8080";
+    private static final String SERVER_IP = "37.192.145.83:8080";
+    private static final String SERVER_URL = "http://" + SERVER_IP;
 
     private static Repository repository;
 
@@ -24,7 +25,7 @@ public class Model {
                 .addInterceptor(interceptor)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(SERVER_IP)
+                .baseUrl(SERVER_URL)
                 .client(client)
                 .addConverterFactory(StringConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -38,6 +39,10 @@ public class Model {
 
     public static Repository getRepository() {
         return repository;
+    }
+
+    public static String getServerIp() {
+        return SERVER_IP;
     }
 
     public static MultipartBody.Part createFileToSend(File file, String partName) {

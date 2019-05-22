@@ -15,4 +15,6 @@
     <string name="settings_activity_alert_clear_cache_no">Нет</string>
     <string name="settings_activity_alert_clear_cache_title">Мессенджер</string>
     <string name="settings_activity_alert_clear_cache_message">Вы действительно хотите очистить кэш и выйти из аккаунта?</string>
+
+    <string name="settings_activity_server_address_text">Адрес сервера:</string>
 </resources>

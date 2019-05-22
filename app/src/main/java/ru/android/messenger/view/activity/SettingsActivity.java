@@ -33,6 +33,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
     private TextView textViewName;
     private TextView textViewLogin;
     private TextView textViewEmail;
+    private TextView textViewServerAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
 
         findViews();
         fillUserInformation();
+        fillServerAddress();
     }
 
     @Override
@@ -132,6 +134,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
         textViewName = findViewById(R.id.text_view_name);
         textViewLogin = findViewById(R.id.text_view_login);
         textViewEmail = findViewById(R.id.text_view_email);
+        textViewServerAddress = findViewById(R.id.text_view_server_address);
     }
 
     private void uploadPhoto() {
@@ -168,5 +171,12 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
 
     private void fillUserInformation() {
         settingsPresenter.fillUserInformation();
+    }
+
+    private void fillServerAddress() {
+        String serverAddress = settingsPresenter.getServerAddress();
+        String fullText =
+                getString(R.string.settings_activity_server_address_text) + " " + serverAddress;
+        textViewServerAddress.setText(fullText);
     }
 }

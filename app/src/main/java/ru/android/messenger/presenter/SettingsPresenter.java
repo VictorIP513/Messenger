@@ -12,4 +12,6 @@ public interface SettingsPresenter {
     void deleteCache();
 
     Bitmap getBitmapFromUri(Uri uri);
+
+    String getServerAddress();
 }
