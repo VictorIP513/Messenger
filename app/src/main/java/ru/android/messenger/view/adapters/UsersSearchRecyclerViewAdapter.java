@@ -124,8 +124,8 @@ public class UsersSearchRecyclerViewAdapter
             super(itemView);
 
             imageViewUserPhoto = itemView.findViewById(R.id.image_view_user_photo);
-            textViewLogin = itemView.findViewById(R.id.navigation_drawer_text_view_login);
-            textViewName = itemView.findViewById(R.id.navigation_drawer_text_view_name);
+            textViewLogin = itemView.findViewById(R.id.text_view_login);
+            textViewName = itemView.findViewById(R.id.text_view_name);
         }
     }
 }

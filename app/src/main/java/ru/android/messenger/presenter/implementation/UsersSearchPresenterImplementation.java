@@ -24,18 +24,18 @@ import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.UserFromView;
 import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.model.utils.ImageHelper;
-import ru.android.messenger.presenter.UsersRecyclerViewPresenter;
-import ru.android.messenger.view.interfaces.ViewWithUsersRecyclerView;
+import ru.android.messenger.presenter.UsersSearchPresenter;
+import ru.android.messenger.view.interfaces.UsersSearchView;
 
-public class UsersRecyclerViewPresenterImplementation implements UsersRecyclerViewPresenter {
+public class UsersSearchPresenterImplementation implements UsersSearchPresenter {
 
-    private ViewWithUsersRecyclerView view;
+    private UsersSearchView usersSearchView;
     private Repository repository;
 
     private List<UserFromView> userFromViewList;
 
-    public UsersRecyclerViewPresenterImplementation(ViewWithUsersRecyclerView view) {
-        this.view = view;
+    public UsersSearchPresenterImplementation(UsersSearchView usersSearchView) {
+        this.usersSearchView = usersSearchView;
         repository = Model.getRepository();
 
         userFromViewList = new ArrayList<>();
@@ -43,9 +43,9 @@ public class UsersRecyclerViewPresenterImplementation implements UsersRecyclerVi
 
     @Override
     public void fillUsersList() {
-        view.showWaitAlertDialog();
+        usersSearchView.showWaitAlertDialog();
         repository.getAllUsers()
-                .enqueue(new DefaultCallback<List<User>, ViewWithUsersRecyclerView>(view) {
+                .enqueue(new DefaultCallback<List<User>, UsersSearchView>(usersSearchView) {
                     @Override
                     public void onResponse(@NonNull Call<List<User>> call,
                                            @NonNull Response<List<User>> response) {
@@ -68,7 +68,7 @@ public class UsersRecyclerViewPresenterImplementation implements UsersRecyclerVi
     private void convertUsersToUsersFromView(final List<User> users) {
         for (final User user : users) {
             repository.getUserPhoto(user.getLogin())
-                    .enqueue(new DefaultCallback<ResponseBody, ViewWithUsersRecyclerView>(view) {
+                    .enqueue(new DefaultCallback<ResponseBody, UsersSearchView>(usersSearchView) {
                         @Override
                         public void onResponse(@NonNull Call<ResponseBody> call,
                                                @NonNull Response<ResponseBody> response) {
@@ -76,13 +76,13 @@ public class UsersRecyclerViewPresenterImplementation implements UsersRecyclerVi
                             File photo = null;
                             if (response.isSuccessful()) {
                                 photo = Objects.requireNonNull(FileUtils.getFileFromResponseBody(
-                                        response.body(), view.getContext()));
+                                        response.body(), usersSearchView.getContext()));
                             }
                             UserFromView userFromView = createUserFromView(user, photo);
                             userFromViewList.add(userFromView);
                             if (userFromViewList.size() == users.size()) {
                                 sortUsersFromFirstNameAndSurname();
-                                view.setUsersList(userFromViewList);
+                                usersSearchView.setUsersList(userFromViewList);
                             }
                         }
                     });
@@ -111,14 +111,14 @@ public class UsersRecyclerViewPresenterImplementation implements UsersRecyclerVi
             userFromView.setUserPhoto(bitmap);
         } else {
             Bitmap bitmap = BitmapFactory.decodeResource(
-                    view.getContext().getResources(), R.drawable.profile_thumbnail);
+                    usersSearchView.getContext().getResources(), R.drawable.profile_thumbnail);
             userFromView.setUserPhoto(bitmap);
         }
         return userFromView;
     }
 
     private void deleteCurrentUserFromUserList(List<User> users) {
-        String currentUserLogin = PreferenceManager.getLogin(view.getContext());
+        String currentUserLogin = PreferenceManager.getLogin(usersSearchView.getContext());
         for (User user : users) {
             if (user.getLogin().equals(currentUserLogin)) {
                 users.remove(user);

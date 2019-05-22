@@ -106,7 +106,6 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
             public void onDrawerSlide(@NonNull View view, float v) {
                 findDrawerLayoutViews();
                 navigationDrawerPresenter.fillUserInformationToNavigationDrawer();
-                //unused method
             }
 
             @Override

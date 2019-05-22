@@ -2,7 +2,7 @@ package ru.android.messenger.presenter;
 
 import android.graphics.Bitmap;
 
-public interface UsersRecyclerViewPresenter {
+public interface UsersSearchPresenter {
 
     void fillUsersList();
 
