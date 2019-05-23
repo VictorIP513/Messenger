@@ -29,4 +29,9 @@ public class NavigationDrawerPresenterImplementation implements NavigationDrawer
         navigationDrawerView.setUserDataToNavigationDrawer(user.getFirstName(), user.getSurname(),
                 user.getLogin(), user.getEmail());
     }
+
+    @Override
+    public void logout() {
+        PreferenceManager.clearAllPreferences(navigationDrawerView.getContext());
+    }
 }

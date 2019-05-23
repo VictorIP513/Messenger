@@ -10,11 +10,12 @@ import ru.android.messenger.R;
 import ru.android.messenger.model.dto.UserFromView;
 import ru.android.messenger.presenter.UsersSearchPresenter;
 import ru.android.messenger.presenter.implementation.UsersSearchPresenterImplementation;
-import ru.android.messenger.view.interfaces.UsersSearchView;
+import ru.android.messenger.view.interfaces.ViewWithUsersRecyclerView;
 import ru.android.messenger.view.utils.recyclerview.RecyclerViewUtils;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
-public class UsersSearchActivity extends ActivityWithNavigationDrawer implements UsersSearchView {
+public class UsersSearchActivity extends ActivityWithNavigationDrawer
+        implements ViewWithUsersRecyclerView {
 
     private UsersSearchPresenter usersSearchPresenter;
 

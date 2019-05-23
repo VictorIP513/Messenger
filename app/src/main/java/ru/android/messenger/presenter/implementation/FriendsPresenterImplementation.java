@@ -8,27 +8,29 @@ import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Response;
 import ru.android.messenger.model.Model;
+import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.DefaultCallback;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.UserUtils;
-import ru.android.messenger.presenter.UsersSearchPresenter;
+import ru.android.messenger.presenter.FriendsPresenter;
 import ru.android.messenger.view.interfaces.ViewWithUsersRecyclerView;
 
-public class UsersSearchPresenterImplementation implements UsersSearchPresenter {
+public class FriendsPresenterImplementation implements FriendsPresenter {
 
     private ViewWithUsersRecyclerView view;
     private Repository repository;
 
-    public UsersSearchPresenterImplementation(ViewWithUsersRecyclerView view) {
+    public FriendsPresenterImplementation(ViewWithUsersRecyclerView view) {
         this.view = view;
         repository = Model.getRepository();
     }
 
     @Override
-    public void fillUsersList() {
+    public void fillFriendList() {
         view.showWaitAlertDialog();
-        repository.getAllUsers()
+        String authenticationToken = PreferenceManager.getAuthenticationToken(view.getContext());
+        repository.getFriends(authenticationToken)
                 .enqueue(new DefaultCallback<List<User>, ViewWithUsersRecyclerView>(view) {
                     @Override
                     public void onResponse(@NonNull Call<List<User>> call,

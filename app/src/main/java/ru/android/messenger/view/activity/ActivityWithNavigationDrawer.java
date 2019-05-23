@@ -79,6 +79,10 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
                             case R.id.navigation_drawer_settings:
                                 activityToStart = SettingsActivity.class;
                                 break;
+                            case R.id.navigation_drawer_logout:
+                                navigationDrawerPresenter.logout();
+                                activityToStart = LoginActivity.class;
+                                break;
                             default:
                                 break;
                         }
@@ -90,7 +94,6 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
 
     private void addDrawerLayoutListener() {
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-
             @Override
             public void onDrawerClosed(@NonNull View view) {
                 if (activityToStart != null) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import ru.android.messenger.model.dto.UserFromView;
 
-public interface UsersSearchView extends ViewWithAlerts {
+public interface ViewWithUsersRecyclerView extends ViewWithAlerts {
 
     void setUsersList(List<UserFromView> users);
 }

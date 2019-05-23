@@ -50,6 +50,9 @@ public interface Repository {
     @GET("/api/getAllUsers")
     Call<List<User>> getAllUsers();
 
+    @GET("/api/getFriends")
+    Call<List<User>> getFriends(@Query("authenticationToken") String authenticationToken);
+
     @GET("/api/getFriendStatus/{login}")
     Call<FriendStatus> getFriendStatus(@Path("login") String login,
                                        @Query("authenticationToken") String authenticationToken);
