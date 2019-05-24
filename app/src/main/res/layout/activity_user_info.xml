@@ -88,7 +88,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0"
                 android:background="@drawable/shape"
-                android:contentDescription="@string/content_description_open_blocked_members_list"
+                android:contentDescription="@string/content_description_goto_dialog"
                 android:gravity="center_vertical" />
         </LinearLayout>
 
