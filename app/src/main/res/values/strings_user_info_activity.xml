@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="user_info_activity_goto_dialog_text">Go to dialog</string>
     <string name="user_info_activity_block_text">Block this user</string>
     <string name="user_info_activity_block_hint_text">When a user is blocked, he will not be able to communicate with you</string>
 

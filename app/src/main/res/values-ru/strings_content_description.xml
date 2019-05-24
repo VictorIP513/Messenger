@@ -4,4 +4,5 @@
     <string name="content_description_user_profile_photo">Фото профиля</string>
     <string name="content_description_upload_photo">Загрузка фото</string>
     <string name="content_description_open_blocked_members_list">Открыть список заблокированных пользователей</string>
+    <string name="content_description_goto_dialog">Перейти к диалогу</string>
 </resources>

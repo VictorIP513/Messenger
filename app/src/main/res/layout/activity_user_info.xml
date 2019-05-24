@@ -71,6 +71,42 @@
             android:paddingBottom="15dp">
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/user_info_activity_goto_dialog_text"
+                android:textColor="#1b1d1d"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:background="@drawable/shape"
+                android:contentDescription="@string/content_description_open_blocked_members_list"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e6e6e6" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_text_color"
+            android:paddingLeft="21dp"
+            android:paddingTop="12dp"
+            android:paddingRight="21dp"
+            android:paddingBottom="15dp">
+
+            <TextView
                 android:id="@+id/text_view_friend_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
