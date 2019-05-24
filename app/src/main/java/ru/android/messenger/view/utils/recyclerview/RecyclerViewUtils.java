@@ -10,7 +10,6 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class RecyclerViewUtils {
     }
 
     public static void configureRecyclerViewForUsers(
-            RecyclerView recyclerView, final Context context, final List<UserFromView> users) {
+            final RecyclerView recyclerView, final Context context, final List<UserFromView> users) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         RecyclerView.Adapter adapter = new UsersSearchRecyclerViewAdapter(users);
 
@@ -38,13 +37,15 @@ public class RecyclerViewUtils {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
                 context, recyclerView, new RecyclerViewOnClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                openUserInfo(users.get(position), context);
+            public void onItemClick(RecyclerView view, int position) {
+                UserFromView user = RecyclerViewUtils.findUserFromRecyclerView(view, position);
+                openUserInfo(user, context);
             }
 
             @Override
-            public void onLongItemClick(View view, int position) {
-                openUserInfo(users.get(position), context);
+            public void onLongItemClick(RecyclerView view, int position) {
+                UserFromView user = RecyclerViewUtils.findUserFromRecyclerView(view, position);
+                openUserInfo(user, context);
             }
         }));
     }
@@ -71,6 +72,12 @@ public class RecyclerViewUtils {
                 return false;
             }
         });
+    }
+
+    private static UserFromView findUserFromRecyclerView(RecyclerView recyclerView, int position) {
+        UsersSearchRecyclerViewAdapter adapter =
+                (UsersSearchRecyclerViewAdapter) recyclerView.getAdapter();
+        return Objects.requireNonNull(adapter).getUser(position);
     }
 
     private static void openUserInfo(UserFromView user, Context context) {

@@ -57,4 +57,40 @@ public class UserInfoPresenterImplementation implements UserInfoPresenter {
                     }
                 });
     }
+
+    @Override
+    public void deleteFromFriend(String login) {
+        userInfoView.showWaitAlertDialog();
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(userInfoView.getContext());
+        repository.deleteFromFriend(login, authenticationToken)
+                .enqueue(new DefaultCallback<Void, UserInfoView>(userInfoView) {
+                    @Override
+                    public void onResponse(@NonNull Call<Void> call,
+                                           @NonNull Response<Void> response) {
+                        super.onResponse(call, response);
+                        if (response.isSuccessful()) {
+                            userInfoView.setFriendStatus(FriendStatus.USER_IS_NOT_FRIEND);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void acceptFriendRequest(String login) {
+        userInfoView.showWaitAlertDialog();
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(userInfoView.getContext());
+        repository.acceptFriendRequest(login, authenticationToken)
+                .enqueue(new DefaultCallback<Void, UserInfoView>(userInfoView) {
+                    @Override
+                    public void onResponse(@NonNull Call<Void> call,
+                                           @NonNull Response<Void> response) {
+                        super.onResponse(call, response);
+                        if (response.isSuccessful()) {
+                            userInfoView.setFriendStatus(FriendStatus.USER_IS_FRIEND);
+                        }
+                    }
+                });
+    }
 }

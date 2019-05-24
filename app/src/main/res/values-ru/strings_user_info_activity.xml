@@ -6,7 +6,9 @@
     <string name="user_info_friend_status_user_is_not_friend">Пользователь не находится в вашем списке друзей</string>
     <string name="user_info_friend_status_user_is_friend">Пользователь у вас в друзьях</string>
     <string name="user_info_friend_status_friend_request_has_been_sent">Заявка в друзья отправлена</string>
+    <string name="user_info_friend_status_friend_incoming_friend_request">Пользователь отправил запрос дружбы</string>
     <string name="user_info_button_friend_add">Добавить</string>
     <string name="user_info_button_friend_delete">Удалить</string>
     <string name="user_info_button_friend_cancel">Отменить</string>
+    <string name="user_info_button_friend_accept">Принять</string>
 </resources>

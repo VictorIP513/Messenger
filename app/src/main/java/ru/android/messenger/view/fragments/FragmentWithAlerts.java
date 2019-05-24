@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 
+import java.util.Objects;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import ru.android.messenger.R;
 import ru.android.messenger.view.interfaces.ViewWithAlerts;
@@ -38,14 +40,16 @@ public class FragmentWithAlerts extends Fragment implements ViewWithAlerts {
 
 
     protected SweetAlertDialog createErrorAlertDialog(String titleText, String contentText) {
-        return new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+        return new SweetAlertDialog(Objects.requireNonNull(getActivity()),
+                SweetAlertDialog.ERROR_TYPE)
                 .setTitleText(titleText)
                 .setContentText(contentText);
     }
 
     private SweetAlertDialog createWaitAlertDialog() {
         SweetAlertDialog alertDialog =
-                new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+                new SweetAlertDialog(Objects.requireNonNull(getActivity()),
+                        SweetAlertDialog.PROGRESS_TYPE);
         alertDialog.getProgressHelper().setBarColor(PROGRESS_BAR_COLOR);
         alertDialog.setTitleText(getString(R.string.alert_dialog_wait_title));
         alertDialog.setCancelable(false);

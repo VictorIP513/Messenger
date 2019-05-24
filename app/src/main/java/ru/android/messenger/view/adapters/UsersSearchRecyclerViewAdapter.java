@@ -25,7 +25,7 @@ public class UsersSearchRecyclerViewAdapter
     private List<UserFromView> allUsers;
 
     public UsersSearchRecyclerViewAdapter(List<UserFromView> users) {
-        this.users = users;
+        this.users = new ArrayList<>(users);
         allUsers = new ArrayList<>(users);
         usersFilter = createFriendsFilter();
     }
@@ -57,6 +57,10 @@ public class UsersSearchRecyclerViewAdapter
 
     public Filter getUsersFilter() {
         return usersFilter;
+    }
+
+    public UserFromView getUser(int position) {
+        return users.get(position);
     }
 
     private Filter createFriendsFilter() {

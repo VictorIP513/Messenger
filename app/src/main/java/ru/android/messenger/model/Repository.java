@@ -37,6 +37,14 @@ public interface Repository {
     Call<Void> addToFriend(@Path("login") String login,
                            @Query("authenticationToken") String authenticationToken);
 
+    @PATCH("/api/deleteFromFriend/{login}")
+    Call<Void> deleteFromFriend(@Path("login") String login,
+                                @Query("authenticationToken") String authenticationToken);
+
+    @PATCH("/api/acceptFriendRequest/{login}")
+    Call<Void> acceptFriendRequest(@Path("login") String login,
+                                   @Query("authenticationToken") String authenticationToken);
+
     @GET("/api/checkAuthenticationToken/{authenticationToken}")
     Call<Boolean> checkAuthenticationToken(@Path("authenticationToken") String authenticationToken);
 
@@ -52,6 +60,12 @@ public interface Repository {
 
     @GET("/api/getFriends")
     Call<List<User>> getFriends(@Query("authenticationToken") String authenticationToken);
+
+    @GET("/api/getIncomingRequests")
+    Call<List<User>> getIncomingRequests(@Query("authenticationToken") String authenticationToken);
+
+    @GET("/api/getOutgoingRequests")
+    Call<List<User>> getOutgoingRequests(@Query("authenticationToken") String authenticationToken);
 
     @GET("/api/getFriendStatus/{login}")
     Call<FriendStatus> getFriendStatus(@Path("login") String login,

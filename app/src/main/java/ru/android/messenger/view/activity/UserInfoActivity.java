@@ -22,9 +22,11 @@ public class UserInfoActivity extends ActivityWithAlerts implements UserInfoView
     private static final int BUTTON_FRIEND_ADD_COLOR = 0xFF03A9F4;
     private static final int BUTTON_FRIEND_DELETE_COLOR = 0xFFFF2B2B;
     private static final int BUTTON_FRIEND_CANCEL_COLOR = 0xB2C2BCBC;
+    private static final int BUTTON_FRIEND_ACCEPT_COLOR = 0xFFFF2B2B;
     private static final int BUTTON_FRIEND_ADD_TEXT_COLOR = 0xFFFFFFFF;
     private static final int BUTTON_FRIEND_DELETE_TEXT_COLOR = 0xFFFFFFFF;
     private static final int BUTTON_FRIEND_CANCEL_TEXT_COLOR = 0xFF000000;
+    private static final int BUTTON_FRIEND_ACCEPT_TEXT_COLOR = 0xFFFFFFFF;
 
     private UserInfoPresenter userInfoPresenter;
     private FriendStatus friendStatus;
@@ -73,6 +75,13 @@ public class UserInfoActivity extends ActivityWithAlerts implements UserInfoView
                 buttonFriendAdd.setBackgroundColor(BUTTON_FRIEND_CANCEL_COLOR);
                 buttonFriendAdd.setTextColor(BUTTON_FRIEND_CANCEL_TEXT_COLOR);
                 break;
+            case INCOMING_FRIEND_REQUEST:
+                textViewFriendStatus.setText(
+                        getText(R.string.user_info_friend_status_friend_incoming_friend_request));
+                buttonFriendAdd.setText(getText(R.string.user_info_button_friend_accept));
+                buttonFriendAdd.setBackgroundColor(BUTTON_FRIEND_ACCEPT_COLOR);
+                buttonFriendAdd.setTextColor(BUTTON_FRIEND_ACCEPT_TEXT_COLOR);
+                break;
             default:
                 break;
         }
@@ -87,8 +96,11 @@ public class UserInfoActivity extends ActivityWithAlerts implements UserInfoView
                     userInfoPresenter.addToFriend(userLogin);
                     break;
                 case USER_IS_FRIEND:
-                    break;
                 case FRIEND_REQUEST_HAS_BEEN_SENT:
+                    userInfoPresenter.deleteFromFriend(userLogin);
+                    break;
+                case INCOMING_FRIEND_REQUEST:
+                    userInfoPresenter.acceptFriendRequest(userLogin);
                     break;
                 default:
                     break;

@@ -6,7 +6,7 @@
     android:background="@android:color/darker_gray">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_users_list"
+        android:id="@+id/recycler_view_incoming_requests"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="4dp"

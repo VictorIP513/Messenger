@@ -6,7 +6,9 @@
     <string name="user_info_friend_status_user_is_not_friend">User is not on your friend list</string>
     <string name="user_info_friend_status_user_is_friend">User is your friend</string>
     <string name="user_info_friend_status_friend_request_has_been_sent">Friend request has been sent</string>
+    <string name="user_info_friend_status_friend_incoming_friend_request">User sent friend request</string>
     <string name="user_info_button_friend_add">Add</string>
     <string name="user_info_button_friend_delete">Delete</string>
     <string name="user_info_button_friend_cancel">Cancel</string>
+    <string name="user_info_button_friend_accept">Accept</string>
 </resources>
