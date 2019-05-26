@@ -62,6 +62,7 @@
             android:background="#e6e6e6" />
 
         <LinearLayout
+            android:onClick="linearLayoutGotoDialogClick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/button_text_color"

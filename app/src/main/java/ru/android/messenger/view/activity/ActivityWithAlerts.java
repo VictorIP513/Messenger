@@ -21,13 +21,13 @@ public abstract class ActivityWithAlerts extends AppCompatActivity implements Vi
 
     @Override
     public void showWaitAlertDialog() {
-        waitAlertDialog = createWaitAlertDialog();
-        waitAlertDialog.show();
+        //waitAlertDialog = createWaitAlertDialog();
+        //waitAlertDialog.show();
     }
 
     @Override
     public void cancelWaitAlertDialog() {
-        waitAlertDialog.cancel();
+        //waitAlertDialog.cancel();
     }
 
     @Override

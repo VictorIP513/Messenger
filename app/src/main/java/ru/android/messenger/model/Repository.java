@@ -14,6 +14,8 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
+import ru.android.messenger.model.dto.Dialog;
+import ru.android.messenger.model.dto.Message;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.response.FriendStatus;
 import ru.android.messenger.model.dto.response.LoginResponse;
@@ -32,6 +34,18 @@ public interface Repository {
     @POST("/api/uploadPhoto")
     Call<Void> uploadPhoto(@Part MultipartBody.Part photo,
                            @Part("authenticationToken") String authenticationToken);
+
+    @Multipart
+    @POST("/api/createDialog")
+    Call<Dialog> createDialog(@Part("login") String login,
+                              @Part("lastMessageText") String lastMessageText,
+                              @Part("authenticationToken") String authenticationToken);
+
+    @Multipart
+    @POST("/api/sendMessage/{dialogId}")
+    Call<Message> sendMessage(@Path("dialogId") int dialogId,
+                              @Part("message") String message,
+                              @Part("authenticationToken") String authenticationToken);
 
     @PATCH("/api/addToFriend/{login}")
     Call<Void> addToFriend(@Path("login") String login,
@@ -70,4 +84,11 @@ public interface Repository {
     @GET("/api/getFriendStatus/{login}")
     Call<FriendStatus> getFriendStatus(@Path("login") String login,
                                        @Query("authenticationToken") String authenticationToken);
+
+    @GET("/api/getDialog/{login}")
+    Call<Dialog> getDialog(@Path("login") String login,
+                           @Query("authenticationToken") String authenticationToken);
+
+    @GET("/api/getAllDialogs")
+    Call<List<Dialog>> getAllDialogs(@Query("authenticationToken") String authenticationToken);
 }

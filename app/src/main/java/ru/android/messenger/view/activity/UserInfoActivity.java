@@ -108,6 +108,12 @@ public class UserInfoActivity extends ActivityWithAlerts implements UserInfoView
         }
     }
 
+    public void linearLayoutGotoDialogClick(View view) {
+        Intent intent = new Intent(this, DialogActivity.class);
+        intent.putExtra("user_login", userLogin);
+        startActivity(intent);
+    }
+
     private void findViews() {
         imageViewProfile = findViewById(R.id.image_view_profile);
         textViewName = findViewById(R.id.text_view_name);
