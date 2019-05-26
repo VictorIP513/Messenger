@@ -13,8 +13,10 @@ import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.DefaultCallback;
 import ru.android.messenger.model.dto.Dialog;
+import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.chat.ChatDialog;
 import ru.android.messenger.model.utils.ChatUtils;
+import ru.android.messenger.model.utils.UserUtils;
 import ru.android.messenger.presenter.DialogsPresenter;
 import ru.android.messenger.view.interfaces.DialogsView;
 
@@ -41,13 +43,31 @@ public class DialogsPresenterImplementation implements DialogsPresenter {
                         super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             List<Dialog> dialogs = Objects.requireNonNull(response.body());
-                            List<ChatDialog> chatDialogs = new ArrayList<>(dialogs.size());
-                            for (Dialog dialog : dialogs) {
-                                chatDialogs.add(ChatUtils.convertDialogToChatDialog(dialog));
-                            }
+                            List<ChatDialog> chatDialogs = getDialogsToView(dialogs);
                             dialogsView.setDialogList(chatDialogs);
                         }
                     }
                 });
+    }
+
+    private List<ChatDialog> getDialogsToView(List<Dialog> dialogs) {
+        String currentUserLogin = PreferenceManager.getLogin(dialogsView.getContext());
+
+        List<ChatDialog> chatDialogs = new ArrayList<>(dialogs.size());
+        for (Dialog dialog : dialogs) {
+            List<User> users = dialog.getUsers();
+            for (User user : users) {
+                if (!user.getLogin().equals(currentUserLogin)) {
+                    String dialogName = user.getFirstName() + " " + user.getSurname();
+                    dialog.setDialogName(dialogName);
+                    dialog.setDialogPhoto(UserUtils.getUserPhotoUrl(user.getLogin()));
+                    ChatDialog chatDialog = ChatUtils.convertDialogToChatDialog(dialog);
+                    chatDialog.setUserLogin(user.getLogin());
+                    chatDialogs.add(chatDialog);
+                    break;
+                }
+            }
+        }
+        return chatDialogs;
     }
 }

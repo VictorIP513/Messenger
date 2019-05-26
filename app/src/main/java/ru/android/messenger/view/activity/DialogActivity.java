@@ -68,7 +68,10 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         imageLoader = new ImageLoader() {
             @Override
             public void loadImage(ImageView imageView, String url, Object payload) {
-                Picasso.with(DialogActivity.this).load(url).into(imageView);
+                Picasso.with(DialogActivity.this)
+                        .load(url)
+                        .error(R.drawable.profile_thumbnail)
+                        .into(imageView);
             }
         };
     }

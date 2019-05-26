@@ -40,6 +40,7 @@ public class ChatUtils {
     private static ChatUser convertUserToChatUser(User user) {
         String id = user.getLogin();
         String name = user.getFirstName() + " " + user.getSurname();
-        return new ChatUser(id, name, null);
+        String avatar = UserUtils.getUserPhotoUrl(user.getLogin());
+        return new ChatUser(id, name, avatar);
     }
 }

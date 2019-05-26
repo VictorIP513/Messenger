@@ -13,6 +13,7 @@ public class ChatDialog implements IDialog<ChatMessage> {
     private List<ChatUser> users;
     private ChatMessage lastMessage;
     private int unreadCount;
+    private String userLogin;
 
     public ChatDialog(String id, String name, String photo, List<ChatUser> users,
                       ChatMessage lastMessage, int unreadCount) {
@@ -57,5 +58,13 @@ public class ChatDialog implements IDialog<ChatMessage> {
     @Override
     public int getUnreadCount() {
         return unreadCount;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 }

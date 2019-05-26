@@ -34,6 +34,10 @@ public class UserUtils {
 
     }
 
+    public static String getUserPhotoUrl(String login) {
+        return Model.getServerUrl() + "/api/getUserPhoto/" + login;
+    }
+
     public static <T extends ViewWithUsersRecyclerView> void convertAndSetUsersToView(
             final List<User> users, final T view) {
         userFromViewList.clear();

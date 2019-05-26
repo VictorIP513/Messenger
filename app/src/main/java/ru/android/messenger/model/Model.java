@@ -45,6 +45,10 @@ public class Model {
         return SERVER_IP;
     }
 
+    public static String getServerUrl() {
+        return SERVER_URL;
+    }
+
     public static MultipartBody.Part createFileToSend(File file, String partName) {
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);

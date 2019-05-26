@@ -1,5 +1,6 @@
 package ru.android.messenger.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -54,26 +55,38 @@ public class DialogsActivity extends ActivityWithNavigationDrawer implements Dia
     private void initAdapter() {
         dialogsAdapter = new DialogsListAdapter<>(imageLoader);
         dialogsAdapter.setItems(dialogs);
-        dialogsAdapter.setOnDialogClickListener(new DialogsListAdapter.OnDialogClickListener<ChatDialog>() {
-            @Override
-            public void onDialogClick(ChatDialog dialog) {
-
-            }
-        });
-        dialogsAdapter.setOnDialogLongClickListener(new DialogsListAdapter.OnDialogLongClickListener<ChatDialog>() {
-            @Override
-            public void onDialogLongClick(ChatDialog dialog) {
-
-            }
-        });
+        dialogsAdapter.setOnDialogClickListener(
+                new DialogsListAdapter.OnDialogClickListener<ChatDialog>() {
+                    @Override
+                    public void onDialogClick(ChatDialog dialog) {
+                        openDialog(dialog.getUserLogin());
+                    }
+                });
+        dialogsAdapter.setOnDialogLongClickListener(
+                new DialogsListAdapter.OnDialogLongClickListener<ChatDialog>() {
+                    @Override
+                    public void onDialogLongClick(ChatDialog dialog) {
+                        openDialog(dialog.getUserLogin());
+                    }
+                });
         dialogsList.setAdapter(dialogsAdapter);
+    }
+
+    private void openDialog(String userLogin) {
+        Intent intent = new Intent(this, DialogActivity.class);
+        intent.putExtra("user_login", userLogin);
+        startActivity(intent);
     }
 
     private void createImageLoader() {
         imageLoader = new ImageLoader() {
             @Override
-            public void loadImage(ImageView imageView, @Nullable String url, @Nullable Object payload) {
-                Picasso.with(DialogsActivity.this).load(url).into(imageView);
+            public void loadImage(ImageView imageView,
+                                  @Nullable String url, @Nullable Object payload) {
+                Picasso.with(DialogsActivity.this)
+                        .load(url)
+                        .error(R.drawable.profile_thumbnail)
+                        .into(imageView);
             }
         };
     }
