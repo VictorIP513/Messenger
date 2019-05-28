@@ -31,7 +31,6 @@
             android:name=".view.activity.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.activity.RegistrationActivity" />
-        <activity android:name=".view.activity.ConnectionActivity" />
         <activity android:name=".view.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

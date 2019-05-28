@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="connection_activity_ip" translatable="false">ip:</string>
-    <string name="connection_activity_button_connect_text">connect</string>
-    <string name="connection_activity_edit_text_ip_hint">Server IP</string>
-</resources>
