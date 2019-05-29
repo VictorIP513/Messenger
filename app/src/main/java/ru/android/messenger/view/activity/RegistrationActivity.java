@@ -101,11 +101,11 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
     }
 
     private void findViews() {
-        editTextFirstName = findViewById(R.id.editTextFirstName);
-        editTextSurname = findViewById(R.id.editTextSurname);
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextLogin = findViewById(R.id.editTextLogin);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        editTextPasswordConfirm = findViewById(R.id.editTextPasswordConfirm);
+        editTextFirstName = findViewById(R.id.edit_text_first_name);
+        editTextSurname = findViewById(R.id.edit_text_surname);
+        editTextEmail = findViewById(R.id.edit_text_email);
+        editTextLogin = findViewById(R.id.edit_text_login);
+        editTextPassword = findViewById(R.id.edit_text_password);
+        editTextPasswordConfirm = findViewById(R.id.edit_text_password_confirm);
     }
 }

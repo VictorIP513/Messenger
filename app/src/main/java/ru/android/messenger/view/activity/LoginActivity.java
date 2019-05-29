@@ -90,8 +90,8 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
     }
 
     private void findViews() {
-        editTextLogin = findViewById(R.id.editTextLogin);
-        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextLogin = findViewById(R.id.edit_text_login);
+        editTextPassword = findViewById(R.id.edit_text_password);
     }
 
     private void autoLogin() {

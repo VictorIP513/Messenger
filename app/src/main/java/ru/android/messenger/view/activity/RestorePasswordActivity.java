@@ -81,8 +81,8 @@ public class RestorePasswordActivity extends ActivityWithAlerts implements Resto
     }
 
     private void findViews() {
-        editTextLogin = findViewById(R.id.editTextLogin);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
+        editTextLogin = findViewById(R.id.edit_text_login);
+        editTextPassword = findViewById(R.id.edit_text_password);
+        editTextConfirmPassword = findViewById(R.id.edit_text_confirm_password);
     }
 }

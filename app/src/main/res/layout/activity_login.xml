@@ -30,7 +30,7 @@
             android:layout_marginBottom="8dp">
 
             <EditText
-                android:id="@+id/editTextLogin"
+                android:id="@+id/edit_text_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/login_activity_edit_text_login_hint"
@@ -47,7 +47,7 @@
             app:passwordToggleEnabled="true">
 
             <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/edit_text_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/login_activity_edit_text_password_hint"
@@ -67,7 +67,6 @@
             android:text="@string/login_activity_button_login_text" />
 
         <TextView
-            android:id="@+id/textViewRegister"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -77,7 +76,6 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textViewRestorePassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
