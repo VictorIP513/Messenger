@@ -2,6 +2,7 @@ package ru.android.messenger.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.EditText;
 
@@ -11,18 +12,25 @@ import ru.android.messenger.presenter.RegistrationPresenter;
 import ru.android.messenger.presenter.implementation.RegistrationPresenterImplementation;
 import ru.android.messenger.view.errors.RegistrationError;
 import ru.android.messenger.view.interfaces.RegistrationView;
+import ru.android.messenger.view.utils.ViewUtils;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
 public class RegistrationActivity extends ActivityWithAlerts implements RegistrationView {
 
     private RegistrationPresenter registrationPresenter;
 
+    private TextInputLayout textInputLayoutFirstName;
+    private TextInputLayout textInputLayoutSurname;
+    private TextInputLayout textInputLayoutEmail;
+    private TextInputLayout textInputLayoutLogin;
+    private TextInputLayout textInputLayoutPassword;
+    private TextInputLayout textInputLayoutConfirmPassword;
     private EditText editTextFirstName;
     private EditText editTextSurname;
     private EditText editTextEmail;
     private EditText editTextLogin;
     private EditText editTextPassword;
-    private EditText editTextPasswordConfirm;
+    private EditText editTextConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,7 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
         registrationPresenter = new RegistrationPresenterImplementation(this);
 
         findViews();
+        configureViews();
     }
 
     @Override
@@ -39,24 +48,24 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
         String errorText = getResources().getString(registrationError.getResourceId());
         switch (registrationError) {
             case PASSWORDS_DO_NOT_MATCH:
-                editTextPasswordConfirm.setError(errorText);
+                textInputLayoutConfirmPassword.setError(errorText);
                 break;
             case INCORRECT_EMAIL:
             case EMAIL_IS_EXISTS:
-                editTextEmail.setError(errorText);
+                textInputLayoutEmail.setError(errorText);
                 break;
             case INCORRECT_LOGIN_LENGTH:
             case LOGIN_IS_EXISTS:
-                editTextLogin.setError(errorText);
+                textInputLayoutLogin.setError(errorText);
                 break;
             case INCORRECT_PASSWORD_LENGTH:
-                editTextPassword.setError(errorText);
+                textInputLayoutPassword.setError(errorText);
                 break;
             case INCORRECT_FIRST_NAME_LENGTH:
-                editTextFirstName.setError(errorText);
+                textInputLayoutFirstName.setError(errorText);
                 break;
             case INCORRECT_SURNAME_LENGTH:
-                editTextSurname.setError(errorText);
+                textInputLayoutSurname.setError(errorText);
                 break;
             default:
                 break;
@@ -95,17 +104,35 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
         String email = editTextEmail.getText().toString();
         String login = editTextLogin.getText().toString();
         String password = editTextPassword.getText().toString();
-        String passwordConfirm = editTextPasswordConfirm.getText().toString();
+        String passwordConfirm = editTextConfirmPassword.getText().toString();
         registrationPresenter.registrationButtonClicked(firstName, surname, email,
                 login, password, passwordConfirm);
     }
 
     private void findViews() {
+        textInputLayoutFirstName = findViewById(R.id.text_input_layout_first_name);
+        textInputLayoutSurname = findViewById(R.id.text_input_layout_surname);
+        textInputLayoutEmail = findViewById(R.id.text_input_layout_email);
+        textInputLayoutLogin = findViewById(R.id.text_input_layout_login);
+        textInputLayoutPassword = findViewById(R.id.text_input_layout_password);
+        textInputLayoutConfirmPassword = findViewById(R.id.text_input_layout_confirm_password);
         editTextFirstName = findViewById(R.id.edit_text_first_name);
         editTextSurname = findViewById(R.id.edit_text_surname);
         editTextEmail = findViewById(R.id.edit_text_email);
         editTextLogin = findViewById(R.id.edit_text_login);
         editTextPassword = findViewById(R.id.edit_text_password);
-        editTextPasswordConfirm = findViewById(R.id.edit_text_password_confirm);
+        editTextConfirmPassword = findViewById(R.id.edit_text_confirm_password);
+    }
+
+    private void configureViews() {
+        ViewUtils.clearErrorInTextInputLayoutOnChangeText(textInputLayoutSurname, editTextSurname);
+        ViewUtils.clearErrorInTextInputLayoutOnChangeText(textInputLayoutEmail, editTextEmail);
+        ViewUtils.clearErrorInTextInputLayoutOnChangeText(textInputLayoutLogin, editTextLogin);
+        ViewUtils.clearErrorInTextInputLayoutOnChangeText(textInputLayoutPassword, editTextPassword);
+        ViewUtils.clearErrorInTextInputLayoutOnChangeText(
+                textInputLayoutConfirmPassword, editTextConfirmPassword);
+        ViewUtils.clearErrorInTextInputLayoutOnChangeText(
+                textInputLayoutFirstName, editTextFirstName);
+
     }
 }
