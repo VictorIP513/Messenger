@@ -4,6 +4,7 @@
     <string name="login_activity_edit_text_password_hint">Введите пароль</string>
     <string name="login_activity_button_login_text">Войти</string>
     <string name="login_activity_text_view_register_text">Ещё нет аккаунта? Создайте аккаунт</string>
+    <string name="login_activity_text_view_restore_password_text">Забыли пароль?</string>
 
     <string name="login_activity_error_incorrect_login_length">Логин может быть длиной от 3 до 30 символов</string>
     <string name="login_activity_error_incorrect_password_length">Пароль может быть длиной от 6 до 100 символов</string>

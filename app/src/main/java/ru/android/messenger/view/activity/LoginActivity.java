@@ -76,6 +76,12 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
+    public void textViewRestorePasswordClick(View view) {
+        Intent intent = new Intent(this, RestorePasswordActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
     public void buttonLoginClick(View view) {
         String login = editTextLogin.getText().toString();
         String password = editTextPassword.getText().toString();

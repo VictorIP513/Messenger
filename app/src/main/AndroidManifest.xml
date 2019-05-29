@@ -16,6 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name=".view.activity.RestorePasswordActivity" />
         <activity
             android:name=".view.activity.DialogActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -30,8 +31,12 @@
         <activity
             android:name=".view.activity.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.activity.RegistrationActivity" />
-        <activity android:name=".view.activity.LoginActivity">
+        <activity
+            android:name=".view.activity.RegistrationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

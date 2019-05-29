@@ -11,4 +11,6 @@
     <string name="alert_dialog_login_error_account_not_confirmed_title">Login failed</string>
     <string name="alert_dialog_login_error_account_not_confirmed_content">Account not confirm. Please check your inbox for a confirmation email.
         Click the link in the email to confirm your email address</string>
+    <string name="alert_dialog_change_password_title">Change password</string>
+    <string name="alert_dialog_change_password_content">To change the password, check your email. Click the link in the email to change your password</string>
 </resources>

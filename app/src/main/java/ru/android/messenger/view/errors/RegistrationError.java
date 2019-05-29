@@ -16,7 +16,6 @@ public enum RegistrationError {
     LOGIN_IS_EXISTS(R.string.registration_activity_error_login_is_exists),
     EMAIL_IS_EXISTS(R.string.registration_activity_error_email_is_exists);
 
-
     private int resourceId;
 
     RegistrationError(int resourceId) {

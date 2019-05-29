@@ -20,6 +20,7 @@ import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.response.FriendStatus;
 import ru.android.messenger.model.dto.response.LoginResponse;
 import ru.android.messenger.model.dto.response.RegistrationResponse;
+import ru.android.messenger.model.dto.response.RestorePasswordResponse;
 
 public interface Repository {
 
@@ -58,6 +59,10 @@ public interface Repository {
     @PATCH("/api/acceptFriendRequest/{login}")
     Call<Void> acceptFriendRequest(@Path("login") String login,
                                    @Query("authenticationToken") String authenticationToken);
+
+    @PATCH("/api/restorePassword")
+    Call<RestorePasswordResponse> restorePassword(@Query("login") String login,
+                                                  @Query("newPassword") String newPassword);
 
     @GET("/api/checkAuthenticationToken/{authenticationToken}")
     Call<Boolean> checkAuthenticationToken(@Path("authenticationToken") String authenticationToken);
