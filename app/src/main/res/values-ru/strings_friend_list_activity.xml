@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="friend_list_activity_friends_fragment_title">Друзья</string>
-    <string name="friend_list_activity_incoming_requests_fragment_title">Входящие запросы</string>
-    <string name="friend_list_activity_outgoing_requests_fragment_title">Исходящие запросы</string>
-</resources>

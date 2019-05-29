@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="content_description_logo">Messenger logo</string>
-    <string name="content_description_user_profile_photo">Profile photo</string>
-    <string name="content_description_upload_photo">Photo upload</string>
-    <string name="content_description_open_blocked_members_list">Open blocked members list</string>
-    <string name="content_description_goto_dialog">Go to dialog</string>
-</resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мессенджер</string>
+
+    <string name="alert_dialog_wait_title">Пожалуйста, подождите…</string>
+    <string name="alert_dialog_connection_failed_title">Подключение прервано</string>
+    <string name="alert_dialog_connection_failed_content">Сервер недоступен или отсутствует интернет-соединение</string>
+    <string name="alert_dialog_registration_successful_title">Регистрация прошла успешно</string>
+    <string name="alert_dialog_registration_successful_content">Пожалуйста, проверьте вашу почту на наличие письма с подтверждением e-mail адреса. Нажмите на ссылку в письме чтобы подтвердить свой e-mail адрес</string>
+    <string name="alert_dialog_login_error_invalid_login_or_password_title">Не удалось авторизоваться</string>
+    <string name="alert_dialog_login_error_invalid_login_or_password_content">Неверный логин или пароль</string>
+    <string name="alert_dialog_login_error_account_not_confirmed_title">Не удалось авторизоваться</string>
+    <string name="alert_dialog_login_error_account_not_confirmed_content">Аккаунт не подтвержден. Пожалуйста, проверьте вашу почту на наличие письма с подтверждением e-mail адреса. Нажмите на ссылку в письме чтобы подтвердить свой e-mail адрес</string>
+    <string name="alert_dialog_change_password_title">Изменение пароля</string>
+    <string name="alert_dialog_change_password_content">Чтобы изменить пароль, проверьте вышу почту. Нажмите на ссылку в письме чтобы изменить ваш пароль</string>
+
+    <string name="content_description_logo">Логотип мессенджера</string>
+    <string name="content_description_user_profile_photo">Фото профиля</string>
+    <string name="content_description_upload_photo">Загрузка фото</string>
+    <string name="content_description_open_blocked_members_list">Открыть список заблокированных пользователей</string>
+    <string name="content_description_goto_dialog">Перейти к диалогу</string>
+
+    <string name="menu_drawer_dialogs">Диалоги</string>
+    <string name="menu_drawer_friends">Друзья</string>
+    <string name="menu_drawer_settings">Настройки</string>
+    <string name="menu_drawer_logout">Выйти из аккаунта</string>
+
+    <string name="friend_list_activity_friends_fragment_title">Друзья</string>
+    <string name="friend_list_activity_incoming_requests_fragment_title">Входящие запросы</string>
+    <string name="friend_list_activity_outgoing_requests_fragment_title">Исходящие запросы</string>
+
+    <string name="login_activity_edit_text_login_hint">Введите логин</string>
+    <string name="login_activity_edit_text_password_hint">Введите пароль</string>
+    <string name="login_activity_button_login_text">Войти</string>
+    <string name="login_activity_text_view_register_text">Ещё нет аккаунта? Создайте аккаунт</string>
+    <string name="login_activity_text_view_restore_password_text">Забыли пароль?</string>
+    <string name="login_activity_error_incorrect_login_length">Логин может быть длиной от 3 до 30 символов</string>
+    <string name="login_activity_error_incorrect_password_length">Пароль может быть длиной от 6 до 100 символов</string>
+
+    <string name="registration_activity_edit_text_first_name_hint">Имя</string>
+    <string name="registration_activity_edit_text_surname_hint">Фамилия</string>
+    <string name="registration_activity_edit_text_email_hint">E-mail</string>
+    <string name="registration_activity_edit_text_login_hint">Придумайте логин</string>
+    <string name="registration_activity_edit_text_password_hint">Придумайте пароль</string>
+    <string name="registration_activity_edit_text_password_confirm_hint">Повторите пароль</string>
+    <string name="registration_activity_button_register_text">Зарегистрироваться</string>
+    <string name="registration_activity_text_view_login_text">Уже есть аккаунт? Войти</string>
+    <string name="registration_activity_error_passwords_do_not_match">Подтверждение не совпадает с паролем</string>
+    <string name="registration_activity_error_incorrect_login_length">Логин может быть длиной от 3 до 30 символов</string>
+    <string name="registration_activity_error_incorrect_first_name_length">Имя может быть длиной от 1 до 50 символов</string>
+    <string name="registration_activity_error_incorrect_surname_length">Фамилия может быть длиной от 1 до 50 символов</string>
+    <string name="registration_activity_error_incorrect_password_length">Пароль может быть длиной от 6 до 100 символов</string>
+    <string name="registration_activity_error_incorrect_email">Некорректный e-mail</string>
+    <string name="registration_activity_error_email_is_exists">К сожалению, e-mail занят</string>
+    <string name="registration_activity_error_login_is_exists">К сожалению, логин занят</string>
+
+    <string name="restore_password_activity_edit_text_login_hint">Введите логин</string>
+    <string name="restore_password_activity_edit_text_password_hint">Введите новый пароль</string>
+    <string name="restore_password_activity_edit_text_password_confirm_hint">Повторите новый пароль</string>
+    <string name="restore_password_activity_button_change_password_text">Сменить пароль</string>
+    <string name="restore_password_activity_error_passwords_do_not_match">Подтверждение не совпадает с паролем</string>
+    <string name="restore_password_activity_error_incorrect_login_length">Логин может быть длиной от 3 до 30 символов</string>
+    <string name="restore_password_activity_error_incorrect_password_length">Пароль может быть длиной от 6 до 100 символов</string>
+    <string name="restore_password_activity_error_user_not_found">Пользователь с таким логином не найден</string>
+
+    <string name="settings_activity_alert_set_profile_image_upload_photo">Загрузить фото</string>
+    <string name="settings_activity_alert_set_profile_image_take_photo">Сфотографировать</string>
+    <string name="settings_activity_alert_set_profile_image_title">Изменение изображения профиля</string>
+    <string name="settings_activity_error_file_not_found">Произошла ошибка при открытии файла. Файл не найден</string>
+    <string name="settings_activity_error_camera_not_found">Невозможно получить доступ к камере</string>
+    <string name="settings_activity_error_writing_bitmap_to_file">Произошла ошибка при обработке фотографии пользователя</string>
+    <string name="settings_activity_enable_notifications_text">Включить уведомления</string>
+    <string name="settings_activity_blocked_members_list_text">Список заблокированных пользователей</string>
+    <string name="settings_activity_clear_cache_and_sign_out_text">Очистить кэш и выйти из аккаунта</string>
+    <string name="settings_activity_alert_clear_cache_yes">Да</string>
+    <string name="settings_activity_alert_clear_cache_no">Нет</string>
+    <string name="settings_activity_alert_clear_cache_title">Мессенджер</string>
+    <string name="settings_activity_alert_clear_cache_message">Вы действительно хотите очистить кэш и выйти из аккаунта?</string>
+    <string name="settings_activity_server_address_text">Адрес сервера:</string>
+
+    <string name="user_info_activity_goto_dialog_text">Перейти к диалогу</string>
+    <string name="user_info_activity_block_text">Заблокировать этого пользователя</string>
+    <string name="user_info_activity_block_hint_text">Когда пользователь заблокирован, он не сможет вести диалог с вами</string>
+    <string name="user_info_friend_status_user_is_not_friend">Пользователь не находится в вашем списке друзей</string>
+    <string name="user_info_friend_status_user_is_friend">Пользователь у вас в друзьях</string>
+    <string name="user_info_friend_status_friend_request_has_been_sent">Заявка в друзья отправлена</string>
+    <string name="user_info_friend_status_friend_incoming_friend_request">Пользователь отправил запрос дружбы</string>
+    <string name="user_info_button_friend_add">Добавить</string>
+    <string name="user_info_button_friend_delete">Удалить</string>
+    <string name="user_info_button_friend_cancel">Отменить</string>
+    <string name="user_info_button_friend_accept">Принять</string>
+</resources>

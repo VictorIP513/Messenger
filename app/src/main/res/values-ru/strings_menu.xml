@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="menu_drawer_dialogs">Диалоги</string>
-    <string name="menu_drawer_friends">Друзья</string>
-    <string name="menu_drawer_settings">Настройки</string>
-    <string name="menu_drawer_logout">Выйти из аккаунта</string>
-</resources>
