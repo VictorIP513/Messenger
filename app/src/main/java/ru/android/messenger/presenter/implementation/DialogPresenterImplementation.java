@@ -13,7 +13,7 @@ import retrofit2.Response;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
-import ru.android.messenger.model.callbacks.DefaultCallback;
+import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.Dialog;
 import ru.android.messenger.model.dto.Message;
 import ru.android.messenger.model.dto.chat.ChatMessage;
@@ -35,15 +35,13 @@ public class DialogPresenterImplementation implements DialogPresenter {
 
     @Override
     public void createDialog(String login, String lastMessageText) {
-        //dialogView.showWaitAlertDialog();
         String authenticationToken =
                 PreferenceManager.getAuthenticationToken(dialogView.getContext());
         repository.createDialog(login, lastMessageText, authenticationToken)
-                .enqueue(new DefaultCallback<Dialog, DialogView>(dialogView) {
+                .enqueue(new CallbackWithoutAlerts<Dialog>() {
                     @Override
                     public void onResponse(@NonNull Call<Dialog> call,
                                            @NonNull Response<Dialog> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             Dialog dialog = Objects.requireNonNull(response.body());
                             dialogId = dialog.getId();
@@ -58,15 +56,13 @@ public class DialogPresenterImplementation implements DialogPresenter {
 
     @Override
     public void sendMessage(String message) {
-        //dialogView.showWaitAlertDialog();
         String authenticationToken =
                 PreferenceManager.getAuthenticationToken(dialogView.getContext());
         repository.sendMessage(dialogId, message, authenticationToken)
-                .enqueue(new DefaultCallback<Message, DialogView>(dialogView) {
+                .enqueue(new CallbackWithoutAlerts<Message>() {
                     @Override
                     public void onResponse(@NonNull Call<Message> call,
                                            @NonNull Response<Message> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             Message responseMessage = Objects.requireNonNull(response.body());
                             ChatMessage chatMessage =
@@ -79,15 +75,13 @@ public class DialogPresenterImplementation implements DialogPresenter {
 
     @Override
     public void fillDialog(String login) {
-        //dialogView.showWaitAlertDialog();
         String authenticationToken =
                 PreferenceManager.getAuthenticationToken(dialogView.getContext());
         repository.getDialog(login, authenticationToken)
-                .enqueue(new DefaultCallback<Dialog, DialogView>(dialogView) {
+                .enqueue(new CallbackWithoutAlerts<Dialog>() {
                     @Override
                     public void onResponse(@NonNull Call<Dialog> call,
                                            @NonNull Response<Dialog> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             Dialog dialog = Objects.requireNonNull(response.body());
                             dialogId = dialog.getId();

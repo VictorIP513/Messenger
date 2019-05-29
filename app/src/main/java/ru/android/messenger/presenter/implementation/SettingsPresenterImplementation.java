@@ -15,7 +15,7 @@ import retrofit2.Response;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
-import ru.android.messenger.model.callbacks.DefaultCallback;
+import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.model.utils.ImageHelper;
@@ -54,15 +54,13 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
             final File photoFile = ImageHelper.writeBitmapToFile(bitmap, context);
             String authenticationToken =
                     PreferenceManager.getAuthenticationToken(settingsView.getContext());
-            settingsView.showWaitAlertDialog();
 
             repository.uploadPhoto(Model.createFileToSend(
                     photoFile, PHOTO_PART_NAME), authenticationToken)
-                    .enqueue(new DefaultCallback<Void, SettingsView>(settingsView) {
+                    .enqueue(new CallbackWithoutAlerts<Void>() {
                         @Override
                         public void onResponse(@NonNull Call<Void> call,
                                                @NonNull Response<Void> response) {
-                            super.onResponse(call, response);
                             if (response.isSuccessful()) {
                                 FileUtils.saveUserPhotoToInternalStorage(photoFile, context);
                                 settingsView.setProfileImage(bitmap);

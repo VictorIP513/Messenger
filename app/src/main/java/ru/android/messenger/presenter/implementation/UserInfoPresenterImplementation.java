@@ -7,6 +7,7 @@ import retrofit2.Response;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
+import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.callbacks.DefaultCallback;
 import ru.android.messenger.model.dto.response.FriendStatus;
 import ru.android.messenger.presenter.UserInfoPresenter;
@@ -24,15 +25,13 @@ public class UserInfoPresenterImplementation implements UserInfoPresenter {
 
     @Override
     public void fillUserFriendStatus(String login) {
-        userInfoView.showWaitAlertDialog();
         String authenticationToken =
                 PreferenceManager.getAuthenticationToken(userInfoView.getContext());
         repository.getFriendStatus(login, authenticationToken)
-                .enqueue(new DefaultCallback<FriendStatus, UserInfoView>(userInfoView) {
+                .enqueue(new CallbackWithoutAlerts<FriendStatus>() {
                     @Override
                     public void onResponse(@NonNull Call<FriendStatus> call,
                                            @NonNull Response<FriendStatus> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             userInfoView.setFriendStatus(response.body());
                         }
@@ -42,15 +41,13 @@ public class UserInfoPresenterImplementation implements UserInfoPresenter {
 
     @Override
     public void addToFriend(String login) {
-        userInfoView.showWaitAlertDialog();
         String authenticationToken =
                 PreferenceManager.getAuthenticationToken(userInfoView.getContext());
         repository.addToFriend(login, authenticationToken)
-                .enqueue(new DefaultCallback<Void, UserInfoView>(userInfoView) {
+                .enqueue(new CallbackWithoutAlerts<Void>() {
                     @Override
                     public void onResponse(@NonNull Call<Void> call,
                                            @NonNull Response<Void> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             userInfoView.setFriendStatus(FriendStatus.FRIEND_REQUEST_HAS_BEEN_SENT);
                         }
@@ -60,15 +57,13 @@ public class UserInfoPresenterImplementation implements UserInfoPresenter {
 
     @Override
     public void deleteFromFriend(String login) {
-        userInfoView.showWaitAlertDialog();
         String authenticationToken =
                 PreferenceManager.getAuthenticationToken(userInfoView.getContext());
         repository.deleteFromFriend(login, authenticationToken)
-                .enqueue(new DefaultCallback<Void, UserInfoView>(userInfoView) {
+                .enqueue(new CallbackWithoutAlerts<Void>() {
                     @Override
                     public void onResponse(@NonNull Call<Void> call,
                                            @NonNull Response<Void> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             userInfoView.setFriendStatus(FriendStatus.USER_IS_NOT_FRIEND);
                         }
@@ -78,15 +73,13 @@ public class UserInfoPresenterImplementation implements UserInfoPresenter {
 
     @Override
     public void acceptFriendRequest(String login) {
-        userInfoView.showWaitAlertDialog();
         String authenticationToken =
                 PreferenceManager.getAuthenticationToken(userInfoView.getContext());
         repository.acceptFriendRequest(login, authenticationToken)
-                .enqueue(new DefaultCallback<Void, UserInfoView>(userInfoView) {
+                .enqueue(new CallbackWithoutAlerts<Void>() {
                     @Override
                     public void onResponse(@NonNull Call<Void> call,
                                            @NonNull Response<Void> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             userInfoView.setFriendStatus(FriendStatus.USER_IS_FRIEND);
                         }

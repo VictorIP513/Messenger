@@ -20,7 +20,7 @@ import ru.android.messenger.R;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
-import ru.android.messenger.model.callbacks.DefaultCallback;
+import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.UserFromView;
 import ru.android.messenger.view.interfaces.ViewWithUsersRecyclerView;
@@ -43,11 +43,10 @@ public class UserUtils {
         userFromViewList.clear();
         for (final User user : users) {
             repository.getUserPhoto(user.getLogin())
-                    .enqueue(new DefaultCallback<ResponseBody, ViewWithUsersRecyclerView>(view) {
+                    .enqueue(new CallbackWithoutAlerts<ResponseBody>() {
                         @Override
                         public void onResponse(@NonNull Call<ResponseBody> call,
                                                @NonNull Response<ResponseBody> response) {
-                            super.onResponse(call, response);
                             File photo = null;
                             if (response.isSuccessful()) {
                                 photo = Objects.requireNonNull(FileUtils.getFileFromResponseBody(

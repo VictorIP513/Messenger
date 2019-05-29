@@ -3,6 +3,7 @@ package ru.android.messenger.view.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import ru.android.messenger.presenter.implementation.FriendsPresenterImplementat
 import ru.android.messenger.view.interfaces.ViewWithUsersRecyclerView;
 import ru.android.messenger.view.utils.recyclerview.RecyclerViewUtils;
 
-public class FriendsFragment extends FragmentWithAlerts implements ViewWithUsersRecyclerView {
+public class FriendsFragment extends Fragment implements ViewWithUsersRecyclerView {
 
     private FriendsPresenter friendsPresenter;
 

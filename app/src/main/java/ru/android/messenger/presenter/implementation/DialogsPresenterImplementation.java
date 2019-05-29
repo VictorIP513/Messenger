@@ -11,7 +11,7 @@ import retrofit2.Response;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
-import ru.android.messenger.model.callbacks.DefaultCallback;
+import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.Dialog;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.chat.ChatDialog;
@@ -32,15 +32,13 @@ public class DialogsPresenterImplementation implements DialogsPresenter {
 
     @Override
     public void fillDialogsList() {
-        //dialogView.showWaitAlertDialog();
         String authenticationToken =
                 PreferenceManager.getAuthenticationToken(dialogsView.getContext());
         repository.getAllDialogs(authenticationToken)
-                .enqueue(new DefaultCallback<List<Dialog>, DialogsView>(dialogsView) {
+                .enqueue(new CallbackWithoutAlerts<List<Dialog>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Dialog>> call,
                                            @NonNull Response<List<Dialog>> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             List<Dialog> dialogs = Objects.requireNonNull(response.body());
                             List<ChatDialog> chatDialogs = getDialogsToView(dialogs);

@@ -10,7 +10,7 @@ import retrofit2.Response;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
-import ru.android.messenger.model.callbacks.DefaultCallback;
+import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.UserUtils;
 import ru.android.messenger.presenter.IncomingRequestsPresenter;
@@ -29,14 +29,12 @@ public class IncomingRequestsPresenterImplementation implements IncomingRequests
 
     @Override
     public void fillIncomingRequestsList() {
-        view.showWaitAlertDialog();
         String authenticationToken = PreferenceManager.getAuthenticationToken(view.getContext());
         repository.getIncomingRequests(authenticationToken)
-                .enqueue(new DefaultCallback<List<User>, ViewWithUsersRecyclerView>(view) {
+                .enqueue(new CallbackWithoutAlerts<List<User>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<User>> call,
                                            @NonNull Response<List<User>> response) {
-                        super.onResponse(call, response);
                         if (response.isSuccessful()) {
                             List<User> users = Objects.requireNonNull(response.body());
                             UserUtils.convertAndSetUsersToView(users, view);
