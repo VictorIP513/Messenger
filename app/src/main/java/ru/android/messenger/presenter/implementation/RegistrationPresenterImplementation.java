@@ -7,6 +7,7 @@ import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Response;
 import ru.android.messenger.model.Model;
+import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.api.ApiUtils;
 import ru.android.messenger.model.callbacks.DefaultCallback;
@@ -57,6 +58,7 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
 
     private void processRegistrationResponse(Response<RegistrationResponse> response) {
         if (response.isSuccessful()) {
+            PreferenceManager.setLastLogin(registrationView.getContext(), null);
             registrationView.showSuccessRegistrationAlert();
         } else {
             RegistrationResponse registrationResponse = ApiUtils.getJsonFromResponseBody(

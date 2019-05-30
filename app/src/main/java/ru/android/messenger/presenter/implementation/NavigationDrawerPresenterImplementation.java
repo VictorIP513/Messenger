@@ -32,6 +32,6 @@ public class NavigationDrawerPresenterImplementation implements NavigationDrawer
 
     @Override
     public void logout() {
-        PreferenceManager.clearAllPreferences(navigationDrawerView.getContext());
+        PreferenceManager.clearPreferencesWithoutLastLogin(navigationDrawerView.getContext());
     }
 }

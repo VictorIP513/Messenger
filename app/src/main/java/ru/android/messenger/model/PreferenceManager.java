@@ -8,6 +8,7 @@ import ru.android.messenger.model.dto.User;
 public class PreferenceManager {
 
     private static final String AUTHENTICATION_TOKEN_KEY = "authenticationToken";
+    private static final String LAST_LOGIN_KEY = "lastLogin";
     private static final String LOGIN_KEY = "login";
     private static final String EMAIL_KEY = "email";
     private static final String USER_FIRST_NAME_KEY = "userFirstName";
@@ -29,6 +30,18 @@ public class PreferenceManager {
     public static String getAuthenticationToken(Context context) {
         SharedPreferences sharedPreferences = getSharedPreferences(context);
         return sharedPreferences.getString(AUTHENTICATION_TOKEN_KEY, null);
+    }
+
+    public static void setLastLogin(Context context, String lastLogin) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(LAST_LOGIN_KEY, lastLogin);
+        editor.apply();
+    }
+
+    public static String getLastLogin(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        return sharedPreferences.getString(LAST_LOGIN_KEY, null);
     }
 
     public static void setLogin(Context context, String login) {
@@ -61,6 +74,12 @@ public class PreferenceManager {
         user.setFirstName(sharedPreferences.getString(USER_FIRST_NAME_KEY, null));
         user.setSurname(sharedPreferences.getString(USER_SURNAME_KEY, null));
         return user;
+    }
+
+    public static void clearPreferencesWithoutLastLogin(Context context) {
+        String lastLogin = getLastLogin(context);
+        clearAllPreferences(context);
+        setLastLogin(context, lastLogin);
     }
 
     public static void clearAllPreferences(Context context) {

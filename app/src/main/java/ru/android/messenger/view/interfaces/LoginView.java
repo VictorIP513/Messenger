@@ -11,4 +11,6 @@ public interface LoginView extends ViewWithAlerts {
     void setAccountNotConfirmedError();
 
     void changeToMainActivity();
+
+    void setLogin(String login);
 }

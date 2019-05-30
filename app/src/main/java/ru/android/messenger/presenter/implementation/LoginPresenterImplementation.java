@@ -67,6 +67,12 @@ public class LoginPresenterImplementation implements LoginPresenter {
         }
     }
 
+    @Override
+    public void fillLastLogin() {
+        String login = PreferenceManager.getLastLogin(loginView.getContext());
+        loginView.setLogin(login);
+    }
+
     private void processCheckAuthenticationTokenResponse(Response<Boolean> response) {
         if (response.isSuccessful()) {
             boolean isCorrectAuthenticationToken = Objects.requireNonNull(response.body());
@@ -83,6 +89,7 @@ public class LoginPresenterImplementation implements LoginPresenter {
             String authenticationToken = loginResponse.getAuthenticationToken();
             PreferenceManager.setAuthenticationToken(loginView.getContext(), authenticationToken);
             PreferenceManager.setLogin(loginView.getContext(), login);
+            PreferenceManager.setLastLogin(loginView.getContext(), login);
             loadUserDataFromServer();
             loginView.changeToMainActivity();
         } else {

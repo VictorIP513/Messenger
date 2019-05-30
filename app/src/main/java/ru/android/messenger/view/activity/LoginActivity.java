@@ -33,6 +33,7 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
 
         findViews();
         configureViews();
+        loginPresenter.fillLastLogin();
         autoLogin();
     }
 
@@ -73,6 +74,11 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
         startActivity(intent);
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         finish();
+    }
+
+    @Override
+    public void setLogin(String login) {
+        editTextLogin.setText(login);
     }
 
     public void textViewRegisterClick(View view) {
