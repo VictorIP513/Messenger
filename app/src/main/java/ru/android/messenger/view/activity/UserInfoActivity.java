@@ -16,7 +16,7 @@ import ru.android.messenger.presenter.implementation.UserInfoPresenterImplementa
 import ru.android.messenger.view.interfaces.UserInfoView;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
-public class UserInfoActivity extends ActivityWithAlerts implements UserInfoView {
+public class UserInfoActivity extends ActivityWithNavigationDrawer implements UserInfoView {
 
     private static final String LOGIN_PREFIX = "@";
     private static final int BUTTON_FRIEND_ADD_COLOR = 0xFF03A9F4;
@@ -41,7 +41,7 @@ public class UserInfoActivity extends ActivityWithAlerts implements UserInfoView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
+        super.init(R.layout.activity_user_info);
 
         userInfoPresenter = new UserInfoPresenterImplementation(this);
 
