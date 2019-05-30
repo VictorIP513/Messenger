@@ -58,7 +58,7 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
             case LOGIN_IS_EXISTS:
                 textInputLayoutLogin.setError(errorText);
                 break;
-            case INCORRECT_PASSWORD_LENGTH:
+            case INCORRECT_PASSWORD:
                 textInputLayoutPassword.setError(errorText);
                 break;
             case INCORRECT_FIRST_NAME_LENGTH:

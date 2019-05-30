@@ -35,7 +35,7 @@
     <string name="login_activity_text_view_register_text">Ещё нет аккаунта? Создайте аккаунт</string>
     <string name="login_activity_text_view_restore_password_text">Забыли пароль?</string>
     <string name="login_activity_error_incorrect_login_length">Логин может быть длиной от 3 до 30 символов</string>
-    <string name="login_activity_error_incorrect_password_length">Пароль может быть длиной от 6 до 100 символов</string>
+    <string name="login_activity_error_incorrect_password">Пароль может быть длиной от 6 до 100 символов, включая цифры и строчные буквы</string>
 
     <string name="registration_activity_edit_text_first_name_hint">Имя</string>
     <string name="registration_activity_edit_text_surname_hint">Фамилия</string>
@@ -49,7 +49,7 @@
     <string name="registration_activity_error_incorrect_login_length">Логин может быть длиной от 3 до 30 символов</string>
     <string name="registration_activity_error_incorrect_first_name_length">Имя может быть длиной от 1 до 50 символов</string>
     <string name="registration_activity_error_incorrect_surname_length">Фамилия может быть длиной от 1 до 50 символов</string>
-    <string name="registration_activity_error_incorrect_password_length">Пароль может быть длиной от 6 до 100 символов</string>
+    <string name="registration_activity_error_incorrect_password">Пароль может быть длиной от 6 до 100 символов, включая цифры и строчные буквы</string>
     <string name="registration_activity_error_incorrect_email">Некорректный e-mail</string>
     <string name="registration_activity_error_email_is_exists">К сожалению, e-mail занят</string>
     <string name="registration_activity_error_login_is_exists">К сожалению, логин занят</string>
@@ -60,7 +60,7 @@
     <string name="restore_password_activity_button_change_password_text">Сменить пароль</string>
     <string name="restore_password_activity_error_passwords_do_not_match">Подтверждение не совпадает с паролем</string>
     <string name="restore_password_activity_error_incorrect_login_length">Логин может быть длиной от 3 до 30 символов</string>
-    <string name="restore_password_activity_error_incorrect_password_length">Пароль может быть длиной от 6 до 100 символов</string>
+    <string name="restore_password_activity_error_incorrect_password">Пароль может быть длиной от 6 до 100 символов, включая цифры и строчные буквы</string>
     <string name="restore_password_activity_error_user_not_found">Пользователь с таким логином не найден</string>
 
     <string name="settings_activity_alert_set_profile_image_upload_photo">Загрузить фото</string>

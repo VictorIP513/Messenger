@@ -103,8 +103,8 @@ public class LoginPresenterImplementation implements LoginPresenter {
             loginView.setLoginError(LoginError.INCORRECT_LOGIN_LENGTH);
             isValidData = false;
         }
-        if (!DataValidator.isCorrectPasswordLength(password)) {
-            loginView.setLoginError(LoginError.INCORRECT_PASSWORD_LENGTH);
+        if (!DataValidator.isCorrectPassword(password)) {
+            loginView.setLoginError(LoginError.INCORRECT_PASSWORD);
             isValidData = false;
         }
         return isValidData;

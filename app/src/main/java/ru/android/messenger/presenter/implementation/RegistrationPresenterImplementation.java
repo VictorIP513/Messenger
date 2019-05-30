@@ -77,8 +77,8 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
             registrationView.setRegistrationError(RegistrationError.INCORRECT_LOGIN_LENGTH);
             isValidData = false;
         }
-        if (!DataValidator.isCorrectPasswordLength(password)) {
-            registrationView.setRegistrationError(RegistrationError.INCORRECT_PASSWORD_LENGTH);
+        if (!DataValidator.isCorrectPassword(password)) {
+            registrationView.setRegistrationError(RegistrationError.INCORRECT_PASSWORD);
             isValidData = false;
         }
         if (!DataValidator.isCorrectEmail(email)) {

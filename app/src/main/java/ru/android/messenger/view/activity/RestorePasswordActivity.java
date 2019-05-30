@@ -49,7 +49,7 @@ public class RestorePasswordActivity extends ActivityWithAlerts implements Resto
             case USER_NOT_FOUND:
                 textInputLayoutLogin.setError(errorText);
                 break;
-            case INCORRECT_PASSWORD_LENGTH:
+            case INCORRECT_PASSWORD:
                 textInputLayoutPassword.setError(errorText);
                 break;
             default:

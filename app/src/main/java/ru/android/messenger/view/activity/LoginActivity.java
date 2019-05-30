@@ -43,7 +43,7 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
             case INCORRECT_LOGIN_LENGTH:
                 textInputLayoutLogin.setError(errorText);
                 break;
-            case INCORRECT_PASSWORD_LENGTH:
+            case INCORRECT_PASSWORD:
                 textInputLayoutPassword.setError(errorText);
                 break;
             default:

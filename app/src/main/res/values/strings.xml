@@ -35,7 +35,7 @@
     <string name="login_activity_text_view_register_text">No account yet? Create an account</string>
     <string name="login_activity_text_view_restore_password_text">Forgot your password?</string>
     <string name="login_activity_error_incorrect_login_length">Login can be from 3 to 30 characters long</string>
-    <string name="login_activity_error_incorrect_password_length">Password can be from 6 to 100 characters long</string>
+    <string name="login_activity_error_incorrect_password">Password can be from 6 to 100 characters long including a number and a lowercase letter</string>
 
     <string name="registration_activity_edit_text_first_name_hint">First name</string>
     <string name="registration_activity_edit_text_surname_hint">Surname</string>
@@ -49,7 +49,7 @@
     <string name="registration_activity_error_incorrect_login_length">Login can be from 3 to 30 characters long</string>
     <string name="registration_activity_error_incorrect_first_name_length">First name can be from 1 to 50 characters long</string>
     <string name="registration_activity_error_incorrect_surname_length">Surname can be from 1 to 50 characters long</string>
-    <string name="registration_activity_error_incorrect_password_length">Password can be from 6 to 100 characters long</string>
+    <string name="registration_activity_error_incorrect_password">Password can be from 6 to 100 characters long including a number and a lowercase letter</string>
     <string name="registration_activity_error_incorrect_email">E-mail is invalid</string>
     <string name="registration_activity_error_email_is_exists">Sorry, this e-mail is already registered</string>
     <string name="registration_activity_error_login_is_exists">Sorry, this login is already registered</string>
@@ -60,7 +60,7 @@
     <string name="restore_password_activity_button_change_password_text">Change password</string>
     <string name="restore_password_activity_error_passwords_do_not_match">The passwords do not match</string>
     <string name="restore_password_activity_error_incorrect_login_length">Login can be from 3 to 30 characters long</string>
-    <string name="restore_password_activity_error_incorrect_password_length">Password can be from 6 to 100 characters long</string>
+    <string name="restore_password_activity_error_incorrect_password">Password can be from 6 to 100 characters long including a number and a lowercase letter</string>
     <string name="restore_password_activity_error_user_not_found">User with this login not found</string>
 
     <string name="settings_activity_alert_set_profile_image_upload_photo">Upload a photo</string>

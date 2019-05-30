@@ -66,9 +66,9 @@ public class RestorePasswordPresenterImplementation implements RestorePasswordPr
             restorePasswordView.setRestorePasswordError(RestorePasswordError.INCORRECT_LOGIN_LENGTH);
             isValidData = false;
         }
-        if (!DataValidator.isCorrectPasswordLength(password)) {
+        if (!DataValidator.isCorrectPassword(password)) {
             restorePasswordView.setRestorePasswordError(
-                    RestorePasswordError.INCORRECT_PASSWORD_LENGTH);
+                    RestorePasswordError.INCORRECT_PASSWORD);
             isValidData = false;
         }
         return isValidData;
