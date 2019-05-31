@@ -15,4 +15,8 @@ public class ApiUtils {
     public static <T> T getJsonFromResponseBody(ResponseBody responseBody, Class<T> type) {
         return GSON.fromJson(responseBody.charStream(), type);
     }
+
+    public static <T> T getObjectFromJson(String json, Class<T> type) {
+        return GSON.fromJson(json, type);
+    }
 }

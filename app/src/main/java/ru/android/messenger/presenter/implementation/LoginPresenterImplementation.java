@@ -2,6 +2,8 @@ package ru.android.messenger.presenter.implementation;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.io.File;
 import java.util.Objects;
 
@@ -90,6 +92,7 @@ public class LoginPresenterImplementation implements LoginPresenter {
             PreferenceManager.setAuthenticationToken(loginView.getContext(), authenticationToken);
             PreferenceManager.setLogin(loginView.getContext(), login);
             PreferenceManager.setLastLogin(loginView.getContext(), login);
+            FirebaseMessaging.getInstance().subscribeToTopic(login);
             loadUserDataFromServer();
             loginView.changeToMainActivity();
         } else {
