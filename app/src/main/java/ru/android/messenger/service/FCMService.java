@@ -8,7 +8,6 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.io.File;
-import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
 
@@ -69,8 +68,7 @@ public class FCMService extends FirebaseMessagingService {
         User sender = message.getUser();
         String title = sender.getFirstName() + " " + sender.getSurname();
         String content = message.getText();
-        Date date = message.getDate();
         Notifications.showNewMessageNotification(
-                getApplicationContext(), title, content, bitmap, date);
+                this, title, content, bitmap);
     }
 }
