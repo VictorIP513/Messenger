@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -78,6 +80,12 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
         Context context = settingsView.getContext();
         FileUtils.deleteCache(context);
         PreferenceManager.clearAllPreferences(context);
+    }
+
+    @Override
+    public void logout() {
+        String login = PreferenceManager.getLogin(settingsView.getContext());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(login);
     }
 
     @Override
