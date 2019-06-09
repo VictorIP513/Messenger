@@ -28,6 +28,7 @@ import ru.android.messenger.model.utils.ChatUtils;
 import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.model.utils.ImageHelper;
 import ru.android.messenger.view.activity.DialogActivity;
+import ru.android.messenger.view.activity.DialogsActivity;
 import ru.android.messenger.view.notifications.Notifications;
 
 public class FCMService extends FirebaseMessagingService {
@@ -49,6 +50,9 @@ public class FCMService extends FirebaseMessagingService {
                 if (activity instanceof DialogActivity) {
                     setNewMessageToDialog((DialogActivity) activity, message);
                 } else {
+                    if (activity instanceof DialogsActivity) {
+                        ((DialogsActivity) activity).updateDialogs();
+                    }
                     sendMessageNotification(message);
                 }
             }

@@ -48,6 +48,10 @@ public class DialogsActivity extends ActivityWithNavigationDrawer implements Dia
         initAdapter();
     }
 
+    public void updateDialogs() {
+        dialogsPresenter.fillDialogsList();
+    }
+
     private void findViews() {
         dialogsList = findViewById(R.id.dialogs_list);
     }
