@@ -9,4 +9,6 @@ public interface DialogView extends ViewWithAlerts {
     void setNewMessage(ChatMessage message);
 
     void setMessageList(List<ChatMessage> messageList);
+
+    String getUserLogin();
 }

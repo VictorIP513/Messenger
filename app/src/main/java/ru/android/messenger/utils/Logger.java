@@ -17,4 +17,8 @@ public class Logger {
     public static void warning(String message) {
         Log.w(TAG, message);
     }
+
+    public static void debug(String message) {
+        Log.d(TAG, message);
+    }
 }

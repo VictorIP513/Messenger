@@ -46,13 +46,23 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
     }
 
     @Override
-    public void setNewMessage(ChatMessage message) {
-        messagesAdapter.addToStart(message, true);
+    public void setNewMessage(final ChatMessage message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                messagesAdapter.addToStart(message, true);
+            }
+        });
     }
 
     @Override
     public void setMessageList(List<ChatMessage> messageList) {
         messagesAdapter.addToEnd(messageList, false);
+    }
+
+    @Override
+    public String getUserLogin() {
+        return userLogin;
     }
 
     private void findViews() {
