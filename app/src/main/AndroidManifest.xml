@@ -24,7 +24,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.activity.UserInfoActivity" />
         <activity
-            android:name=".view.activity.DialogsActivity"
+            android:name=".view.activity.DialogListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.activity.FriendListActivity"

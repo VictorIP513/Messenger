@@ -1,6 +1,6 @@
 package ru.android.messenger.presenter;
 
-public interface DialogsPresenter {
+public interface DialogListPresenter {
 
     void fillDialogsList();
 }

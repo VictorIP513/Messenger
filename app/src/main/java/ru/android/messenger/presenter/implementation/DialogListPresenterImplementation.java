@@ -20,15 +20,15 @@ import ru.android.messenger.model.dto.chat.ChatDialog;
 import ru.android.messenger.model.dto.chat.ChatMessage;
 import ru.android.messenger.model.utils.ChatUtils;
 import ru.android.messenger.model.utils.UserUtils;
-import ru.android.messenger.presenter.DialogsPresenter;
+import ru.android.messenger.presenter.DialogListPresenter;
 import ru.android.messenger.view.interfaces.DialogsView;
 
-public class DialogsPresenterImplementation implements DialogsPresenter {
+public class DialogListPresenterImplementation implements DialogListPresenter {
 
     private DialogsView dialogsView;
     private Repository repository;
 
-    public DialogsPresenterImplementation(DialogsView dialogsView) {
+    public DialogListPresenterImplementation(DialogsView dialogsView) {
         this.dialogsView = dialogsView;
         repository = Model.getRepository();
     }

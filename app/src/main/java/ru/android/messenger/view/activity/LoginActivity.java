@@ -70,7 +70,7 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
 
     @Override
     public void changeToMainActivity() {
-        Intent intent = new Intent(this, DialogsActivity.class);
+        Intent intent = new Intent(this, DialogListActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         finish();

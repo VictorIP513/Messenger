@@ -14,14 +14,14 @@ import java.util.List;
 
 import ru.android.messenger.R;
 import ru.android.messenger.model.dto.chat.ChatDialog;
-import ru.android.messenger.presenter.DialogsPresenter;
-import ru.android.messenger.presenter.implementation.DialogsPresenterImplementation;
+import ru.android.messenger.presenter.DialogListPresenter;
+import ru.android.messenger.presenter.implementation.DialogListPresenterImplementation;
 import ru.android.messenger.view.interfaces.DialogsView;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
-public class DialogsActivity extends ActivityWithNavigationDrawer implements DialogsView {
+public class DialogListActivity extends ActivityWithNavigationDrawer implements DialogsView {
 
-    private DialogsPresenter dialogsPresenter;
+    private DialogListPresenter dialogListPresenter;
 
     private ImageLoader imageLoader;
     private DialogsListAdapter<ChatDialog> dialogsAdapter;
@@ -33,13 +33,13 @@ public class DialogsActivity extends ActivityWithNavigationDrawer implements Dia
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.init(R.layout.activity_dialogs);
+        super.init(R.layout.activity_dialog_list);
 
-        dialogsPresenter = new DialogsPresenterImplementation(this);
+        dialogListPresenter = new DialogListPresenterImplementation(this);
 
         findViews();
         createImageLoader();
-        dialogsPresenter.fillDialogsList();
+        dialogListPresenter.fillDialogsList();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class DialogsActivity extends ActivityWithNavigationDrawer implements Dia
     }
 
     public void updateDialogs() {
-        dialogsPresenter.fillDialogsList();
+        dialogListPresenter.fillDialogsList();
     }
 
     private void findViews() {
@@ -87,7 +87,7 @@ public class DialogsActivity extends ActivityWithNavigationDrawer implements Dia
             @Override
             public void loadImage(ImageView imageView,
                                   @Nullable String url, @Nullable Object payload) {
-                Picasso.with(DialogsActivity.this)
+                Picasso.with(DialogListActivity.this)
                         .load(url)
                         .error(R.drawable.profile_thumbnail)
                         .into(imageView);

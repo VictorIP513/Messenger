@@ -71,7 +71,7 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
                         int id = menuItem.getItemId();
                         switch (id) {
                             case R.id.navigation_drawer_dialogs:
-                                activityToStart = DialogsActivity.class;
+                                activityToStart = DialogListActivity.class;
                                 break;
                             case R.id.navigation_drawer_friends:
                                 activityToStart = FriendListActivity.class;
