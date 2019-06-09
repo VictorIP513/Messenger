@@ -1,5 +1,8 @@
 package ru.android.messenger.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.File;
 
 import okhttp3.MediaType;
@@ -15,10 +18,13 @@ public class Model {
 
     private static final String SERVER_IP = "37.192.145.83:8080";
     private static final String SERVER_URL = "http://" + SERVER_IP;
+    private static final String JSON_DATE_FORMAT = "dd MMM yyyy HH:mm:ss";
 
     private static Repository repository;
 
     static {
+        Gson gson = createGson();
+
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
@@ -28,7 +34,7 @@ public class Model {
                 .baseUrl(SERVER_URL)
                 .client(client)
                 .addConverterFactory(StringConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         repository = retrofit.create(Repository.class);
     }
@@ -52,5 +58,11 @@ public class Model {
     public static MultipartBody.Part createFileToSend(File file, String partName) {
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
+    }
+
+    public static Gson createGson() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat(JSON_DATE_FORMAT);
+        return gsonBuilder.create();
     }
 }

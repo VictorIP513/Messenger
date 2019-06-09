@@ -20,7 +20,7 @@ public class ChatUtils {
     public static ChatMessage convertMessageToChatMessage(Message message) {
         String id = String.valueOf(message.getId());
         String text = message.getText();
-        Date createdAt = message.getDate();
+        Date createdAt = DateUtils.convertUTCToLocalDate(message.getDate());
         ChatUser chatUser = convertUserToChatUser(message.getUser());
         return new ChatMessage(id, text, createdAt, chatUser);
     }
