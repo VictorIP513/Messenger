@@ -3,6 +3,8 @@ package ru.android.messenger.presenter.implementation;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +17,7 @@ import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.Dialog;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.chat.ChatDialog;
+import ru.android.messenger.model.dto.chat.ChatMessage;
 import ru.android.messenger.model.utils.ChatUtils;
 import ru.android.messenger.model.utils.UserUtils;
 import ru.android.messenger.presenter.DialogsPresenter;
@@ -66,6 +69,18 @@ public class DialogsPresenterImplementation implements DialogsPresenter {
                 }
             }
         }
+        sortDialogsByTime(chatDialogs);
         return chatDialogs;
+    }
+
+    private void sortDialogsByTime(List<ChatDialog> chatDialogs) {
+        Collections.sort(chatDialogs, new Comparator<ChatDialog>() {
+            @Override
+            public int compare(ChatDialog o1, ChatDialog o2) {
+                ChatMessage firstLastMessage = o1.getLastMessage();
+                ChatMessage secondLastMessage = o2.getLastMessage();
+                return secondLastMessage.getCreatedAt().compareTo(firstLastMessage.getCreatedAt());
+            }
+        });
     }
 }
