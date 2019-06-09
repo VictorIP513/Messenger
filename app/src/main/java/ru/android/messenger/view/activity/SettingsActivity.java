@@ -123,8 +123,8 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
     }
 
     private void deleteCacheAndBackToLoginActivity() {
-        settingsPresenter.deleteCache();
         settingsPresenter.logout();
+        settingsPresenter.deleteCache();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
