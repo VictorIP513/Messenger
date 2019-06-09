@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
     private TextView textViewLogin;
     private TextView textViewEmail;
     private TextView textViewServerAddress;
+    private SwitchCompat switchNotifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
         settingsPresenter = new SettingsPresenterImplementation(this);
 
         findViews();
+        configureNotificationsSwitch();
         fillUserInformation();
         fillServerAddress();
     }
@@ -136,6 +140,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
         textViewLogin = findViewById(R.id.text_view_login);
         textViewEmail = findViewById(R.id.text_view_email);
         textViewServerAddress = findViewById(R.id.text_view_server_address);
+        switchNotifications = findViewById(R.id.switch_notifications);
     }
 
     private void uploadPhoto() {
@@ -179,5 +184,16 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
         String fullText =
                 getString(R.string.settings_activity_server_address_text) + " " + serverAddress;
         textViewServerAddress.setText(fullText);
+    }
+
+    private void configureNotificationsSwitch() {
+        boolean isEnabledNotifications = settingsPresenter.isEnabledNotifications();
+        switchNotifications.setChecked(isEnabledNotifications);
+        switchNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                settingsPresenter.enableNotifications(isChecked);
+            }
+        });
     }
 }

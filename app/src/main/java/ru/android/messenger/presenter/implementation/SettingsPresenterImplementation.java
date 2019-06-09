@@ -104,4 +104,15 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
     public String getServerAddress() {
         return Model.getServerIp();
     }
+
+    @Override
+    public void enableNotifications(boolean value) {
+        PreferenceManager.setEnabledNotifications(settingsView.getContext(), value);
+    }
+
+    @Override
+    public boolean isEnabledNotifications() {
+        Context context = settingsView.getContext();
+        return PreferenceManager.isEnabledNotifications(context);
+    }
 }

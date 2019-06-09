@@ -13,6 +13,7 @@ public class PreferenceManager {
     private static final String EMAIL_KEY = "email";
     private static final String USER_FIRST_NAME_KEY = "userFirstName";
     private static final String USER_SURNAME_KEY = "userSurname";
+    private static final String ENABLED_NOTIFICATIONS_KEY = "enabledNotifications";
 
     private static final String GLOBAL_SHARED_PREFERENCES_FILE = "application_preferences";
 
@@ -74,6 +75,18 @@ public class PreferenceManager {
         user.setFirstName(sharedPreferences.getString(USER_FIRST_NAME_KEY, null));
         user.setSurname(sharedPreferences.getString(USER_SURNAME_KEY, null));
         return user;
+    }
+
+    public static void setEnabledNotifications(Context context, boolean value) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(ENABLED_NOTIFICATIONS_KEY, value);
+        editor.apply();
+    }
+
+    public static boolean isEnabledNotifications(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        return sharedPreferences.getBoolean(ENABLED_NOTIFICATIONS_KEY, true);
     }
 
     public static void clearPreferencesWithoutLastLogin(Context context) {

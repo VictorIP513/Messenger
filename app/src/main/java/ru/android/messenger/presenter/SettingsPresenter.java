@@ -16,4 +16,8 @@ public interface SettingsPresenter {
     Bitmap getBitmapFromUri(Uri uri);
 
     String getServerAddress();
+
+    void enableNotifications(boolean value);
+
+    boolean isEnabledNotifications();
 }
