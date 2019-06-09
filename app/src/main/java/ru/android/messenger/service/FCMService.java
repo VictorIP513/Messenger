@@ -92,6 +92,7 @@ public class FCMService extends FirebaseMessagingService {
         User sender = message.getUser();
         String title = sender.getFirstName() + " " + sender.getSurname();
         String content = message.getText();
-        Notifications.showNewMessageNotification(this, title, content, bitmap);
+        String userLogin = message.getUser().getLogin();
+        Notifications.showNewMessageNotification(this, title, content, bitmap, userLogin);
     }
 }

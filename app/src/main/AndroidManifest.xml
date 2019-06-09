@@ -21,6 +21,7 @@
         <activity android:name=".view.activity.RestorePasswordActivity" />
         <activity
             android:name=".view.activity.DialogActivity"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.activity.UserInfoActivity" />
         <activity
