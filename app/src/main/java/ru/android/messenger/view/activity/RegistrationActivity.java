@@ -3,6 +3,7 @@ package ru.android.messenger.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -31,6 +32,7 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
     private EditText editTextLogin;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,14 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
         setContentView(R.layout.activity_registration);
 
         registrationPresenter = new RegistrationPresenterImplementation(this);
-
         findViews();
         configureViews();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
@@ -122,6 +129,7 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
         editTextLogin = findViewById(R.id.edit_text_login);
         editTextPassword = findViewById(R.id.edit_text_password);
         editTextConfirmPassword = findViewById(R.id.edit_text_confirm_password);
+        toolbar = findViewById(R.id.toolbar);
     }
 
     private void configureViews() {
@@ -134,5 +142,7 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
         ViewUtils.clearErrorInTextInputLayoutOnChangeText(
                 textInputLayoutFirstName, editTextFirstName);
 
+        String actionBarTitle = getString(R.string.registration_activity_action_bar_title);
+        ViewUtils.createActionBarWithBackButtonForActivity(this, toolbar, actionBarTitle);
     }
 }

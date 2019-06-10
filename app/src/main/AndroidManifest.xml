@@ -18,7 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".view.activity.RestorePasswordActivity" />
+        <activity
+            android:name=".view.activity.RestorePasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.activity.DialogActivity"
             android:launchMode="singleTop"
@@ -47,7 +49,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.FCMService">
+        <service
+            android:name=".service.FCMService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

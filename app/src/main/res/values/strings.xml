@@ -63,6 +63,7 @@
     <string name="registration_activity_error_incorrect_email">E-mail is invalid</string>
     <string name="registration_activity_error_email_is_exists">Sorry, this e-mail is already registered</string>
     <string name="registration_activity_error_login_is_exists">Sorry, this login is already registered</string>
+    <string name="registration_activity_action_bar_title">Registration</string>
 
     <string name="restore_password_activity_edit_text_login_hint">Enter a login</string>
     <string name="restore_password_activity_edit_text_password_hint">Enter a new password</string>
@@ -72,6 +73,7 @@
     <string name="restore_password_activity_error_incorrect_login_length">Login can be from 3 to 30 characters long</string>
     <string name="restore_password_activity_error_incorrect_password">Password can be from 6 to 100 characters long including a number and a lowercase letter</string>
     <string name="restore_password_activity_error_user_not_found">User with this login not found</string>
+    <string name="restore_password_activity_action_bar_title">Change password</string>
 
     <string name="settings_activity_alert_set_profile_image_upload_photo">Upload a photo</string>
     <string name="settings_activity_alert_set_profile_image_take_photo">Take a photo</string>

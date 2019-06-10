@@ -63,6 +63,7 @@
     <string name="registration_activity_error_incorrect_email">Некорректный e-mail</string>
     <string name="registration_activity_error_email_is_exists">К сожалению, e-mail занят</string>
     <string name="registration_activity_error_login_is_exists">К сожалению, логин занят</string>
+    <string name="registration_activity_action_bar_title">Регистрация</string>
 
     <string name="restore_password_activity_edit_text_login_hint">Введите логин</string>
     <string name="restore_password_activity_edit_text_password_hint">Введите новый пароль</string>
@@ -72,6 +73,7 @@
     <string name="restore_password_activity_error_incorrect_login_length">Логин может быть длиной от 3 до 30 символов</string>
     <string name="restore_password_activity_error_incorrect_password">Пароль может быть длиной от 6 до 100 символов, включая цифры и строчные буквы</string>
     <string name="restore_password_activity_error_user_not_found">Пользователь с таким логином не найден</string>
+    <string name="restore_password_activity_action_bar_title">Изменение пароля</string>
 
     <string name="settings_activity_alert_set_profile_image_upload_photo">Загрузить фото</string>
     <string name="settings_activity_alert_set_profile_image_take_photo">Сфотографировать</string>

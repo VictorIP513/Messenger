@@ -3,6 +3,7 @@ package ru.android.messenger.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -25,6 +26,7 @@ public class RestorePasswordActivity extends ActivityWithAlerts implements Resto
     private EditText editTextLogin;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,12 @@ public class RestorePasswordActivity extends ActivityWithAlerts implements Resto
 
         findViews();
         configureViews();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
@@ -93,6 +101,7 @@ public class RestorePasswordActivity extends ActivityWithAlerts implements Resto
         editTextLogin = findViewById(R.id.edit_text_login);
         editTextPassword = findViewById(R.id.edit_text_password);
         editTextConfirmPassword = findViewById(R.id.edit_text_confirm_password);
+        toolbar = findViewById(R.id.toolbar);
     }
 
     private void configureViews() {
@@ -100,5 +109,8 @@ public class RestorePasswordActivity extends ActivityWithAlerts implements Resto
         ViewUtils.clearErrorInTextInputLayoutOnChangeText(textInputLayoutPassword, editTextPassword);
         ViewUtils.clearErrorInTextInputLayoutOnChangeText(
                 textInputLayoutConfirmPassword, editTextConfirmPassword);
+
+        String actionBarTitle = getString(R.string.restore_password_activity_action_bar_title);
+        ViewUtils.createActionBarWithBackButtonForActivity(this, toolbar, actionBarTitle);
     }
 }
