@@ -14,6 +14,16 @@
     <string name="alert_dialog_change_password_title">Изменение пароля</string>
     <string name="alert_dialog_change_password_content">Чтобы изменить пароль, проверьте вышу почту. Нажмите на ссылку в письме чтобы изменить ваш пароль</string>
 
+    <string name="notification_accept_friend_request_title">Ваша заявка принята</string>
+    <string name="notification_accept_friend_request_body">принял вашу заявку в друзья</string>
+    <string name="notification_new_friend_title">Новая заявка в друзья</string>
+    <string name="notification_new_friend_body">хочет добавить вас в друзья</string>
+    <string name="notification_button_add_text">Добавить</string>
+    <string name="notification_button_cancel_text">Отмена</string>
+
+    <string name="toast_add_friend_error">Произошла ошибка при добавлении в друзья</string>
+    <string name="toast_cancel_add_friend_error">Произошла ошибка при отмене запроса дружбы</string>
+
     <string name="content_description_logo">Логотип мессенджера</string>
     <string name="content_description_user_profile_photo">Фото профиля</string>
     <string name="content_description_upload_photo">Загрузка фото</string>

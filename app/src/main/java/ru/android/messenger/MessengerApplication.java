@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.android.messenger.utils.Logger;
+import ru.android.messenger.view.notifications.NotificationChannels;
 
 public class MessengerApplication extends Application
         implements Application.ActivityLifecycleCallbacks {
@@ -19,6 +20,7 @@ public class MessengerApplication extends Application
     public void onCreate() {
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
+        createNotificationChannels();
 
         activities = new ArrayList<>();
     }
@@ -68,5 +70,9 @@ public class MessengerApplication extends Application
     @Nullable
     public Activity getCurrentActivity() {
         return activities.isEmpty() ? null : activities.get(0);
+    }
+
+    private void createNotificationChannels() {
+        new NotificationChannels(this);
     }
 }

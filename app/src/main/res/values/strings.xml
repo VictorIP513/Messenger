@@ -14,6 +14,16 @@
     <string name="alert_dialog_change_password_title">Change password</string>
     <string name="alert_dialog_change_password_content">To change the password, check your email. Click the link in the email to change your password</string>
 
+    <string name="notification_accept_friend_request_title">Your friend request has been accepted</string>
+    <string name="notification_accept_friend_request_body">accepted your friend request</string>
+    <string name="notification_new_friend_title">New friend request</string>
+    <string name="notification_new_friend_body">wants to add you as a friend</string>
+    <string name="notification_button_add_text">Add</string>
+    <string name="notification_button_cancel_text">Cancel</string>
+
+    <string name="toast_add_friend_error">An error occurred while adding friends</string>
+    <string name="toast_cancel_add_friend_error">An error occurred while canceling the friend request</string>
+
     <string name="content_description_logo">Messenger logo</string>
     <string name="content_description_user_profile_photo">Profile photo</string>
     <string name="content_description_upload_photo">Photo upload</string>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
     private TextView textViewLogin;
     private TextView textViewFriendStatus;
     private Button buttonFriendAdd;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
         userInfoPresenter = new UserInfoPresenterImplementation(this);
 
         findViews();
+        createSwipeRefreshListener();
         setUserDataFromIntent();
         userInfoPresenter.fillUserFriendStatus(userLogin);
     }
@@ -120,6 +123,7 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
         textViewLogin = findViewById(R.id.text_view_login);
         textViewFriendStatus = findViewById(R.id.text_view_friend_status);
         buttonFriendAdd = findViewById(R.id.button_friend_add);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
     }
 
     private void setUserDataFromIntent() {
@@ -137,5 +141,15 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
         byte[] userPhoto = intent.getByteArrayExtra("user_photo");
         Bitmap bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto.length);
         imageViewProfile.setImageBitmap(bitmap);
+    }
+
+    private void createSwipeRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                userInfoPresenter.fillUserFriendStatus(userLogin);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 }

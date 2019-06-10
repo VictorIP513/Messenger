@@ -1,9 +1,15 @@
 package ru.android.messenger.view.utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+
+import ru.android.messenger.model.utils.ImageHelper;
+import ru.android.messenger.view.activity.UserInfoActivity;
 
 public class ViewUtils {
 
@@ -30,4 +36,15 @@ public class ViewUtils {
             }
         });
     }
+
+    public static Intent getUserInfoIntent(Context context, String firstName,
+                                    String surname, String login, Bitmap photo) {
+        Intent intent = new Intent(context, UserInfoActivity.class);
+        intent.putExtra("user_first_name", firstName);
+        intent.putExtra("user_surname", surname);
+        intent.putExtra("user_login", login);
+        intent.putExtra("user_photo", ImageHelper.getByteArrayFromBitmap(photo));
+        return intent;
+    }
 }
+

@@ -3,7 +3,6 @@ package ru.android.messenger.view.utils.recyclerview;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -17,9 +16,8 @@ import java.util.Objects;
 
 import ru.android.messenger.R;
 import ru.android.messenger.model.dto.UserFromView;
-import ru.android.messenger.model.utils.ImageHelper;
-import ru.android.messenger.view.activity.UserInfoActivity;
 import ru.android.messenger.view.adapters.UsersSearchRecyclerViewAdapter;
+import ru.android.messenger.view.utils.ViewUtils;
 
 public class RecyclerViewUtils {
 
@@ -81,12 +79,8 @@ public class RecyclerViewUtils {
     }
 
     private static void openUserInfo(UserFromView user, Context context) {
-        Intent intent = new Intent(context, UserInfoActivity.class);
-        Bitmap userPhoto = user.getUserPhoto();
-        intent.putExtra("user_first_name", user.getFirstName());
-        intent.putExtra("user_surname", user.getSurname());
-        intent.putExtra("user_login", user.getLogin());
-        intent.putExtra("user_photo", ImageHelper.getByteArrayFromBitmap(userPhoto));
+        Intent intent = ViewUtils.getUserInfoIntent(context, user.getFirstName(), user.getSurname(),
+                user.getLogin(), user.getUserPhoto());
         context.startActivity(intent);
     }
 }
