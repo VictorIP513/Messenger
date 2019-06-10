@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:inputHint="TODO. Enter the message"
+            app:inputHint="@string/dialog_activity_enter_message_hint"
             app:showAttachmentButton="true" />
 
     </RelativeLayout>

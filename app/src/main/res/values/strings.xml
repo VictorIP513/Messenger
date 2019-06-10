@@ -99,4 +99,6 @@
     <string name="user_info_button_friend_delete">Delete</string>
     <string name="user_info_button_friend_cancel">Cancel</string>
     <string name="user_info_button_friend_accept">Accept</string>
+
+    <string name="dialog_activity_enter_message_hint">Enter the message</string>
 </resources>
