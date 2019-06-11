@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
@@ -29,11 +30,13 @@ import ru.android.messenger.view.utils.ViewUtils;
 public class DialogActivity extends ActivityWithNavigationDrawer implements DialogView {
 
     private DialogPresenter dialogPresenter;
-
-    private ImageLoader imageLoader;
     private MessagesListAdapter<ChatMessage> messagesAdapter;
+    private ImageLoader imageLoader;
+
     private MessagesList messagesList;
     private MessageInput messageInput;
+    private ImageView imageViewProfile;
+    private TextView textViewName;
 
     private String userLogin;
 
@@ -49,6 +52,7 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         createImageLoader();
         initMessagesAdapter();
         initMessageInput();
+        fillUserInformation();
         dialogPresenter.fillDialog(userLogin);
     }
 
@@ -84,9 +88,21 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         return userLogin;
     }
 
+    @Override
+    public void setDialogUserName(String dialogUserName) {
+        textViewName.setText(dialogUserName);
+    }
+
+    @Override
+    public void setDialogPhoto(Bitmap dialogPhoto) {
+        imageViewProfile.setImageBitmap(dialogPhoto);
+    }
+
     private void findViews() {
         messagesList = findViewById(R.id.messages_list);
         messageInput = findViewById(R.id.message_input);
+        imageViewProfile = findViewById(R.id.image_view_profile);
+        textViewName = findViewById(R.id.text_view_name);
     }
 
     private void setDataFromIntent() {
@@ -139,5 +155,9 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
                 return true;
             }
         });
+    }
+
+    private void fillUserInformation() {
+        dialogPresenter.fillUserInformation(userLogin);
     }
 }

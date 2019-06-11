@@ -17,6 +17,7 @@ import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
+import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.model.utils.ImageHelper;
 
@@ -30,23 +31,35 @@ public class HttpUtils {
 
     public static void getUserPhotoAndExecuteAction(String login, final Context context,
                                                     final OnPhotoLoadedListener listener) {
-        repository.getUserPhoto(login)
-                .enqueue(new CallbackWithoutAlerts<ResponseBody>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ResponseBody> call,
-                                           @NonNull Response<ResponseBody> response) {
-                        Bitmap bitmap;
-                        if (response.isSuccessful()) {
-                            File photo = Objects.requireNonNull(FileUtils.getFileFromResponseBody(
-                                    response.body(), context));
-                            bitmap = ImageHelper.getBitmapFromFile(photo);
-                        } else {
-                            bitmap = BitmapFactory.decodeResource(
-                                    context.getResources(), R.drawable.profile_thumbnail);
-                        }
-                        listener.onPhotoLoaded(bitmap);
-                    }
-                });
+        repository.getUserPhoto(login).enqueue(new CallbackWithoutAlerts<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call,
+                                   @NonNull Response<ResponseBody> response) {
+                Bitmap bitmap;
+                if (response.isSuccessful()) {
+                    File photo = Objects.requireNonNull(FileUtils.getFileFromResponseBody(
+                            response.body(), context));
+                    bitmap = ImageHelper.getBitmapFromFile(photo);
+                } else {
+                    bitmap = BitmapFactory.decodeResource(
+                            context.getResources(), R.drawable.profile_thumbnail);
+                }
+                listener.onPhotoLoaded(bitmap);
+            }
+        });
+    }
+
+    public static void getUserAndExecuteAction(String login, final Context context,
+                                               final OnUserLoadedListener listener) {
+        repository.getUser(login).enqueue(new CallbackWithoutAlerts<User>() {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                if (response.isSuccessful()) {
+                    User user = response.body();
+                    listener.onUserLoaded(user);
+                }
+            }
+        });
     }
 
     public static void cancelFriendRequest(String login, final Context context) {

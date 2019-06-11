@@ -7,4 +7,6 @@ public interface DialogPresenter {
     void sendMessage(String message);
 
     void fillDialog(String login);
+
+    void fillUserInformation(String login);
 }

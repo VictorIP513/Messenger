@@ -1,5 +1,7 @@
 package ru.android.messenger.presenter.implementation;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -16,8 +18,12 @@ import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.Dialog;
 import ru.android.messenger.model.dto.Message;
+import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.chat.ChatMessage;
 import ru.android.messenger.model.utils.ChatUtils;
+import ru.android.messenger.model.utils.http.HttpUtils;
+import ru.android.messenger.model.utils.http.OnPhotoLoadedListener;
+import ru.android.messenger.model.utils.http.OnUserLoadedListener;
 import ru.android.messenger.presenter.DialogPresenter;
 import ru.android.messenger.view.interfaces.DialogView;
 
@@ -94,6 +100,25 @@ public class DialogPresenterImplementation implements DialogPresenter {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void fillUserInformation(String login) {
+        Context context = dialogView.getContext();
+        HttpUtils.getUserAndExecuteAction(login, context, new OnUserLoadedListener() {
+            @Override
+            public void onUserLoaded(User user) {
+                String userName = user.getFirstName() + " " + user.getSurname();
+                dialogView.setDialogUserName(userName);
+            }
+        });
+
+        HttpUtils.getUserPhotoAndExecuteAction(login, context, new OnPhotoLoadedListener() {
+            @Override
+            public void onPhotoLoaded(Bitmap photo) {
+                dialogView.setDialogPhoto(photo);
+            }
+        });
     }
 
     private void sortMessagesByTime(List<ChatMessage> messages) {
