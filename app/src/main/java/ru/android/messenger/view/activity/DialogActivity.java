@@ -1,6 +1,7 @@
 package ru.android.messenger.view.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -17,6 +18,7 @@ import ru.android.messenger.model.dto.chat.ChatMessage;
 import ru.android.messenger.presenter.DialogPresenter;
 import ru.android.messenger.presenter.implementation.DialogPresenterImplementation;
 import ru.android.messenger.view.interfaces.DialogView;
+import ru.android.messenger.view.utils.ViewUtils;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
 public class DialogActivity extends ActivityWithNavigationDrawer implements DialogView {
@@ -43,6 +45,18 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         initMessagesAdapter();
         initMessageInput();
         dialogPresenter.fillDialog(userLogin);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    protected void configureToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtils.createActionBarWithBackButtonForActivity(this, toolbar, "");
     }
 
     @Override

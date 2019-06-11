@@ -25,14 +25,18 @@
             android:name=".view.activity.DialogActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.activity.UserInfoActivity" />
+        <activity
+            android:name=".view.activity.UserInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.activity.DialogListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.activity.FriendListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.activity.UsersSearchActivity" />
+        <activity
+            android:name=".view.activity.UsersSearchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.activity.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />

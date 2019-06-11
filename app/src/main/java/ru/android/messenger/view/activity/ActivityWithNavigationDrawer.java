@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import ru.android.messenger.R;
 import ru.android.messenger.presenter.NavigationDrawerPresenter;
 import ru.android.messenger.presenter.implementation.NavigationDrawerPresenterImplementation;
 import ru.android.messenger.view.interfaces.NavigationDrawerView;
+import ru.android.messenger.view.utils.ViewUtils;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
 public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
@@ -29,8 +31,19 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
     private TextView navigationDrawerTextViewLogin;
     private TextView navigationDrawerTextViewName;
     private TextView navigationDrawerTextViewEmail;
+    private Toolbar toolbar;
 
     private Class activityToStart;
+    private boolean createdNavigationDrawerToolbar;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (createdNavigationDrawerToolbar && item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public Context getContext() {
@@ -61,6 +74,12 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
         findViewsInNavigationDrawer();
         setNavigationItemSelectedListener();
         addDrawerLayoutListener();
+        configureToolbar();
+    }
+
+    protected void configureToolbar() {
+        ViewUtils.createActionBarWithNavigationDrawerButtonForActivity(this, toolbar);
+        createdNavigationDrawerToolbar = true;
     }
 
     private void setNavigationItemSelectedListener() {
@@ -126,6 +145,7 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
     private void findViewsInNavigationDrawer() {
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawer_layout);
+        toolbar = findViewById(R.id.toolbar);
     }
 
     private void findDrawerLayoutViews() {

@@ -3,6 +3,7 @@ package ru.android.messenger.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -11,6 +12,7 @@ import com.stfalcon.chatkit.dialogs.DialogsList;
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 import ru.android.messenger.R;
 import ru.android.messenger.model.dto.chat.ChatDialog;
@@ -39,6 +41,7 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
 
         findViews();
         createImageLoader();
+        configureActionBar();
         dialogListPresenter.fillDialogsList();
     }
 
@@ -93,5 +96,11 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
                         .into(imageView);
             }
         };
+    }
+
+    private void configureActionBar() {
+        ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
+        String actionBarTitle = getString(R.string.dialogs_list_activity_action_bar_title);
+        actionBar.setTitle(actionBarTitle);
     }
 }

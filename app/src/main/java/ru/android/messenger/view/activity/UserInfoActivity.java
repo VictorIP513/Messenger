@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import ru.android.messenger.model.dto.response.FriendStatus;
 import ru.android.messenger.presenter.UserInfoPresenter;
 import ru.android.messenger.presenter.implementation.UserInfoPresenterImplementation;
 import ru.android.messenger.view.interfaces.UserInfoView;
+import ru.android.messenger.view.utils.ViewUtils;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
 public class UserInfoActivity extends ActivityWithNavigationDrawer implements UserInfoView {
@@ -51,6 +53,19 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
         createSwipeRefreshListener();
         setUserDataFromIntent();
         userInfoPresenter.fillUserFriendStatus(userLogin);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    protected void configureToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        String actionBarTitle = getString(R.string.user_info_activity_action_bar_title);
+        ViewUtils.createActionBarWithBackButtonForActivity(this, toolbar, actionBarTitle);
     }
 
     @Override

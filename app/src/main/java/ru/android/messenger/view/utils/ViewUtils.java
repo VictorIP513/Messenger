@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import java.util.Objects;
 
+import ru.android.messenger.R;
 import ru.android.messenger.model.utils.ImageHelper;
 import ru.android.messenger.view.activity.UserInfoActivity;
 
@@ -59,5 +60,14 @@ public class ViewUtils {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setTitle(title);
+    }
+
+    public static void createActionBarWithNavigationDrawerButtonForActivity(
+            AppCompatActivity activity, Toolbar toolbar) {
+        activity.setSupportActionBar(toolbar);
+        ActionBar actionBar = Objects.requireNonNull(activity.getSupportActionBar());
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.button_menu);
     }
 }

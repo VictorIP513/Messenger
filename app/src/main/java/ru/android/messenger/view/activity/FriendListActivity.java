@@ -30,6 +30,11 @@ public class FriendListActivity extends ActivityWithNavigationDrawer {
         createFragmentPagerAdapter();
     }
 
+    @Override
+    protected void configureToolbar() {
+        //unused method
+    }
+
     public void actionButtonAddFriendClick(View view) {
         Intent intent = new Intent(this, UsersSearchActivity.class);
         startActivity(intent);

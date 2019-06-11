@@ -89,6 +89,7 @@
     <string name="settings_activity_alert_clear_cache_title">Мессенджер</string>
     <string name="settings_activity_alert_clear_cache_message">Вы действительно хотите очистить кэш и выйти из аккаунта?</string>
     <string name="settings_activity_server_address_text">Адрес сервера:</string>
+    <string name="settings_activity_action_bar_title">Настройки</string>
 
     <string name="user_info_activity_goto_dialog_text">Перейти к диалогу</string>
     <string name="user_info_activity_block_text">Заблокировать этого пользователя</string>
@@ -101,6 +102,11 @@
     <string name="user_info_button_friend_delete">Удалить</string>
     <string name="user_info_button_friend_cancel">Отменить</string>
     <string name="user_info_button_friend_accept">Принять</string>
+    <string name="user_info_activity_action_bar_title">Информация о пользователе</string>
 
     <string name="dialog_activity_enter_message_hint">Введите сообщение</string>
+
+    <string name="dialogs_list_activity_action_bar_title">Диалоги</string>
+
+    <string name="users_search_activity_action_bar_title">Поиск друзей</string>
 </resources>

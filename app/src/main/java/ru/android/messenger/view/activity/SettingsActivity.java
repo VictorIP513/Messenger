@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
@@ -49,6 +50,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
         configureNotificationsSwitch();
         fillUserInformation();
         fillServerAddress();
+        configureActionBar();
     }
 
     @Override
@@ -195,5 +197,11 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
                 settingsPresenter.enableNotifications(isChecked);
             }
         });
+    }
+
+    private void configureActionBar() {
+        ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
+        String actionBarTitle = getString(R.string.settings_activity_action_bar_title);
+        actionBar.setTitle(actionBarTitle);
     }
 }
