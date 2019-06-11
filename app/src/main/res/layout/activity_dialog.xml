@@ -29,7 +29,6 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:contentDescription="@string/content_description_user_profile_photo"
-                    android:onClick="imageViewProfileClick"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_thumbnail" />
 
