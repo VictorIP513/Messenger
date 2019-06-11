@@ -1,6 +1,5 @@
 package ru.android.messenger.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
@@ -95,10 +94,7 @@ public class RegistrationActivity extends ActivityWithAlerts implements Registra
 
     @Override
     public void backToLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        onBackPressed();
     }
 
     public void textViewLoginClick(View view) {

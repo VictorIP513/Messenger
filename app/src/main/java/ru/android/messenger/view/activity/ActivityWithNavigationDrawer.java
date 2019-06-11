@@ -119,7 +119,6 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
                     Intent intent = new Intent(
                             ActivityWithNavigationDrawer.this, activityToStart);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     activityToStart = null;
                 }
             }

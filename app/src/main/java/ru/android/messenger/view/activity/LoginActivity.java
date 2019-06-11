@@ -72,7 +72,6 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
     public void changeToMainActivity() {
         Intent intent = new Intent(this, DialogListActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         finish();
     }
 
@@ -84,13 +83,11 @@ public class LoginActivity extends ActivityWithAlerts implements LoginView {
     public void textViewRegisterClick(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
     public void textViewRestorePasswordClick(View view) {
         Intent intent = new Intent(this, RestorePasswordActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
     public void buttonLoginClick(View view) {
