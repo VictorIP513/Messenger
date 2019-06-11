@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.commons.models.IUser;
+import com.stfalcon.chatkit.messages.MessageHolders;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
@@ -122,8 +123,11 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
     }
 
     private void initMessagesAdapter() {
+        MessageHolders holdersConfig = new MessageHolders()
+                .setIncomingTextLayout(R.layout.item_incoming_text_message);
+
         messagesAdapter = new MessagesListAdapter<>(
-                PreferenceManager.getLogin(this), imageLoader);
+                PreferenceManager.getLogin(this), holdersConfig, imageLoader);
         registerViewClickListener(messagesAdapter);
         messagesList.setAdapter(messagesAdapter);
     }

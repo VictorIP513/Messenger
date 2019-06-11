@@ -60,7 +60,7 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
     }
 
     private void initAdapter() {
-        dialogsAdapter = new DialogsListAdapter<>(imageLoader);
+        dialogsAdapter = new DialogsListAdapter<>(R.layout.item_dialog, imageLoader);
         dialogsAdapter.setItems(dialogs);
         dialogsAdapter.setOnDialogClickListener(
                 new DialogsListAdapter.OnDialogClickListener<ChatDialog>() {
