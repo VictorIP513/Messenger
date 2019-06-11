@@ -11,6 +11,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import com.stfalcon.chatkit.commons.models.IUser;
+
 import java.util.Objects;
 
 import ru.android.messenger.R;
@@ -51,6 +53,14 @@ public class ViewUtils {
         intent.putExtra("user_login", login);
         intent.putExtra("user_photo", ImageHelper.getByteArrayFromBitmap(photo));
         return intent;
+    }
+
+    public static Intent getUserInfoIntent(Context context, IUser user, Bitmap photo) {
+        String[] userName = user.getName().split(" ");
+        String firstName = userName[0];
+        String surname = userName[1];
+        String login = user.getId();
+        return getUserInfoIntent(context, firstName, surname, login, photo);
     }
 
     public static void createActionBarWithBackButtonForActivity(

@@ -1,11 +1,16 @@
 package ru.android.messenger.view.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
+import com.stfalcon.chatkit.commons.models.IUser;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
@@ -103,7 +108,23 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
     private void initMessagesAdapter() {
         messagesAdapter = new MessagesListAdapter<>(
                 PreferenceManager.getLogin(this), imageLoader);
+        registerViewClickListener(messagesAdapter);
         messagesList.setAdapter(messagesAdapter);
+    }
+
+    private void registerViewClickListener(MessagesListAdapter<ChatMessage> messagesAdapter) {
+        messagesAdapter.registerViewClickListener(R.id.messageUserAvatar,
+                new MessagesListAdapter.OnMessageViewClickListener<ChatMessage>() {
+                    @Override
+                    public void onMessageViewClick(View view, ChatMessage message) {
+                        ImageView imageView = (ImageView) view;
+                        Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                        IUser user = message.getUser();
+                        Intent intent = ViewUtils.getUserInfoIntent(
+                                DialogActivity.this, user, image);
+                        startActivity(intent);
+                    }
+                });
     }
 
     private void initMessageInput() {
