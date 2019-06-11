@@ -23,6 +23,8 @@ import ru.android.messenger.view.utils.ViewUtils;
 public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
         implements NavigationDrawerView {
 
+    private static final String LOGIN_PREFIX = "@";
+
     private NavigationDrawerPresenter navigationDrawerPresenter;
 
     private NavigationView navigationView;
@@ -60,7 +62,8 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
     public void setUserDataToNavigationDrawer(String firstName, String surname,
                                               String login, String email) {
         String name = firstName + " " + surname;
-        navigationDrawerTextViewLogin.setText(login);
+        String loginToView = LOGIN_PREFIX + login;
+        navigationDrawerTextViewLogin.setText(loginToView);
         navigationDrawerTextViewEmail.setText(email);
         navigationDrawerTextViewName.setText(name);
     }
