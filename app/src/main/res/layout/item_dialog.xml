@@ -54,7 +54,7 @@
                 android:layout_height="24dp"
                 android:layout_marginEnd="7dp" />
 
-            <TextView
+            <android.support.text.emoji.widget.EmojiTextView
                 android:id="@id/dialogLastMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

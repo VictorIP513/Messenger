@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class MessengerApplication extends Application
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
         createNotificationChannels();
+        initEmoji();
 
         activities = new ArrayList<>();
     }
@@ -74,5 +77,10 @@ public class MessengerApplication extends Application
 
     private void createNotificationChannels() {
         new NotificationChannels(this);
+    }
+
+    private void initEmoji() {
+        EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
+        EmojiCompat.init(config);
     }
 }
