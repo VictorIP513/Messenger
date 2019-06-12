@@ -124,7 +124,8 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
 
     private void initMessagesAdapter() {
         MessageHolders holdersConfig = new MessageHolders()
-                .setIncomingTextLayout(R.layout.item_incoming_text_message);
+                .setIncomingTextLayout(R.layout.item_incoming_text_message)
+                .setOutcomingTextLayout(R.layout.item_outcoming_text_message);
 
         messagesAdapter = new MessagesListAdapter<>(
                 PreferenceManager.getLogin(this), holdersConfig, imageLoader);
