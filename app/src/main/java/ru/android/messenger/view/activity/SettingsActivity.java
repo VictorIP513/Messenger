@@ -128,6 +128,11 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
                 .show();
     }
 
+    public void linearLayoutBlockedMembersListClick(View view) {
+        Intent intent = new Intent(this, BlockedUsersActivity.class);
+        startActivity(intent);
+    }
+
     private void deleteCacheAndBackToLoginActivity() {
         settingsPresenter.logout();
         settingsPresenter.deleteCache();

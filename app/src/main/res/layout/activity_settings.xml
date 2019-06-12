@@ -135,10 +135,10 @@
                     android:background="#e6e6e6" />
 
                 <LinearLayout
-                    android:id="@+id/linear_layout_blocked_members_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/button_text_color"
+                    android:onClick="linearLayoutBlockedMembersListClick"
                     android:orientation="horizontal"
                     android:paddingLeft="21dp"
                     android:paddingTop="12dp"

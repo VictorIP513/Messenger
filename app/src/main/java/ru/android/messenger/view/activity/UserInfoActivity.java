@@ -5,11 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ru.android.messenger.R;
 import ru.android.messenger.model.dto.response.FriendStatus;
@@ -41,6 +44,7 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
     private TextView textViewFriendStatus;
     private Button buttonFriendAdd;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SwitchCompat switchBlockUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +54,10 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
         userInfoPresenter = new UserInfoPresenterImplementation(this);
 
         findViews();
+        configureBlockUserSwitch();
         createSwipeRefreshListener();
         setUserDataFromIntent();
+        userInfoPresenter.fillBlockInformation(userLogin);
         userInfoPresenter.fillUserFriendStatus(userLogin);
     }
 
@@ -105,7 +111,16 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
         }
     }
 
+    @Override
+    public void setBlockStatus(boolean value) {
+        switchBlockUser.setChecked(value);
+    }
+
     public void buttonFriendAddClick(View view) {
+        if (switchBlockUser.isChecked()) {
+            showUnlockUserToast();
+            return;
+        }
         if (friendStatus == null) {
             showConnectionErrorAlertDialog();
         } else {
@@ -139,6 +154,7 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
         textViewFriendStatus = findViewById(R.id.text_view_friend_status);
         buttonFriendAdd = findViewById(R.id.button_friend_add);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        switchBlockUser = findViewById(R.id.switch_block_user);
     }
 
     private void setUserDataFromIntent() {
@@ -166,5 +182,19 @@ public class UserInfoActivity extends ActivityWithNavigationDrawer implements Us
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    private void configureBlockUserSwitch() {
+        switchBlockUser.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userInfoPresenter.blockUser(userLogin, isChecked);
+            }
+        });
+    }
+
+    private void showUnlockUserToast() {
+        String toastText = getString(R.string.toast_unlock_user);
+        Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();
     }
 }

@@ -2,6 +2,8 @@ package ru.android.messenger.presenter.implementation;
 
 import android.support.annotation.NonNull;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Response;
 import ru.android.messenger.model.Model;
@@ -81,6 +83,50 @@ public class UserInfoPresenterImplementation implements UserInfoPresenter {
                                            @NonNull Response<Void> response) {
                         if (response.isSuccessful()) {
                             userInfoView.setFriendStatus(FriendStatus.USER_IS_FRIEND);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void blockUser(String login, boolean block) {
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(userInfoView.getContext());
+        if (block) {
+            repository.blockUser(login, authenticationToken)
+                    .enqueue(new CallbackWithoutAlerts<Void>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Void> call,
+                                               @NonNull Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                userInfoView.setFriendStatus(FriendStatus.USER_IS_NOT_FRIEND);
+                            }
+                        }
+                    });
+        } else {
+            repository.unlockUser(login, authenticationToken)
+                    .enqueue(new CallbackWithoutAlerts<Void>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Void> call,
+                                               @NonNull Response<Void> response) {
+                            // unused response
+                        }
+                    });
+        }
+    }
+
+    @Override
+    public void fillBlockInformation(String login) {
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(userInfoView.getContext());
+        repository.getBlockStatus(login, authenticationToken)
+                .enqueue(new CallbackWithoutAlerts<Boolean>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Boolean> call,
+                                           @NonNull Response<Boolean> response) {
+                        if (response.isSuccessful()) {
+                            boolean isBlockedUser = Objects.requireNonNull(response.body());
+                            userInfoView.setBlockStatus(isBlockedUser);
                         }
                     }
                 });

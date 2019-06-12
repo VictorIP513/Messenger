@@ -121,6 +121,25 @@ public class DialogPresenterImplementation implements DialogPresenter {
         });
     }
 
+    @Override
+    public void fillBlockedInformation(String login) {
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(dialogView.getContext());
+        repository.getBlockYouStatus(login, authenticationToken)
+                .enqueue(new CallbackWithoutAlerts<Boolean>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Boolean> call,
+                                           @NonNull Response<Boolean> response) {
+                        if (response.isSuccessful()) {
+                            boolean isBlockedUser = Objects.requireNonNull(response.body());
+                            if (isBlockedUser) {
+                                dialogView.setBlockedInformation();
+                            }
+                        }
+                    }
+                });
+    }
+
     private void sortMessagesByTime(List<ChatMessage> messages) {
         Collections.sort(messages, new Comparator<ChatMessage>() {
             @Override

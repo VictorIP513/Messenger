@@ -17,5 +17,7 @@ public interface DialogView extends ViewWithAlerts {
     void setDialogUserName(String dialogUserName);
 
     void setDialogPhoto(Bitmap dialogPhoto);
+
+    void setBlockedInformation();
 }
 

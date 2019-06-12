@@ -23,6 +23,7 @@
 
     <string name="toast_add_friend_error">An error occurred while adding friends</string>
     <string name="toast_cancel_add_friend_error">An error occurred while canceling the friend request</string>
+    <string name="toast_unlock_user">To add a user as a friend - unblock him</string>
 
     <string name="content_description_logo">Messenger logo</string>
     <string name="content_description_user_profile_photo">Profile photo</string>
@@ -105,8 +106,11 @@
     <string name="user_info_activity_action_bar_title">User information</string>
 
     <string name="dialog_activity_enter_message_hint">Enter the message</string>
+    <string name="dialog_activity_text_view_blocked_information_text">User has blocked you</string>
 
     <string name="dialogs_list_activity_action_bar_title">Dialogs</string>
 
     <string name="users_search_activity_action_bar_title">Friend search</string>
+
+    <string name="blocked_users_activity_action_bar_title">Blocked users list</string>
 </resources>

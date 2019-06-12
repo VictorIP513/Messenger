@@ -19,6 +19,9 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
         <activity
+            android:name=".view.activity.BlockedUsersActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".view.activity.RestorePasswordActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -46,6 +49,7 @@
         <activity android:name=".view.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -57,6 +61,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <receiver android:name=".view.notifications.NotificationReceiver" />
     </application>
 </manifest>

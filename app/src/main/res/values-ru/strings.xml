@@ -23,6 +23,7 @@
 
     <string name="toast_add_friend_error">Произошла ошибка при добавлении в друзья</string>
     <string name="toast_cancel_add_friend_error">Произошла ошибка при отмене запроса дружбы</string>
+    <string name="toast_unlock_user">Чтобы добавить пользователя в друзья - разблокируйте его</string>
 
     <string name="content_description_logo">Логотип мессенджера</string>
     <string name="content_description_user_profile_photo">Фото профиля</string>
@@ -105,8 +106,11 @@
     <string name="user_info_activity_action_bar_title">Информация о пользователе</string>
 
     <string name="dialog_activity_enter_message_hint">Введите сообщение</string>
+    <string name="dialog_activity_text_view_blocked_information_text">Пользователь вас заблокировал</string>
 
     <string name="dialogs_list_activity_action_bar_title">Диалоги</string>
 
     <string name="users_search_activity_action_bar_title">Поиск друзей</string>
+
+    <string name="blocked_users_activity_action_bar_title">Список заблокированных пользователей</string>
 </resources>

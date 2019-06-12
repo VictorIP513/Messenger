@@ -38,6 +38,7 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
     private MessageInput messageInput;
     private ImageView imageViewProfile;
     private TextView textViewName;
+    private TextView textViewBlockedInformation;
 
     private String userLogin;
 
@@ -55,6 +56,7 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         initMessageInput();
         fillUserInformation();
         dialogPresenter.fillDialog(userLogin);
+        dialogPresenter.fillBlockedInformation(userLogin);
     }
 
     @Override
@@ -99,11 +101,18 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         imageViewProfile.setImageBitmap(dialogPhoto);
     }
 
+    @Override
+    public void setBlockedInformation() {
+        messageInput.setVisibility(View.INVISIBLE);
+        textViewBlockedInformation.setVisibility(View.VISIBLE);
+    }
+
     private void findViews() {
         messagesList = findViewById(R.id.messages_list);
         messageInput = findViewById(R.id.message_input);
         imageViewProfile = findViewById(R.id.image_view_profile);
         textViewName = findViewById(R.id.text_view_name);
+        textViewBlockedInformation = findViewById(R.id.text_view_blocked_information);
     }
 
     private void setDataFromIntent() {

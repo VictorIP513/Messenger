@@ -9,4 +9,6 @@ public interface DialogPresenter {
     void fillDialog(String login);
 
     void fillUserInformation(String login);
+
+    void fillBlockedInformation(String login);
 }

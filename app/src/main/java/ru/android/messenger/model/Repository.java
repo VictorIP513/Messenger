@@ -60,6 +60,14 @@ public interface Repository {
     Call<Void> acceptFriendRequest(@Path("login") String login,
                                    @Query("authenticationToken") String authenticationToken);
 
+    @PATCH("/api/blockUser/{login}")
+    Call<Void> blockUser(@Path("login") String login,
+                         @Query("authenticationToken") String authenticationToken);
+
+    @PATCH("/api/unlockUser/{login}")
+    Call<Void> unlockUser(@Path("login") String login,
+                          @Query("authenticationToken") String authenticationToken);
+
     @PATCH("/api/restorePassword")
     Call<RestorePasswordResponse> restorePassword(@Query("login") String login,
                                                   @Query("newPassword") String newPassword);
@@ -96,4 +104,15 @@ public interface Repository {
 
     @GET("/api/getAllDialogs")
     Call<List<Dialog>> getAllDialogs(@Query("authenticationToken") String authenticationToken);
+
+    @GET("/api/getBlockStatus/{login}")
+    Call<Boolean> getBlockStatus(@Path("login") String login,
+                                 @Query("authenticationToken") String authenticationToken);
+
+    @GET("/api/getBlockYouStatus/{login}")
+    Call<Boolean> getBlockYouStatus(@Path("login") String login,
+                                    @Query("authenticationToken") String authenticationToken);
+
+    @GET("/api/getAllBlockedUsers")
+    Call<List<User>> getAllBlockedUsers(@Query("authenticationToken") String authenticationToken);
 }
