@@ -51,6 +51,12 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
         initAdapter();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        dialogListPresenter.fillDialogsList();
+    }
+
     public void updateDialogs() {
         dialogListPresenter.fillDialogsList();
     }
