@@ -6,8 +6,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,6 +18,7 @@ import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
+import ru.android.messenger.model.utils.FirebaseUtils;
 import ru.android.messenger.model.utils.ImageHelper;
 import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.utils.Logger;
@@ -84,8 +83,7 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
 
     @Override
     public void logout() {
-        String login = PreferenceManager.getLogin(settingsView.getContext());
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(login);
+        FirebaseUtils.unsubscribeFromReceivingMessages(settingsView.getContext());
     }
 
     @Override

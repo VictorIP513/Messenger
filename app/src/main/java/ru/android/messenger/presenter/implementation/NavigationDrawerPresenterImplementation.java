@@ -4,11 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
+import ru.android.messenger.model.utils.FirebaseUtils;
 import ru.android.messenger.presenter.NavigationDrawerPresenter;
 import ru.android.messenger.view.interfaces.NavigationDrawerView;
 
@@ -34,8 +33,6 @@ public class NavigationDrawerPresenterImplementation implements NavigationDrawer
 
     @Override
     public void logout() {
-        String login = PreferenceManager.getLogin(navigationDrawerView.getContext());
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(login);
-        PreferenceManager.clearPreferencesWithoutLastLogin(navigationDrawerView.getContext());
+        FirebaseUtils.unsubscribeFromReceivingMessages(navigationDrawerView.getContext());
     }
 }
