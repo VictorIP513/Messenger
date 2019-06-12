@@ -72,6 +72,9 @@ public interface Repository {
     Call<RestorePasswordResponse> restorePassword(@Query("login") String login,
                                                   @Query("newPassword") String newPassword);
 
+    @PATCH("/api/userIsOnline")
+    Call<Void> userIsOnline(@Query("authenticationToken") String authenticationToken);
+
     @GET("/api/checkAuthenticationToken/{authenticationToken}")
     Call<Boolean> checkAuthenticationToken(@Path("authenticationToken") String authenticationToken);
 

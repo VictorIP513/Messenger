@@ -3,6 +3,7 @@ package ru.android.messenger.view.utils;
 import android.app.Activity;
 import android.content.Context;
 
+import ru.android.messenger.model.utils.OnlineNotifier;
 import ru.android.messenger.model.utils.http.HttpUtils;
 import ru.android.messenger.model.utils.http.OnAuthenticationTokenCheckedListener;
 import ru.android.messenger.utils.Logger;
@@ -19,6 +20,7 @@ public class ActiveActivitiesTracker {
         if (activeActivities == 0) {
             Logger.debug("Application resumed");
             checkAuthenticationToken(activity);
+            OnlineNotifier.start(activity);
         }
         ++activeActivities;
     }
@@ -27,6 +29,7 @@ public class ActiveActivitiesTracker {
         --activeActivities;
         if (activeActivities == 0) {
             Logger.debug("Application paused");
+            OnlineNotifier.stop();
         }
     }
 

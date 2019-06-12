@@ -96,6 +96,17 @@ public class HttpUtils {
                 });
     }
 
+    public static void sendUserIsOnlineNotification(Context context) {
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(context);
+        repository.userIsOnline(authenticationToken).enqueue(new CallbackWithoutAlerts<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                // unused response
+            }
+        });
+    }
+
     private static CallbackWithoutAlerts<Void> createFriendCallback(
             final String errorText, final Context context) {
         return new CallbackWithoutAlerts<Void>() {
