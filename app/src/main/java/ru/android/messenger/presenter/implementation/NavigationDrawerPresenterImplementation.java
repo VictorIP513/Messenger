@@ -30,10 +30,4 @@ public class NavigationDrawerPresenterImplementation implements NavigationDrawer
         navigationDrawerView.setUserDataToNavigationDrawer(user.getFirstName(), user.getSurname(),
                 user.getLogin(), user.getEmail());
     }
-
-    @Override
-    public void logout() {
-        FirebaseUtils.unsubscribeFromReceivingMessages(navigationDrawerView.getContext());
-        PreferenceManager.clearPreferencesWithoutLastLogin(navigationDrawerView.getContext());
-    }
 }

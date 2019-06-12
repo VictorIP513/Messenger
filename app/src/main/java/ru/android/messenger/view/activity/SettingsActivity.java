@@ -22,6 +22,7 @@ import ru.android.messenger.R;
 import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.presenter.implementation.SettingsPresenterImplementation;
 import ru.android.messenger.view.interfaces.SettingsView;
+import ru.android.messenger.view.utils.ViewUtils;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
 public class SettingsActivity extends ActivityWithNavigationDrawer implements SettingsView {
@@ -134,11 +135,8 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
     }
 
     private void deleteCacheAndBackToLoginActivity() {
-        settingsPresenter.logout();
+        ViewUtils.logout(this);
         settingsPresenter.deleteCache();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     private void findViews() {

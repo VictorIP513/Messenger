@@ -82,11 +82,6 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
     }
 
     @Override
-    public void logout() {
-        FirebaseUtils.unsubscribeFromReceivingMessages(settingsView.getContext());
-    }
-
-    @Override
     public Bitmap getBitmapFromUri(Uri imageUri) {
         Context context = settingsView.getContext();
         try {

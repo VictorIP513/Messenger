@@ -102,8 +102,7 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
                                 activityToStart = SettingsActivity.class;
                                 break;
                             case R.id.navigation_drawer_logout:
-                                navigationDrawerPresenter.logout();
-                                activityToStart = LoginActivity.class;
+                                ViewUtils.logout(ActivityWithNavigationDrawer.this);
                                 break;
                             default:
                                 break;

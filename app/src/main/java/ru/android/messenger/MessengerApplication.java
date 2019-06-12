@@ -12,6 +12,7 @@ import java.util.List;
 
 import ru.android.messenger.utils.Logger;
 import ru.android.messenger.view.notifications.NotificationChannels;
+import ru.android.messenger.view.utils.ActiveActivitiesTracker;
 
 public class MessengerApplication extends Application
         implements Application.ActivityLifecycleCallbacks {
@@ -38,6 +39,7 @@ public class MessengerApplication extends Application
     public void onActivityStarted(Activity activity) {
         Logger.debug(String.format("Started %s activity", activity.getLocalClassName()));
         activities.add(activity);
+        ActiveActivitiesTracker.activityStarted(activity);
     }
 
     @Override
@@ -56,6 +58,7 @@ public class MessengerApplication extends Application
     public void onActivityStopped(Activity activity) {
         Logger.debug(String.format("Stopped %s activity", activity.getLocalClassName()));
         activities.remove(activity);
+        ActiveActivitiesTracker.activityStopped();
     }
 
     @Override

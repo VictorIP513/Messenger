@@ -20,12 +20,14 @@ import ru.android.messenger.model.utils.http.OnPhotoLoadedListener;
 import ru.android.messenger.view.activity.DialogActivity;
 import ru.android.messenger.view.activity.DialogListActivity;
 import ru.android.messenger.view.notifications.Notifications;
+import ru.android.messenger.view.utils.Alerts;
 
 public class FCMService extends FirebaseMessagingService {
 
     private static final String MESSAGE_DATA_TYPE = "message";
     private static final String NEW_FRIEND_TYPE = "new_friend";
     private static final String ACCEPT_FRIEND_REQUEST_TYPE = "accept_friend_request";
+    private static final String LOGGED_IN_ON_NEW_DEVICE_TYPE = "logged_in_on_new_device";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -49,6 +51,15 @@ public class FCMService extends FirebaseMessagingService {
                 User user = ApiUtils.getObjectFromJson(json, User.class);
                 sendAcceptFriendRequestNotification(user);
             }
+            if (data.get(LOGGED_IN_ON_NEW_DEVICE_TYPE) != null) {
+                sendLoggedInANewDeviceNotification(activity);
+            }
+        }
+    }
+
+    private void sendLoggedInANewDeviceNotification(Activity activity) {
+        if (activity != null) {
+            Alerts.sendLoggedInANewDeviceNotification(activity);
         }
     }
 

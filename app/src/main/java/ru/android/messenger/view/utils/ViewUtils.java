@@ -16,13 +16,24 @@ import com.stfalcon.chatkit.commons.models.IUser;
 import java.util.Objects;
 
 import ru.android.messenger.R;
+import ru.android.messenger.model.PreferenceManager;
+import ru.android.messenger.model.utils.FirebaseUtils;
 import ru.android.messenger.model.utils.ImageHelper;
+import ru.android.messenger.view.activity.LoginActivity;
 import ru.android.messenger.view.activity.UserInfoActivity;
 
 public class ViewUtils {
 
     private ViewUtils() {
 
+    }
+
+    public static void logout(Context context) {
+        FirebaseUtils.unsubscribeFromReceivingMessages(context);
+        PreferenceManager.clearPreferencesWithoutLastLogin(context);
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     public static void clearErrorInTextInputLayoutOnChangeText(

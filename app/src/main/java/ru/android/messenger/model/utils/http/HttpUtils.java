@@ -78,6 +78,24 @@ public class HttpUtils {
                 .enqueue(createFriendCallback(acceptRequestErrorText, context));
     }
 
+    public static void checkAuthenticationToken(
+            Context context, final OnAuthenticationTokenCheckedListener listener) {
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(context);
+        repository.checkAuthenticationToken(authenticationToken)
+                .enqueue(new CallbackWithoutAlerts<Boolean>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Boolean> call,
+                                           @NonNull Response<Boolean> response) {
+                        if (response.isSuccessful()) {
+                            boolean isCorrectAuthenticationToken =
+                                    Objects.requireNonNull(response.body());
+                            listener.onAuthenticationTokenChecked(isCorrectAuthenticationToken);
+                        }
+                    }
+                });
+    }
+
     private static CallbackWithoutAlerts<Void> createFriendCallback(
             final String errorText, final Context context) {
         return new CallbackWithoutAlerts<Void>() {
