@@ -34,5 +34,6 @@ public class NavigationDrawerPresenterImplementation implements NavigationDrawer
     @Override
     public void logout() {
         FirebaseUtils.unsubscribeFromReceivingMessages(navigationDrawerView.getContext());
+        PreferenceManager.clearPreferencesWithoutLastLogin(navigationDrawerView.getContext());
     }
 }
