@@ -66,7 +66,9 @@ public class RecyclerViewUtils {
             public boolean onQueryTextChange(String text) {
                 UsersSearchRecyclerViewAdapter adapter =
                         (UsersSearchRecyclerViewAdapter) recyclerView.getAdapter();
-                Objects.requireNonNull(adapter).getUsersFilter().filter(text);
+                if (adapter != null) {
+                    adapter.getUsersFilter().filter(text);
+                }
                 return false;
             }
         });

@@ -37,6 +37,7 @@
     <string name="menu_drawer_friends">Друзья</string>
     <string name="menu_drawer_settings">Настройки</string>
     <string name="menu_drawer_logout">Выйти из аккаунта</string>
+    <string name="menu_search_title">Поиск</string>
 
     <string name="friend_list_activity_friends_fragment_title">Друзья</string>
     <string name="friend_list_activity_incoming_requests_fragment_title">Входящие запросы</string>
