@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
@@ -31,6 +33,7 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
     private List<ChatDialog> dialogs;
 
     private DialogsList dialogsList;
+    private TextView textViewEmptyDialogsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
         findViews();
         createImageLoader();
         configureActionBar();
+        setEmptyDialogListMessage(true);
         dialogListPresenter.fillDialogsList();
     }
 
@@ -49,6 +53,7 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
     public void setDialogList(List<ChatDialog> dialogs) {
         this.dialogs = dialogs;
         initAdapter();
+        setEmptyDialogListMessage(false);
     }
 
     @Override
@@ -63,6 +68,7 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
 
     private void findViews() {
         dialogsList = findViewById(R.id.dialogs_list);
+        textViewEmptyDialogsList = findViewById(R.id.text_view_empty_dialogs_list);
     }
 
     private void initAdapter() {
@@ -108,5 +114,15 @@ public class DialogListActivity extends ActivityWithNavigationDrawer implements 
         ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
         String actionBarTitle = getString(R.string.dialogs_list_activity_action_bar_title);
         actionBar.setTitle(actionBarTitle);
+    }
+
+    private void setEmptyDialogListMessage(boolean value) {
+        if (value) {
+            dialogsList.setVisibility(View.INVISIBLE);
+            textViewEmptyDialogsList.setVisibility(View.VISIBLE);
+        } else {
+            dialogsList.setVisibility(View.VISIBLE);
+            textViewEmptyDialogsList.setVisibility(View.INVISIBLE);
+        }
     }
 }

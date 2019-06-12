@@ -111,6 +111,7 @@
     <string name="dialog_activity_text_view_blocked_information_text">Пользователь вас заблокировал</string>
 
     <string name="dialogs_list_activity_action_bar_title">Диалоги</string>
+    <string name="dialogs_list_text_view_empty_dialogs_list_text">Диалоги отсутствуют</string>
 
     <string name="users_search_activity_action_bar_title">Поиск друзей</string>
 

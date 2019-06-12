@@ -111,6 +111,7 @@
     <string name="dialog_activity_text_view_blocked_information_text">User has blocked you</string>
 
     <string name="dialogs_list_activity_action_bar_title">Dialogs</string>
+    <string name="dialogs_list_text_view_empty_dialogs_list_text">There are no dialogues</string>
 
     <string name="users_search_activity_action_bar_title">Friend search</string>
 
