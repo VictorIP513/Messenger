@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -19,6 +20,8 @@ public class Model {
     private static final String SERVER_IP = "37.192.145.83:8080";
     private static final String SERVER_URL = "http://" + SERVER_IP;
     private static final String JSON_DATE_FORMAT = "dd MMM yyyy HH:mm:ss";
+    private static final int READ_TIMEOUT_SECONDS = 15;
+    private static final int CONNECT_TIMEOUT_SECONDS = 15;
 
     private static Repository repository;
 
@@ -29,6 +32,8 @@ public class Model {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+                .readTimeout(READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .connectTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(SERVER_URL)
