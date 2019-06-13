@@ -62,11 +62,11 @@ public class RestorePasswordPresenterImplementation implements RestorePasswordPr
             restorePasswordView.setRestorePasswordError(RestorePasswordError.PASSWORDS_DO_NOT_MATCH);
             isValidData = false;
         }
-        if (!DataValidator.isCorrectLoginLength(login)) {
+        if (DataValidator.isInorrectLoginLength(login)) {
             restorePasswordView.setRestorePasswordError(RestorePasswordError.INCORRECT_LOGIN_LENGTH);
             isValidData = false;
         }
-        if (!DataValidator.isCorrectPassword(password)) {
+        if (DataValidator.isIncorrectPassword(password)) {
             restorePasswordView.setRestorePasswordError(
                     RestorePasswordError.INCORRECT_PASSWORD);
             isValidData = false;

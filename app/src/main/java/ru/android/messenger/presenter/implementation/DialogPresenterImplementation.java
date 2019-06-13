@@ -113,7 +113,7 @@ public class DialogPresenterImplementation implements DialogPresenter {
     @Override
     public void fillUserInformation(String login) {
         Context context = dialogView.getContext();
-        HttpUtils.getUserAndExecuteAction(login, context, new OnUserLoadedListener() {
+        HttpUtils.getUserAndExecuteAction(login, new OnUserLoadedListener() {
             @Override
             public void onUserLoaded(User user) {
                 String userName = user.getFirstName() + " " + user.getSurname();

@@ -18,6 +18,10 @@ public class NotificationChannels extends ContextWrapper {
         createChannels();
     }
 
+    public static String getMessengerNotificationChannelId() {
+        return MESSENGER_NOTIFICATION_CHANNEL_ID;
+    }
+
     private void createChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel androidChannel = new NotificationChannel(
@@ -34,9 +38,5 @@ public class NotificationChannels extends ContextWrapper {
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(androidChannel);
         }
-    }
-
-    public static String getMessengerNotificationChannelId() {
-        return MESSENGER_NOTIFICATION_CHANNEL_ID;
     }
 }

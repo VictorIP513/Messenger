@@ -75,11 +75,11 @@ public class RegistrationPresenterImplementation implements RegistrationPresente
     private boolean validateInputData(String login, String password, String email,
                                       String firstName, String surname) {
         boolean isValidData = true;
-        if (!DataValidator.isCorrectLoginLength(login)) {
+        if (DataValidator.isInorrectLoginLength(login)) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_LOGIN_LENGTH);
             isValidData = false;
         }
-        if (!DataValidator.isCorrectPassword(password)) {
+        if (DataValidator.isIncorrectPassword(password)) {
             registrationView.setRegistrationError(RegistrationError.INCORRECT_PASSWORD);
             isValidData = false;
         }

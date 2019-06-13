@@ -30,12 +30,17 @@ public class ImageHelper {
 
     }
 
-    public static File writeBitmapToFile(Bitmap bitmap, Context context) throws IOException {
-        File file = File.createTempFile(FILE_PREFIX, FILE_SUFFIX, context.getCacheDir());
-        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
-            bitmap.compress(COMPRESS_FORMAT, QUALITY, outputStream);
+    public static File writeBitmapToFile(Bitmap bitmap, Context context) {
+        try {
+            File file = File.createTempFile(FILE_PREFIX, FILE_SUFFIX, context.getCacheDir());
+            try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
+                bitmap.compress(COMPRESS_FORMAT, QUALITY, outputStream);
+            }
+            return file;
+        } catch (IOException e) {
+            Logger.error("Could not create temp file", e);
         }
-        return file;
+        return null;
     }
 
     public static Bitmap getBitmapFromUriAndContext(Uri imageUri, Context context)

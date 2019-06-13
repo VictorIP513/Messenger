@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -49,28 +48,23 @@ public class SettingsPresenterImplementation implements SettingsPresenter {
 
     @Override
     public void uploadPhoto(final Bitmap bitmap) {
-        try {
-            final Context context = settingsView.getContext();
-            final File photoFile = ImageHelper.writeBitmapToFile(bitmap, context);
-            String authenticationToken =
-                    PreferenceManager.getAuthenticationToken(settingsView.getContext());
+        final Context context = settingsView.getContext();
+        final File photoFile = ImageHelper.writeBitmapToFile(bitmap, context);
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(settingsView.getContext());
 
-            repository.uploadPhoto(Model.createFileToSend(
-                    photoFile, PHOTO_PART_NAME), authenticationToken)
-                    .enqueue(new CallbackWithoutAlerts<Void>() {
-                        @Override
-                        public void onResponse(@NonNull Call<Void> call,
-                                               @NonNull Response<Void> response) {
-                            if (response.isSuccessful()) {
-                                FileUtils.saveUserPhotoToInternalStorage(photoFile, context);
-                                settingsView.setProfileImage(bitmap);
-                            }
+        repository.uploadPhoto(Model.createFileToSend(
+                photoFile, PHOTO_PART_NAME), authenticationToken)
+                .enqueue(new CallbackWithoutAlerts<Void>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Void> call,
+                                           @NonNull Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            FileUtils.saveUserPhotoToInternalStorage(photoFile, context);
+                            settingsView.setProfileImage(bitmap);
                         }
-                    });
-        } catch (IOException e) {
-            Logger.error("Error when writing bitmap to file", e);
-            settingsView.setErrorWritingBitmapToFile();
-        }
+                    }
+                });
     }
 
     @Override

@@ -7,8 +7,8 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import okhttp3.MultipartBody;
@@ -20,11 +20,11 @@ import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
+import ru.android.messenger.model.dto.Dialog;
 import ru.android.messenger.model.dto.Message;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.model.utils.ImageHelper;
-import ru.android.messenger.utils.Logger;
 
 public class HttpUtils {
 
@@ -34,6 +34,38 @@ public class HttpUtils {
 
     private HttpUtils() {
 
+    }
+
+    public static void getAllBlockedUsers(Context context, final OnUsersListLoadedListener listener) {
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(context);
+        repository.getAllBlockedUsers(authenticationToken)
+                .enqueue(new CallbackWithoutAlerts<List<User>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<User>> call,
+                                           @NonNull Response<List<User>> response) {
+                        if (response.isSuccessful()) {
+                            List<User> blockedUsersList = response.body();
+                            listener.onUsersListLoaded(blockedUsersList);
+                        }
+                    }
+                });
+    }
+
+    public static void getAllDialogs(Context context, final OnDialogsListLoadedListener listener) {
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(context);
+        repository.getAllDialogs(authenticationToken)
+                .enqueue(new CallbackWithoutAlerts<List<Dialog>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<Dialog>> call,
+                                           @NonNull Response<List<Dialog>> response) {
+                        if (response.isSuccessful()) {
+                            List<Dialog> dialogList = response.body();
+                            listener.onDialogListLoadedListener(dialogList);
+                        }
+                    }
+                });
     }
 
     public static void getUserPhotoAndExecuteAction(String login, final Context context,
@@ -56,8 +88,7 @@ public class HttpUtils {
         });
     }
 
-    public static void getUserAndExecuteAction(String login, final Context context,
-                                               final OnUserLoadedListener listener) {
+    public static void getUserAndExecuteAction(String login, final OnUserLoadedListener listener) {
         repository.getUser(login).enqueue(new CallbackWithoutAlerts<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
@@ -128,25 +159,21 @@ public class HttpUtils {
 
     public static void sendImage(int dialogId, Bitmap image, Context context,
                                  final OnMessageSentOutListenter listener) {
-        try {
-            String authenticationToken =
-                    PreferenceManager.getAuthenticationToken(context);
-            File imageFile = ImageHelper.writeBitmapToFile(image, context);
-            MultipartBody.Part file = Model.createFileToSend(imageFile, IMAGE_PART_NAME);
-            repository.sendImage(dialogId, file, authenticationToken)
-                    .enqueue(new CallbackWithoutAlerts<Message>() {
-                        @Override
-                        public void onResponse(@NonNull Call<Message> call,
-                                               @NonNull Response<Message> response) {
-                            if (response.isSuccessful()) {
-                                Message message = response.body();
-                                listener.onMessageSentOut(message);
-                            }
+        String authenticationToken =
+                PreferenceManager.getAuthenticationToken(context);
+        File imageFile = ImageHelper.writeBitmapToFile(image, context);
+        MultipartBody.Part file = Model.createFileToSend(imageFile, IMAGE_PART_NAME);
+        repository.sendImage(dialogId, file, authenticationToken)
+                .enqueue(new CallbackWithoutAlerts<Message>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Message> call,
+                                           @NonNull Response<Message> response) {
+                        if (response.isSuccessful()) {
+                            Message message = response.body();
+                            listener.onMessageSentOut(message);
                         }
-                    });
-        } catch (IOException e) {
-            Logger.error("Error when writing bitmap to file", e);
-        }
+                    }
+                });
     }
 
     private static CallbackWithoutAlerts<Void> createFriendCallback(

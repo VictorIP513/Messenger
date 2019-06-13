@@ -29,8 +29,7 @@ public class BlockedUsersActivity extends ActivityWithNavigationDrawer
         super.onCreate(savedInstanceState);
         super.init(R.layout.activity_blocked_users);
 
-        blockedUsersPresenter = new BlockedUsersPresenterImplementation(
-                this, this);
+        blockedUsersPresenter = new BlockedUsersPresenterImplementation(this);
 
         findViews();
         blockedUsersPresenter.fillBlockedUsersList();

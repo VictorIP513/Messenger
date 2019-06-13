@@ -2,32 +2,22 @@ package ru.android.messenger.model.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Response;
-import ru.android.messenger.R;
 import ru.android.messenger.model.Model;
 import ru.android.messenger.model.PreferenceManager;
-import ru.android.messenger.model.Repository;
-import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.UserFromView;
+import ru.android.messenger.model.utils.http.HttpUtils;
+import ru.android.messenger.model.utils.http.OnPhotoLoadedListener;
 import ru.android.messenger.view.interfaces.ViewWithUsersRecyclerView;
 
 public class UserUtils {
 
-    private static Repository repository = Model.getRepository();
     private static List<UserFromView> userFromViewList = new ArrayList<>();
 
     private UserUtils() {
@@ -40,20 +30,14 @@ public class UserUtils {
 
     public static <T extends ViewWithUsersRecyclerView> void convertAndSetUsersToView(
             final List<User> users, final T view) {
+        Context context = view.getContext();
         userFromViewList.clear();
         for (final User user : users) {
-            repository.getUserPhoto(user.getLogin())
-                    .enqueue(new CallbackWithoutAlerts<ResponseBody>() {
+            HttpUtils.getUserPhotoAndExecuteAction(user.getLogin(), context,
+                    new OnPhotoLoadedListener() {
                         @Override
-                        public void onResponse(@NonNull Call<ResponseBody> call,
-                                               @NonNull Response<ResponseBody> response) {
-                            File photo = null;
-                            if (response.isSuccessful()) {
-                                photo = Objects.requireNonNull(FileUtils.getFileFromResponseBody(
-                                        response.body(), view.getContext()));
-                            }
-                            Context context = view.getContext();
-                            UserFromView userFromView = createUserFromView(user, photo, context);
+                        public void onPhotoLoaded(Bitmap photo) {
+                            UserFromView userFromView = createUserFromView(user, photo);
                             userFromViewList.add(userFromView);
                             if (userFromViewList.size() == users.size()) {
                                 sortUsersFromFirstNameAndSurname();
@@ -85,21 +69,12 @@ public class UserUtils {
         });
     }
 
-    private static UserFromView createUserFromView(
-            User user, @Nullable File photo, Context context) {
+    private static UserFromView createUserFromView(User user, Bitmap userPhoto) {
         UserFromView userFromView = new UserFromView();
         userFromView.setFirstName(user.getFirstName());
         userFromView.setSurname(user.getSurname());
         userFromView.setLogin(user.getLogin());
-
-        if (photo != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(photo.toString());
-            userFromView.setUserPhoto(bitmap);
-        } else {
-            Bitmap bitmap = BitmapFactory.decodeResource(
-                    context.getResources(), R.drawable.profile_thumbnail);
-            userFromView.setUserPhoto(bitmap);
-        }
+        userFromView.setUserPhoto(userPhoto);
         return userFromView;
     }
 }

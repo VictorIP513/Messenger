@@ -1,12 +1,11 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
     android:layout_marginLeft="16dp"
+    android:layout_marginTop="8dp"
     android:layout_marginRight="16dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginBottom="8dp">
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@id/bubble"
@@ -23,7 +22,7 @@
             android:id="@id/messageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignWithParentIfMissing="true"/>
+            android:layout_alignWithParentIfMissing="true" />
 
         <!--suppress AndroidElementNotAllowed -->
         <TextView
@@ -33,6 +32,6 @@
             android:layout_below="@id/messageText"
             android:layout_marginStart="8dp"
             app:layout_alignSelf="center"
-            app:layout_order="1"/>
+            app:layout_order="1" />
     </com.google.android.flexbox.FlexboxLayout>
 </RelativeLayout>

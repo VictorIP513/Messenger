@@ -21,8 +21,6 @@ import ru.android.messenger.view.utils.recyclerview.RecyclerViewUtils;
 
 public class FriendsFragment extends Fragment implements ViewWithUsersRecyclerView {
 
-    private FriendsPresenter friendsPresenter;
-
     private RecyclerView recyclerView;
 
     @Nullable
@@ -34,7 +32,7 @@ public class FriendsFragment extends Fragment implements ViewWithUsersRecyclerVi
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        friendsPresenter = new FriendsPresenterImplementation(this);
+        FriendsPresenter friendsPresenter = new FriendsPresenterImplementation(this);
 
         findViews();
         friendsPresenter.fillFriendList();

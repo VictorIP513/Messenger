@@ -21,8 +21,6 @@ import ru.android.messenger.view.utils.recyclerview.RecyclerViewUtils;
 
 public class OutgoingRequestsFragment extends Fragment implements ViewWithUsersRecyclerView {
 
-    private OutgoingRequestsPresenter outgoingRequestsPresenter;
-
     private RecyclerView recyclerView;
 
     @Nullable
@@ -34,7 +32,8 @@ public class OutgoingRequestsFragment extends Fragment implements ViewWithUsersR
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        outgoingRequestsPresenter = new OutgoingRequestsPresenterImplementation(this);
+        OutgoingRequestsPresenter outgoingRequestsPresenter =
+                new OutgoingRequestsPresenterImplementation(this);
 
         findViews();
         outgoingRequestsPresenter.fillOutgoingRequestsList();

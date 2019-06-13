@@ -21,7 +21,7 @@ public class DataValidator {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    public static boolean isCorrectPassword(String password) {
+    public static boolean isIncorrectPassword(String password) {
         boolean isCorrectLength =
                 password.length() > MIN_PASSWORD_LENGTH && password.length() < MAX_PASSWORD_LENGTH;
         boolean isContainsDigit = password.matches(".*\\d.*");
@@ -31,7 +31,7 @@ public class DataValidator {
                 isContainsLowercaseLetter = true;
             }
         }
-        return isCorrectLength && isContainsDigit && isContainsLowercaseLetter;
+        return !isCorrectLength || !isContainsDigit || !isContainsLowercaseLetter;
     }
 
     public static boolean isCorrectFirstNameLength(String firstName) {
@@ -43,7 +43,7 @@ public class DataValidator {
         return surname.length() > MIN_SURNAME_LENGTH && surname.length() < MAX_SURNAME_LENGTH;
     }
 
-    public static boolean isCorrectLoginLength(String login) {
-        return login.length() > MIN_LOGIN_LENGTH && login.length() < MAX_LOGIN_LENGTH;
+    public static boolean isInorrectLoginLength(String login) {
+        return login.length() <= MIN_LOGIN_LENGTH || login.length() >= MAX_LOGIN_LENGTH;
     }
 }

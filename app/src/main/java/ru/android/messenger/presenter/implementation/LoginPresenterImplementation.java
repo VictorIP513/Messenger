@@ -108,11 +108,11 @@ public class LoginPresenterImplementation implements LoginPresenter {
 
     private boolean validateInputData(String login, String password) {
         boolean isValidData = true;
-        if (!DataValidator.isCorrectLoginLength(login)) {
+        if (DataValidator.isInorrectLoginLength(login)) {
             loginView.setLoginError(LoginError.INCORRECT_LOGIN_LENGTH);
             isValidData = false;
         }
-        if (!DataValidator.isCorrectPassword(password)) {
+        if (DataValidator.isIncorrectPassword(password)) {
             loginView.setLoginError(LoginError.INCORRECT_PASSWORD);
             isValidData = false;
         }
