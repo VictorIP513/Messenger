@@ -85,6 +85,7 @@ public class FCMService extends FirebaseMessagingService {
         if (message.getUser().getLogin().equals(userLogin)) {
             ChatMessage chatMessage = ChatUtils.convertMessageToChatMessage(message);
             activity.setNewMessage(chatMessage);
+            activity.setUserIsOnline();
         }
     }
 

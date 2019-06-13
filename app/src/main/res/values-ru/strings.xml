@@ -110,6 +110,9 @@
 
     <string name="dialog_activity_enter_message_hint">Введите сообщение</string>
     <string name="dialog_activity_text_view_blocked_information_text">Пользователь вас заблокировал</string>
+    <string name="dialog_activity_online_text">Онлайн</string>
+    <string name="dialog_activity_last_seen_text">был(а)</string>
+    <string name="dialog_activity_at_text">в</string>
 
     <string name="dialogs_list_activity_action_bar_title">Диалоги</string>
     <string name="dialogs_list_text_view_empty_dialogs_list_text">Диалоги отсутствуют</string>

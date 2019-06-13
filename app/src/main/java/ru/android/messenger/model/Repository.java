@@ -1,5 +1,6 @@
 package ru.android.messenger.model;
 
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -118,4 +119,7 @@ public interface Repository {
 
     @GET("/api/getAllBlockedUsers")
     Call<List<User>> getAllBlockedUsers(@Query("authenticationToken") String authenticationToken);
+
+    @GET("/api/getLastOnlineDate/{login}")
+    Call<Date> getLastOnlineDate(@Path("login") String login);
 }

@@ -19,5 +19,9 @@ public interface DialogView extends ViewWithAlerts {
     void setDialogPhoto(Bitmap dialogPhoto);
 
     void setBlockedInformation();
+
+    void setUserIsOnline();
+
+    void setLastOnlineDate(String date, String time);
 }
 

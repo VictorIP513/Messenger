@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Objects;
 
 import okhttp3.ResponseBody;
@@ -103,6 +104,18 @@ public class HttpUtils {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 // unused response
+            }
+        });
+    }
+
+    public static void getLastOnlineDate(String login, final OnDateLoadedListener listener) {
+        repository.getLastOnlineDate(login).enqueue(new CallbackWithoutAlerts<Date>() {
+            @Override
+            public void onResponse(@NonNull Call<Date> call, @NonNull Response<Date> response) {
+                if (response.isSuccessful()) {
+                    Date date = response.body();
+                    listener.onDateLoaded(date);
+                }
             }
         });
     }

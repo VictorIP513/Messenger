@@ -39,6 +39,7 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
     private ImageView imageViewProfile;
     private TextView textViewName;
     private TextView textViewBlockedInformation;
+    private TextView textViewLastOnlineDate;
 
     private String userLogin;
 
@@ -57,6 +58,7 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         fillUserInformation();
         dialogPresenter.fillDialog(userLogin);
         dialogPresenter.fillBlockedInformation(userLogin);
+        dialogPresenter.fillLastOnlineDate(userLogin);
     }
 
     @Override
@@ -107,12 +109,28 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         textViewBlockedInformation.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void setUserIsOnline() {
+        String onlineText = getString(R.string.dialog_activity_online_text);
+        textViewLastOnlineDate.setText(onlineText);
+    }
+
+    @Override
+    public void setLastOnlineDate(String date, String time) {
+        String lastSeenText = getString(R.string.dialog_activity_last_seen_text);
+        String atText = getString(R.string.dialog_activity_at_text);
+        String resultText = String.format("%s %s %s %s", lastSeenText, date, atText, time);
+
+        textViewLastOnlineDate.setText(resultText);
+    }
+
     private void findViews() {
         messagesList = findViewById(R.id.messages_list);
         messageInput = findViewById(R.id.message_input);
         imageViewProfile = findViewById(R.id.image_view_profile);
         textViewName = findViewById(R.id.text_view_name);
         textViewBlockedInformation = findViewById(R.id.text_view_blocked_information);
+        textViewLastOnlineDate = findViewById(R.id.text_view_last_online_date);
     }
 
     private void setDataFromIntent() {

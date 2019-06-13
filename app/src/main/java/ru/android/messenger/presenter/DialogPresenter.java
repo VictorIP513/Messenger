@@ -11,4 +11,6 @@ public interface DialogPresenter {
     void fillUserInformation(String login);
 
     void fillBlockedInformation(String login);
+
+    void fillLastOnlineDate(String login);
 }

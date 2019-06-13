@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +22,9 @@ import ru.android.messenger.model.dto.Message;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.chat.ChatMessage;
 import ru.android.messenger.model.utils.ChatUtils;
+import ru.android.messenger.model.utils.DateUtils;
 import ru.android.messenger.model.utils.http.HttpUtils;
+import ru.android.messenger.model.utils.http.OnDateLoadedListener;
 import ru.android.messenger.model.utils.http.OnPhotoLoadedListener;
 import ru.android.messenger.model.utils.http.OnUserLoadedListener;
 import ru.android.messenger.presenter.DialogPresenter;
@@ -138,6 +141,21 @@ public class DialogPresenterImplementation implements DialogPresenter {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void fillLastOnlineDate(String login) {
+        HttpUtils.getLastOnlineDate(login, new OnDateLoadedListener() {
+            @Override
+            public void onDateLoaded(Date date) {
+                if (DateUtils.isOnline(date)) {
+                    dialogView.setUserIsOnline();
+                } else {
+                    String[] lastOnlineDate = DateUtils.getFormattedDateAndTime(date);
+                    dialogView.setLastOnlineDate(lastOnlineDate[0], lastOnlineDate[1]);
+                }
+            }
+        });
     }
 
     private void sortMessagesByTime(List<ChatMessage> messages) {
