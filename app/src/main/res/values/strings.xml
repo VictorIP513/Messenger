@@ -31,6 +31,7 @@
     <string name="toast_add_friend_error">An error occurred while adding friends</string>
     <string name="toast_cancel_add_friend_error">An error occurred while canceling the friend request</string>
     <string name="toast_unlock_user">To add a user as a friend - unblock him</string>
+    <string name="toast_user_has_blocked_you">Unable to send message. User has blocked you</string>
 
     <string name="content_description_logo">Messenger logo</string>
     <string name="content_description_user_profile_photo">Profile photo</string>

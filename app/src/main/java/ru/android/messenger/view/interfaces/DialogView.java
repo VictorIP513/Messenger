@@ -26,6 +26,6 @@ public interface DialogView extends ViewWithAlerts {
 
     void setImageNotFoundError();
 
-    void setErrorWritingBitmapToFile();
+    void showUserHasBlockedYouMessage();
 }
 

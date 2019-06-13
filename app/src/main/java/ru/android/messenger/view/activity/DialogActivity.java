@@ -151,10 +151,9 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
     }
 
     @Override
-    public void setErrorWritingBitmapToFile() {
-        Toast errorToast = Toast.makeText(this,
-                getText(R.string.settings_activity_error_writing_bitmap_to_file), Toast.LENGTH_LONG);
-        errorToast.show();
+    public void showUserHasBlockedYouMessage() {
+        String userHasBlockedYouText = getString(R.string.toast_user_has_blocked_you);
+        Toast.makeText(this, userHasBlockedYouText, Toast.LENGTH_LONG).show();
     }
 
     private void findViews() {

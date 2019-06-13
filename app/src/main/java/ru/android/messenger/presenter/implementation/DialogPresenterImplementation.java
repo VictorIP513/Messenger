@@ -82,6 +82,8 @@ public class DialogPresenterImplementation implements DialogPresenter {
                             ChatMessage chatMessage =
                                     ChatUtils.convertMessageToChatMessage(responseMessage);
                             dialogView.setNewMessage(chatMessage);
+                        } else {
+                            dialogView.showUserHasBlockedYouMessage();
                         }
                     }
                 });

@@ -31,6 +31,7 @@
     <string name="toast_add_friend_error">Произошла ошибка при добавлении в друзья</string>
     <string name="toast_cancel_add_friend_error">Произошла ошибка при отмене запроса дружбы</string>
     <string name="toast_unlock_user">Чтобы добавить пользователя в друзья - разблокируйте его</string>
+    <string name="toast_user_has_blocked_you">Невозможно отправить сообщение. Пользователь заблокировал вас</string>
 
     <string name="content_description_logo">Логотип мессенджера</string>
     <string name="content_description_user_profile_photo">Фото профиля</string>
