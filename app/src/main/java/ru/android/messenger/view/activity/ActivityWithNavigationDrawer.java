@@ -55,7 +55,8 @@ public abstract class ActivityWithNavigationDrawer extends ActivityWithAlerts
     @Override
     public void setProfileImageToNavigationDrawer(Bitmap bitmap) {
         navigationDrawerImageViewProfile = findViewById(R.id.navigation_drawer_image_view_profile);
-        navigationDrawerImageViewProfile.setImageBitmap(bitmap);
+        navigationDrawerImageViewProfile.setImageBitmap(
+                bitmap == null ? ViewUtils.getDefaultProfileImage(this) : bitmap);
     }
 
     @Override

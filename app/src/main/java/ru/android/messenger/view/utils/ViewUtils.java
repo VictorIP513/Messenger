@@ -3,6 +3,7 @@ package ru.android.messenger.view.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import java.util.Objects;
 
 import ru.android.messenger.R;
 import ru.android.messenger.model.PreferenceManager;
+import ru.android.messenger.model.utils.FileUtils;
 import ru.android.messenger.model.utils.FirebaseUtils;
 import ru.android.messenger.model.utils.ImageHelper;
 import ru.android.messenger.view.activity.LoginActivity;
@@ -28,9 +30,14 @@ public class ViewUtils {
 
     }
 
+    public static Bitmap getDefaultProfileImage(Context context) {
+        return BitmapFactory.decodeResource(context.getResources(), R.drawable.profile_thumbnail);
+    }
+
     public static void logout(Context context) {
         FirebaseUtils.unsubscribeFromReceivingMessages(context);
         PreferenceManager.clearPreferencesWithoutLastLogin(context);
+        FileUtils.deletePhotoFile(context);
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import ru.android.messenger.model.PreferenceManager;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
-import ru.android.messenger.model.utils.FirebaseUtils;
 import ru.android.messenger.presenter.NavigationDrawerPresenter;
 import ru.android.messenger.view.interfaces.NavigationDrawerView;
 

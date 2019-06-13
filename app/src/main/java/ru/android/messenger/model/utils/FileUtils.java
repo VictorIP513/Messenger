@@ -86,6 +86,13 @@ public class FileUtils {
         return contextWrapper.getDir(IMAGES_DIR_NAME, Context.MODE_PRIVATE) + PROFILE_IMAGE_NAME;
     }
 
+    public static void deletePhotoFile(Context context) {
+        File photoFile = new File(getPathToPhoto(context));
+        if (photoFile.exists()) {
+            deleteFile(photoFile);
+        }
+    }
+
     private static void copyFile(File file, String destination) {
         File newFile = new File(destination);
         try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file));

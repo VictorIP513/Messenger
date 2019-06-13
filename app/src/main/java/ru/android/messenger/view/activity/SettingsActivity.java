@@ -82,7 +82,8 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
 
     @Override
     public void setProfileImage(Bitmap bitmap) {
-        imageViewProfile.setImageBitmap(bitmap);
+        imageViewProfile.setImageBitmap(
+                bitmap == null ? ViewUtils.getDefaultProfileImage(this) : bitmap);
     }
 
     @Override
