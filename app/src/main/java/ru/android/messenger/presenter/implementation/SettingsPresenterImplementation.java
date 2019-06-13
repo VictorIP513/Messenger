@@ -18,7 +18,6 @@ import ru.android.messenger.model.Repository;
 import ru.android.messenger.model.callbacks.CallbackWithoutAlerts;
 import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.utils.FileUtils;
-import ru.android.messenger.model.utils.FirebaseUtils;
 import ru.android.messenger.model.utils.ImageHelper;
 import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.utils.Logger;

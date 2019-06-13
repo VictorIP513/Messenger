@@ -49,6 +49,12 @@ public interface Repository {
                               @Part("message") String message,
                               @Part("authenticationToken") String authenticationToken);
 
+    @Multipart
+    @POST("/api/sendImage/{dialogId}")
+    Call<Message> sendImage(@Path("dialogId") int dialogId,
+                            @Part MultipartBody.Part image,
+                            @Part("authenticationToken") String authenticationToken);
+
     @PATCH("/api/addToFriend/{login}")
     Call<Void> addToFriend(@Path("login") String login,
                            @Query("authenticationToken") String authenticationToken);

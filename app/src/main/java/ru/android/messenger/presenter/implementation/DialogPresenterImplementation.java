@@ -2,8 +2,10 @@ package ru.android.messenger.presenter.implementation;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,11 +25,14 @@ import ru.android.messenger.model.dto.User;
 import ru.android.messenger.model.dto.chat.ChatMessage;
 import ru.android.messenger.model.utils.ChatUtils;
 import ru.android.messenger.model.utils.DateUtils;
+import ru.android.messenger.model.utils.ImageHelper;
 import ru.android.messenger.model.utils.http.HttpUtils;
 import ru.android.messenger.model.utils.http.OnDateLoadedListener;
+import ru.android.messenger.model.utils.http.OnMessageSentOutListenter;
 import ru.android.messenger.model.utils.http.OnPhotoLoadedListener;
 import ru.android.messenger.model.utils.http.OnUserLoadedListener;
 import ru.android.messenger.presenter.DialogPresenter;
+import ru.android.messenger.utils.Logger;
 import ru.android.messenger.view.interfaces.DialogView;
 
 public class DialogPresenterImplementation implements DialogPresenter {
@@ -154,6 +159,30 @@ public class DialogPresenterImplementation implements DialogPresenter {
                     String[] lastOnlineDate = DateUtils.getFormattedDateAndTime(date);
                     dialogView.setLastOnlineDate(lastOnlineDate[0], lastOnlineDate[1]);
                 }
+            }
+        });
+    }
+
+    @Override
+    public Bitmap getBitmapFromUri(Uri data) {
+        Context context = dialogView.getContext();
+        try {
+            return ImageHelper.getBitmapFromUriAndContext(data, context);
+        } catch (FileNotFoundException e) {
+            Logger.error("Image not found", e);
+            dialogView.setImageNotFoundError();
+        }
+        return null;
+    }
+
+    @Override
+    public void sendImage(Bitmap image) {
+        Context context = dialogView.getContext();
+        HttpUtils.sendImage(dialogId, image, context, new OnMessageSentOutListenter() {
+            @Override
+            public void onMessageSentOut(Message message) {
+                ChatMessage chatMessage = ChatUtils.convertMessageToChatMessage(message);
+                dialogView.setNewMessage(chatMessage);
             }
         });
     }

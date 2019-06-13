@@ -23,5 +23,9 @@ public interface DialogView extends ViewWithAlerts {
     void setUserIsOnline();
 
     void setLastOnlineDate(String date, String time);
+
+    void setImageNotFoundError();
+
+    void setErrorWritingBitmapToFile();
 }
 

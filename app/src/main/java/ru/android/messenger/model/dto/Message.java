@@ -9,6 +9,7 @@ public class Message {
     private String text;
     private Date date;
     private User user;
+    private boolean isPhoto;
 
     public int getId() {
         return id;
@@ -40,5 +41,13 @@ public class Message {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isPhoto() {
+        return isPhoto;
+    }
+
+    public void setMessageIsPhoto(boolean value) {
+        isPhoto = value;
     }
 }

@@ -1,5 +1,8 @@
 package ru.android.messenger.presenter;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 public interface DialogPresenter {
 
     void createDialog(String login, String lastMessageText);
@@ -13,4 +16,8 @@ public interface DialogPresenter {
     void fillBlockedInformation(String login);
 
     void fillLastOnlineDate(String login);
+
+    Bitmap getBitmapFromUri(Uri data);
+
+    void sendImage(Bitmap image);
 }

@@ -33,10 +33,12 @@ public class Notifications {
     }
 
     public static void showNewMessageNotification(Context context, Message message, Bitmap image) {
+        String notificationImageText = context.getString(R.string.notification_image_body);
+
         User sender = message.getUser();
-        String title = sender.getFirstName() + " " + sender.getSurname();
-        String content = message.getText();
         String userLogin = message.getUser().getLogin();
+        String title = sender.getFirstName() + " " + sender.getSurname();
+        String content = message.isPhoto() ? notificationImageText : message.getText();
 
         NotificationCompat.Builder builder =
                 createDefaultNotificationBuilder(context, title, content, image);

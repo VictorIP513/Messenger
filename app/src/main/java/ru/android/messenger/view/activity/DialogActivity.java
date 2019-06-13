@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
@@ -18,6 +20,7 @@ import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 import ru.android.messenger.R;
 import ru.android.messenger.model.PreferenceManager;
@@ -25,10 +28,14 @@ import ru.android.messenger.model.dto.chat.ChatMessage;
 import ru.android.messenger.presenter.DialogPresenter;
 import ru.android.messenger.presenter.implementation.DialogPresenterImplementation;
 import ru.android.messenger.view.interfaces.DialogView;
+import ru.android.messenger.view.utils.Alerts;
 import ru.android.messenger.view.utils.ViewUtils;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
 public class DialogActivity extends ActivityWithNavigationDrawer implements DialogView {
+
+    private static final int UPLOAD_PHOTO_REQUEST_CODE = 0;
+    private static final int TAKE_PHOTO_REQUEST_CODE = 1;
 
     private DialogPresenter dialogPresenter;
     private MessagesListAdapter<ChatMessage> messagesAdapter;
@@ -65,6 +72,18 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == UPLOAD_PHOTO_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            getImageFromDevice(data);
+        }
+        if (requestCode == TAKE_PHOTO_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            getImageFromCamera(data);
+        }
     }
 
     @Override
@@ -122,6 +141,20 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
         String resultText = String.format("%s %s %s %s", lastSeenText, date, atText, time);
 
         textViewLastOnlineDate.setText(resultText);
+    }
+
+    @Override
+    public void setImageNotFoundError() {
+        Toast errorToast = Toast.makeText(this,
+                getText(R.string.alert_dialog_error_file_not_found), Toast.LENGTH_LONG);
+        errorToast.show();
+    }
+
+    @Override
+    public void setErrorWritingBitmapToFile() {
+        Toast errorToast = Toast.makeText(this,
+                getText(R.string.settings_activity_error_writing_bitmap_to_file), Toast.LENGTH_LONG);
+        errorToast.show();
     }
 
     private void findViews() {
@@ -187,9 +220,28 @@ public class DialogActivity extends ActivityWithNavigationDrawer implements Dial
                 return true;
             }
         });
+        messageInput.setAttachmentsListener(new MessageInput.AttachmentsListener() {
+            @Override
+            public void onAddAttachments() {
+                Alerts.showUploadPhotoAlertDialog(DialogActivity.this);
+            }
+        });
     }
 
     private void fillUserInformation() {
         dialogPresenter.fillUserInformation(userLogin);
+    }
+
+    private void getImageFromDevice(Intent data) {
+        Bitmap imageBitmap = dialogPresenter.getBitmapFromUri(data.getData());
+        if (imageBitmap != null) {
+            dialogPresenter.sendImage(imageBitmap);
+        }
+    }
+
+    private void getImageFromCamera(Intent data) {
+        Bundle extras = data.getExtras();
+        Bitmap imageBitmap = (Bitmap) Objects.requireNonNull(extras).get("data");
+        dialogPresenter.sendImage(imageBitmap);
     }
 }

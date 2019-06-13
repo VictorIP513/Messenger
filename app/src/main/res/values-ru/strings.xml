@@ -15,7 +15,12 @@
     <string name="alert_dialog_change_password_content">Чтобы изменить пароль, проверьте вышу почту. Нажмите на ссылку в письме чтобы изменить ваш пароль</string>
     <string name="alert_dialog_logged_in_on_new_device_title">Выполнен вход с другого устройства</string>
     <string name="alert_dialog_logged_in_on_new_device_content">Мессендер поддерживает одновременную работу только с одного устройства. При нажатии на кнопку «OK» будет выполнен выход из аккаунта на этом устройстве.</string>
+    <string name="alert_dialog_set_profile_image_upload_photo">Загрузить фото</string>
+    <string name="alert_dialog_set_profile_image_take_photo">Сфотографировать</string>
+    <string name="alert_dialog_set_profile_image_title">Изменение изображения профиля</string>
+    <string name="alert_dialog_error_file_not_found">Произошла ошибка при открытии файла. Файл не найден</string>
 
+    <string name="notification_image_body">Изображение</string>
     <string name="notification_accept_friend_request_title">Ваша заявка принята</string>
     <string name="notification_accept_friend_request_body">принял вашу заявку в друзья</string>
     <string name="notification_new_friend_title">Новая заявка в друзья</string>
@@ -79,10 +84,6 @@
     <string name="restore_password_activity_error_user_not_found">Пользователь с таким логином не найден</string>
     <string name="restore_password_activity_action_bar_title">Изменение пароля</string>
 
-    <string name="settings_activity_alert_set_profile_image_upload_photo">Загрузить фото</string>
-    <string name="settings_activity_alert_set_profile_image_take_photo">Сфотографировать</string>
-    <string name="settings_activity_alert_set_profile_image_title">Изменение изображения профиля</string>
-    <string name="settings_activity_error_file_not_found">Произошла ошибка при открытии файла. Файл не найден</string>
     <string name="settings_activity_error_camera_not_found">Невозможно получить доступ к камере</string>
     <string name="settings_activity_error_writing_bitmap_to_file">Произошла ошибка при обработке фотографии пользователя</string>
     <string name="settings_activity_enable_notifications_text">Включить уведомления</string>

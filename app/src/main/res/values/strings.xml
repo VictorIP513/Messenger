@@ -15,7 +15,12 @@
     <string name="alert_dialog_change_password_content">To change the password, check your email. Click the link in the email to change your password</string>
     <string name="alert_dialog_logged_in_on_new_device_title">Logged in to another device</string>
     <string name="alert_dialog_logged_in_on_new_device_content">Messenger supports simultaneous work with only one device. Clicking on the "OK" button will log out of the account on this device</string>
+    <string name="alert_dialog_set_profile_image_upload_photo">Upload a photo</string>
+    <string name="alert_dialog_set_profile_image_take_photo">Take a photo</string>
+    <string name="alert_dialog_set_profile_image_title">Set profile image</string>
+    <string name="alert_dialog_error_file_not_found">An error occurred while opening the file. File not found</string>
 
+    <string name="notification_image_body">Image</string>
     <string name="notification_accept_friend_request_title">Your friend request has been accepted</string>
     <string name="notification_accept_friend_request_body">accepted your friend request</string>
     <string name="notification_new_friend_title">New friend request</string>
@@ -79,10 +84,6 @@
     <string name="restore_password_activity_error_user_not_found">User with this login not found</string>
     <string name="restore_password_activity_action_bar_title">Change password</string>
 
-    <string name="settings_activity_alert_set_profile_image_upload_photo">Upload a photo</string>
-    <string name="settings_activity_alert_set_profile_image_take_photo">Take a photo</string>
-    <string name="settings_activity_alert_set_profile_image_title">Set profile image</string>
-    <string name="settings_activity_error_file_not_found">An error occurred while opening the file. File not found</string>
     <string name="settings_activity_error_camera_not_found">Can\'t connect to camera</string>
     <string name="settings_activity_error_writing_bitmap_to_file">An error occurred while processing the user\'s photo</string>
     <string name="settings_activity_enable_notifications_text">Enable notifications</string>

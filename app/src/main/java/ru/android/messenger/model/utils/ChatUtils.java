@@ -22,7 +22,12 @@ public class ChatUtils {
         String text = message.getText();
         Date createdAt = DateUtils.convertUTCToLocalDate(message.getDate());
         ChatUser chatUser = convertUserToChatUser(message.getUser());
-        return new ChatMessage(id, text, createdAt, chatUser);
+        ChatMessage.Image image = null;
+        if (message.isPhoto()) {
+            image = new ChatMessage.Image(text);
+            text = null;
+        }
+        return new ChatMessage(id, text, createdAt, chatUser, image);
     }
 
     public static ChatDialog convertDialogToChatDialog(Dialog dialog) {

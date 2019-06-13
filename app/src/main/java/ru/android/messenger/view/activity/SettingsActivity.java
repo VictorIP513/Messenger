@@ -2,10 +2,8 @@ package ru.android.messenger.view.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +20,7 @@ import ru.android.messenger.R;
 import ru.android.messenger.presenter.SettingsPresenter;
 import ru.android.messenger.presenter.implementation.SettingsPresenterImplementation;
 import ru.android.messenger.view.interfaces.SettingsView;
+import ru.android.messenger.view.utils.Alerts;
 import ru.android.messenger.view.utils.ViewUtils;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
@@ -29,7 +28,6 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
 
     private static final int UPLOAD_PHOTO_REQUEST_CODE = 0;
     private static final int TAKE_PHOTO_REQUEST_CODE = 1;
-    private static final String INTENT_IMAGE_TYPE = "image/*";
 
     private SettingsPresenter settingsPresenter;
 
@@ -76,7 +74,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
     @Override
     public void setImageNotFoundError() {
         Toast errorToast = Toast.makeText(this,
-                getText(R.string.settings_activity_error_file_not_found), Toast.LENGTH_LONG);
+                getText(R.string.alert_dialog_error_file_not_found), Toast.LENGTH_LONG);
         errorToast.show();
     }
 
@@ -95,23 +93,7 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
     }
 
     public void imageViewProfileClick(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.settings_activity_alert_set_profile_image_title))
-                .setItems(new String[]{
-                        getString(R.string.settings_activity_alert_set_profile_image_upload_photo),
-                        getString(R.string.settings_activity_alert_set_profile_image_take_photo)
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (which == 0) {
-                            uploadPhoto();
-                        } else {
-                            takePhoto();
-                        }
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        Alerts.showUploadPhotoAlertDialog(this);
     }
 
     public void linearLayoutClearCacheClick(View view) {
@@ -147,25 +129,6 @@ public class SettingsActivity extends ActivityWithNavigationDrawer implements Se
         textViewEmail = findViewById(R.id.text_view_email);
         textViewServerAddress = findViewById(R.id.text_view_server_address);
         switchNotifications = findViewById(R.id.switch_notifications);
-    }
-
-    private void uploadPhoto() {
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType(INTENT_IMAGE_TYPE);
-        startActivityForResult(photoPickerIntent, UPLOAD_PHOTO_REQUEST_CODE);
-    }
-
-    private void takePhoto() {
-        PackageManager packageManager = getPackageManager();
-        if (!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
-            Toast errorToast = Toast.makeText(this,
-                    getText(R.string.settings_activity_error_file_not_found), Toast.LENGTH_LONG);
-            errorToast.show();
-            return;
-        }
-
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(takePictureIntent, TAKE_PHOTO_REQUEST_CODE);
     }
 
     private void getPhotoFromDevice(Intent data) {
